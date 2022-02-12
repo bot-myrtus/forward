@@ -1,0 +1,146 @@
+port: 8080
+allowWrite: true
+prefix:
+  - /
+plugins:
+  ./src/ping: null
+  ./src/getpopular:
+    disabled: 如果设置为true，将禁用“获取热门条目”功能
+    groups:
+      QQChannel:
+        list:
+          '频道 ID':
+            all: 如果设置为true，将忽略 sublist
+            link: https://zh.wikipedia.org/wiki/$1
+            api: https://zh.wikipedia.org/
+            sublist:
+              '子频道 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+              '子频道2 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+      Telegram:
+        list:
+          '群组 ID':
+            link: https://zh.wikipedia.org/wiki/$1
+            api: https://zh.wikipedia.org/
+          '群组2 ID':
+            link: https://zh.wikipedia.org/wiki/$1
+            api: https://zh.wikipedia.org/
+      QQGroup:
+        list:
+          '群组ID':
+            link: https://zh.wikipedia.org/wiki/$1
+            api: https://zh.wikipedia.org/
+      Discord:
+        list:
+          '频道 ID':
+            all: 如果设置为true，将忽略 sublist
+            link: https://zh.wikipedia.org/wiki/$1
+            api: https://zh.wikipedia.org/
+            sublist:
+              '子频道 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+              '子频道2 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+  ./src/wlink:
+    disabled: 如果设置为true，将禁用“将消息内 wikitxt 转换为链接”功能
+    groups:
+      QQChannel:
+        list:
+          '频道 ID':
+            all: 如果设置为true，将忽略 sublist
+            link: https://zh.wikipedia.org/wiki/$1
+            sublist:
+              '子频道 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+              '子频道2 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+      Telegram:
+        list:
+          '群组 ID':
+            link: https://zh.wikipedia.org/wiki/$1
+          '群组2 ID':
+            link: https://zh.wikipedia.org/wiki/$1
+      QQGroup:
+        list:
+          '群组 ID':
+            link: https://zh.wikipedia.org/wiki/$1
+      Discord:
+        list:
+          '频道 ID':
+            all: 如果设置为true，将忽略 sublist
+            link: https://zh.wikipedia.org/wiki/$1
+            sublist:
+              '子频道 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+              '子频道2 ID':
+                link: https://zh.wikipedia.org/wiki/$1
+  ./src/getgroupid:
+    disabled: 如果设置为true，将禁用“获取群组 ID”功能
+  ./src/wforward/wforward:
+    disabled: 如果设置为true，将禁用“互联”功能
+    group:
+      - source:
+          groupId: '群组 ID，频道则为子频道ID'
+          platform: 群组平台（QQChannel、QQGroup、Telegram、Discord）
+        target:
+          QQGroup:
+            selfId: '机器人自身 ID'
+            groupIdList:
+              - '群组 ID，频道则为子频道ID'
+              - '群组 ID2，频道则为子频道ID'
+          Telegram:
+            selfId: '机器人自身 ID'
+            groupIdList:
+              - '群组 ID，频道则为子频道ID'
+          Discord:
+            selfId: '机器人自身 ID'
+            groupIdList:
+              - '群组 ID，频道则为子频道ID'
+      - source:
+          groupId: '群组 ID，频道则为子频道ID'
+          platform: QQGroup
+        target:
+          QQChannel:
+            selfId: '频道机器人自身 ID'
+            groupIdList:
+              - - '子频道 ID'
+                - '频道 ID'
+              - - '子频道 ID'
+                - '频道 ID'
+  ./src/getscience:
+    disabled: 如果设置为true，将禁用“获取科学类条目”功能
+    groups:
+      QQChannel:
+        list:
+          此处设置同 getpopular
+  ./src/getsource: null
+  ./src/getselfid:
+    disabled: 如果设置为true，将禁用“获取机器人自身 ID”功能
+  console: null
+  dataview: null
+  insight: null
+  logger: null
+  manager: null
+  status: null
+  adapter-onebot:
+    bots:
+      - protocol: ws
+        disabled: 如果设置为 true，将禁用 QQ 平台
+        selfId: '机器人 QQ号'
+        endpoint: ws://127.0.0.1:6700
+  ~forward: null
+  limit-help: null
+  adapter-telegram:
+    bots:
+      - protocol: polling
+        disabled: 如果设置为 true，将禁用 Telegram 平台
+        request:
+          timeout: null
+          endpoint: https://api.telegram.org
+          proxyAgent: null
+        token: 机器人 Telegram Token
+  adapter-discord:
+    bots:
+      - disabled: 如果设置为 true，将禁用 Discord 平台
+        token: 机器人 Discord Token
