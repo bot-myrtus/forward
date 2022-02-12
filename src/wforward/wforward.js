@@ -97,9 +97,8 @@ module.exports.apply = (ctx, config) => {
         if (!config.disabled && !!content) {
             let index = config.group.findIndex((element) => (element.source.groupId === channelId));
             if (index > -1) {
-                let platformAbbreviation = platform.replace("qqguild", "Q频").replace("onebot", "Q群").replace("telegram", "T").replace("discord", "D");
-                let template = `[${platformAbbreviation} - ${(typeof author.nickname !== "undefined" && author.nickname) || author.username}] ${content}`;
                 let { QQGroup, QQChannel, Telegram, Discord } = config.group[index].target;
+                let template = `[${config.group[index].source.name} - ${(typeof author.nickname !== "undefined" && author.nickname) || author.username}] ${content}`;
                 if (typeof QQGroup !== "undefined") {
                     let targetBot = ctx.bots.get(`onebot:${QQGroup.selfId}`);
                     targetBot.broadcast(QQGroup.groupIdList, template);

@@ -83,6 +83,7 @@ plugins:
       - source:
           groupId: '群组 ID，频道则为子频道ID'
           platform: 群组平台（QQChannel、QQGroup、Telegram、Discord）
+          name: "群组平台简称"
         target:
           QQGroup:
             selfId: '机器人自身 ID'
@@ -100,6 +101,7 @@ plugins:
       - source:
           groupId: '群组 ID，频道则为子频道ID'
           platform: QQGroup
+          name: "群组平台简称"
         target:
           QQChannel:
             selfId: '频道机器人自身 ID'
