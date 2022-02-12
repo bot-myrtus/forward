@@ -22,7 +22,7 @@ npm start
 2. **下载[ go-cqhttp ](https://github.com/Mrs4s/go-cqhttp/releases)**，启动一下以便完成安装。
 
 ### 设定 Telegram 机器人
-@BotFather，与其交互，按照荧幕提示进行操作，建立一个机器人账号。设定完成后，BotFather 会给一个 Token，你需要把这个 Token 填到 koishi.config.yml 中。
+@BotFather，与其交互，按照屏幕提示进行操作，建立一个机器人账号。设定完成后，BotFather 会给一个 Token，你需要把这个 Token 填到 koishi.config.yml 中。
 
 之后请记得执行 `/setprivacy` 命令，将机器人的 Privacy 设为 DISABLED，以便于让它看到群组内的讯息。
 
