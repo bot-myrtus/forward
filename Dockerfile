@@ -14,5 +14,5 @@ ENV NODE_ENV production
 RUN npm ci && npm cache clean --force
 COPY --from=builder /usr/src/app/dist ./dist
 
-EXPOSE 3000
+EXPOSE 8080
 CMD [ "npm", "start" ]
