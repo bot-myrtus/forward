@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-ping",
   "description": "测试机器人是否成功反应",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",

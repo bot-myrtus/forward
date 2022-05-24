@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
   "description": "群组互联",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",

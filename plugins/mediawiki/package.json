@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-mediawiki",
   "description": "让群组支援 mediawiki 特性",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",

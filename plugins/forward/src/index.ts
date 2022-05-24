@@ -1,7 +1,7 @@
 import { Context, Schema } from 'koishi'
 import { parseMessageFace } from './parse'
 
-export const name = 'annan-forward'
+export const name = 'forward'
 
 export interface Config {
   rules: {

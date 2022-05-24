@@ -5,14 +5,14 @@ help: false
 prefix:
   - /
 plugins:
-  forward:
+  '@myrtus/forward':
     rules: []
-  getselfid: null
-  getgroupid: null
-  getsource: null
-  mediawiki:
+  '@myrtus/getselfid': null
+  '@myrtus/getgroupid': null
+  '@myrtus/getsource': null
+  '@myrtus/mediawiki':
     rules: []
-  ping: null
+  '@myrtus/ping': null
   console:
     open: true
   logger: null

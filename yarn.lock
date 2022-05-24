@@ -376,6 +376,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@myrtus/koishi-plugin-getsource@workspace:plugins/getsource":
+  version: 0.0.0-use.local
+  resolution: "@myrtus/koishi-plugin-getsource@workspace:plugins/getsource"
+  peerDependencies:
+    koishi: ^4.7.1
+  languageName: unknown
+  linkType: soft
+
 "@myrtus/koishi-plugin-mediawiki@workspace:plugins/mediawiki":
   version: 0.0.0-use.local
   resolution: "@myrtus/koishi-plugin-mediawiki@workspace:plugins/mediawiki"
@@ -2987,14 +2995,6 @@ __metadata:
   checksum: c9a6f9c803433b2d143a0788308048c1432a71c5febcfea2af7f2e8bd732b9bfd75c2c220d553752ee9ab9a3f52490f006cfd521db97cd01d8461d67cc1ccc1f
   languageName: node
   linkType: hard
-
-"koishi-plugin-getsource@workspace:plugins/getsource":
-  version: 0.0.0-use.local
-  resolution: "koishi-plugin-getsource@workspace:plugins/getsource"
-  peerDependencies:
-    koishi: ^4.7.1
-  languageName: unknown
-  linkType: soft
 
 "koishi@npm:^4.7.1":
   version: 4.7.1
