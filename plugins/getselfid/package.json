@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-getselfid",
   "description": "获取机器人自身编号",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",

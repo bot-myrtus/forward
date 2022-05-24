@@ -1,7 +1,7 @@
 import { Context, Schema } from 'koishi'
 import { randArray, genlink, compare } from './utils'
 
-export const name = 'annan-mediawiki'
+export const name = 'mediawiki'
 
 export interface Config {
   rules: {
