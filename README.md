@@ -7,11 +7,13 @@ AnNanBot
 
 ### 必需步骤
 * 根据实际需要准备机器人账号 (具体方法见后面)
-* 安装 Node.js, 版本要求: >=16.x
+* 安装 Node.js, 版本要求: >=16.10
 * 安装并运行 MongoDB, 版本要求: >=5.x
 * 下载机器人本体
-* 执行:
+* 在本体目录下执行 (可能需要管理员权限):
 ```
+corepack enable
+yarn set version berry
 yarn
 yarn dev
 ```
