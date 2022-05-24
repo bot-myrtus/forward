@@ -1,14 +1,14 @@
 {
-  "name": "koishi-plugin-annan-getgroupid",
-  "description": "获取所在群组编号",
-  "version": "1.0.3",
+  "name": "koishi-plugin-annan-ping",
+  "description": "测试机器人是否成功反应",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idanran/AnNanBot.git",
-    "directory": "plugins/annan-getgroupid"
+    "directory": "plugins/annan-ping"
   },
   "files": [
     "lib",

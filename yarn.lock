@@ -3011,6 +3011,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"koishi-plugin-annan-mediawiki@workspace:plugins/annan-mediawiki":
+  version: 0.0.0-use.local
+  resolution: "koishi-plugin-annan-mediawiki@workspace:plugins/annan-mediawiki"
+  peerDependencies:
+    koishi: ^4.7.1
+  languageName: unknown
+  linkType: soft
+
+"koishi-plugin-annan-ping@workspace:plugins/annan-ping":
+  version: 0.0.0-use.local
+  resolution: "koishi-plugin-annan-ping@workspace:plugins/annan-ping"
+  peerDependencies:
+    koishi: ^4.7.1
+  languageName: unknown
+  linkType: soft
+
 "koishi@npm:^4.7.1":
   version: 4.7.1
   resolution: "koishi@npm:4.7.1"
