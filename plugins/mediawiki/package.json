@@ -1,20 +1,20 @@
 {
-  "name": "koishi-plugin-annan-forward",
-  "description": "群组互联",
-  "version": "2.0.0",
+  "name": "@myrtus/koishi-plugin-mediawiki",
+  "description": "让群组支援 mediawiki 特性",
+  "version": "1.0.3",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idanran/myrtus.git",
+    "directory": "plugins/mediawiki"
+  },
   "files": [
     "lib",
     "dist"
   ],
   "license": "AGPL-3.0",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/idanran/AnNanBot.git",
-    "directory": "plugins/annan-forward"
-  },
   "keywords": [
     "chatbot",
     "koishi",

@@ -5,14 +5,14 @@ help: false
 prefix:
   - /
 plugins:
-  annan-forward:
+  forward:
     rules: []
-  annan-getselfid: null
-  annan-getgroupid: null
-  annan-getsource: null
-  annan-mediawiki:
+  getselfid: null
+  getgroupid: null
+  getsource: null
+  mediawiki:
     rules: []
-  annan-ping: null
+  ping: null
   console:
     open: true
   logger: null

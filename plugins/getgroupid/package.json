@@ -1,14 +1,14 @@
 {
-  "name": "koishi-plugin-annan-getgroupid",
+  "name": "@myrtus/koishi-plugin-getgroupid",
   "description": "获取所在群组编号",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idanran/AnNanBot.git",
-    "directory": "plugins/annan-getgroupid"
+    "url": "git+https://github.com/idanran/myrtus.git",
+    "directory": "plugins/getgroupid"
   },
   "files": [
     "lib",
