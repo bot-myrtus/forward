@@ -1,8 +1,4 @@
-/*
- * 互联
- *
- * 部分代码基于「LilyWhiteBot」的 QQbot.js
- */
+import { segment } from 'koishi'
 
 const faces = {
     0: '惊讶', 1: '撇嘴', 2: '色', 3: '发呆', 4: '得意', 5: '流泪', 6: '害羞', 7: '闭嘴', 8: '睡', 9: '大哭',
@@ -33,91 +29,24 @@ const faces = {
     264: "捂脸", 265: "辣眼睛", 266: "哦哟", 267: "头秃", 268: "问号脸", 269: "暗中观察", 270: "emm", 271: "吃瓜", 272: "呵呵哒", 273: "我酸了",
     274: "太南了", 277: "汪汪", 289: "睁眼", 300: "胖三斤", 306: "牛气冲天", 307: "喵喵", 311: "打call", 312: "变形", 314: "仔细分析", 317: "菜汪", 318: "崇拜",
     319: "比心", 320: "庆祝", 324: "吃糖", 325: "惊吓", 326: "生气", 333: "烟花"
-};
-
-const parseMessageRecord = (message) => {
-    let text = message.replace(/\n/gu, '&#10;').replace(/\[CQ:([^,]*?)\]/gu, '[CQ:$1,]').replace(/\[CQ:(.*?)((?:,).*?)\]/gu, (_, type, param) => {
-        if (type === "record") {
-            return '[语音]';
-        } else {
-            return '';
-        }
-    }).replace(/&#10;/gu, '\n');
-
-    return text;
 }
 
-/**
- * 去除接收訊息中的部分 CQ 碼（酷 Q 專用碼，包括表情等資料），將其換為「[表情名稱]」等文字
- * @param  {string} Message 已解碼並轉為 UTF-8 之後的訊息
- * @return {string} 去除 CQ 碼之後的文字
- */
-const parseMessage = (message) => {
-    let text = message.replace(/\n/gu, '&#10;').replace(/\[CQ:([^,]*?)\]/gu, '[CQ:$1,]').replace(/\[CQ:(.*?)((?:,).*?)\]/gu, (_, type, param) => {
-        let tmp;
-        let tmp1;
-        switch (type) {
-            case 'face':
-                // [CQ:face,id=13]
-                tmp = param.match(/(?:^|,)id=(.*?)(?:,|$)/u);
-                tmp1 = faces[parseInt(tmp[1])];
-                if (tmp && tmp[1] && typeof tmp1 !== "undefined") {
-                    return `[${tmp1}]`;
-                } else {
-                    return '[表情]';
-                }
-
-            case 'record':
-                // 一般語音 [CQ:record,file=C091016F9A0CCFF1741AF0B442BD4F70.silk]
-                // 領取語音紅包 [CQ:record,file=C091016F9A0CCFF1741AF0B442BD4F70.silk,hb=true]
-                // 依據客户端之不同，可能是 silk，也可能是 amr
-                return '[语音]';
-
-            case 'hb':
-                // [CQ:hb,title=恭喜发财]
-                tmp = ['[红包]'];
-                tmp1 = param.match(/(?:^|,)title=(.*?)(?:,|$)/u);
-                if (tmp1 && tmp1[1]) {
-                    tmp.push(tmp1[1]);
-                }
-                return tmp.join('\n');
-
-            default:
-                return '';
-        }
-    }).replace(/&#10;/gu, '\n');
-
-    return text;
-}
-
-module.exports.name = 'wforward'
-module.exports.apply = (ctx, config) => {
-    ctx.middleware(async (session, next) => {
-        const { author, channelId, platform, content } = session;
-        if (!config.disabled && !!content) {
-            let index = config.group.findIndex((element) => (element.source.groupId === channelId));
-            if (index > -1) {
-                let { QQGroup, QQChannel, Telegram, Discord } = config.group[index].target;
-                let template = `[${config.group[index].source.name} - ${(typeof author.nickname !== "undefined" && author.nickname) || author.username}] ${content}`;
-                if (typeof QQGroup !== "undefined") {
-                    let targetBot = ctx.bots.get(`onebot:${QQGroup.selfId}`);
-                    targetBot.broadcast(QQGroup.groupIdList, template);
-                }
-                if (typeof QQChannel !== "undefined") {
-                    let targetBot = ctx.bots.get(`qqguild:${QQChannel.selfId}`);
-                    targetBot.broadcast(QQChannel.groupIdList, parseMessageRecord(template));
-                }
-                if (typeof Telegram !== "undefined") {
-                    let targetBot = ctx.bots.get(`telegram:${Telegram.selfId}`);
-                    targetBot.broadcast(Telegram.groupIdList, parseMessage(template));
-                }
-                if (typeof Discord !== "undefined") {
-                    let targetBot = ctx.bots.get(`discord:${Discord.selfId}`);
-                    targetBot.broadcast(Discord.groupIdList, parseMessage(template));
-                }
-                console.log(session);
+export function parseMessageFace(message: string): string {
+    return segment.transform(message, {
+        face: (data) => {
+            let text = '[表情]'
+            if (faces[data.id]) {
+                text = `[${faces[data.id]}]`
             }
-        }
-        return next()
-    }, true)
+            return text
+        },
+    })
+}
+
+export function parseMessageRecord(message: string): string {
+    return segment.transform(message, {
+        record: () => {
+            return '[语音]'
+        },
+    })
 }

@@ -1,0 +1,25 @@
+{
+  "name": "koishi-plugin-annan-getselfid",
+  "description": "获取机器人自身编号",
+  "version": "1.0.1",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idanran/AnNanBot.git",
+    "directory": "plugins/annan-getselfid"
+  },
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.7.1"
+  }
+}

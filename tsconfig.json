@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // The `plugins` directory is used to store created plugins.
+      // Try `npm run setup` or `yarn setup` to create a new plugin.
+      "koishi-plugin-*": ["plugins/*/src"],
+
+      // If you are publishing scoped plugins, just uncomment the next line
+      // and change `@scope` to your npm account or organization name:
+      // "@scope/koishi-plugin-*": ["plugins/*/src"],
+
+      // Many monorepo projects have a `packages` directory.
+      // You can use it if you are developing non-plugin packages.
+      // Even if you don't, do not delete this line,
+      // as it bypasses a bug in tsconfig-path/register.
+      // See: https://github.com/dividab/tsconfig-paths/issues/209
+      "*": ["packages/*/src"],
+    },
+  },
+}
