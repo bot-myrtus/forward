@@ -1,14 +1,14 @@
 {
-  "name": "koishi-plugin-annan-getgroupid",
-  "description": "获取所在群组编号",
-  "version": "1.0.3",
+  "name": "koishi-plugin-annan-mediawiki",
+  "description": "支援 mediawiki 特性",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idanran/AnNanBot.git",
-    "directory": "plugins/annan-getgroupid"
+    "directory": "plugins/annan-mediawiki"
   },
   "files": [
     "lib",

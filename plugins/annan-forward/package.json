@@ -1,14 +1,15 @@
 {
   "name": "koishi-plugin-annan-forward",
   "description": "群组互联",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "author": "idanran <idanran@outlook.com>",
   "files": [
     "lib",
     "dist"
   ],
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idanran/AnNanBot.git",

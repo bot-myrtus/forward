@@ -3,5 +3,5 @@ import { Context } from 'koishi'
 export const name = 'annan-getgroupid'
 
 export function apply(ctx: Context) {
-  ctx.command("groupid").action(({ session }) => `群组编号: ${session.channelId}`)
+  ctx.command("groupid").action(({ session }) => `channelId (群组编号): ${session.channelId}\nguildId (父级群组编号): ${session.guildId}`)
 }

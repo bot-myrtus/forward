@@ -6,10 +6,13 @@ prefix:
   - /
 plugins:
   annan-forward:
-    groups: []
+    rules: []
   annan-getselfid: null
   annan-getgroupid: null
   annan-getsource: null
+  annan-mediawiki:
+    rules: []
+  annan-ping: null
   console:
     open: true
   logger: null
@@ -22,6 +25,6 @@ plugins:
     bots: []
   adapter-telegram:
     bots: []
-  dataview: null
-  database-mongo:
+  ~database-mongo:
     host: 127.0.0.1
+  ~dataview: null
