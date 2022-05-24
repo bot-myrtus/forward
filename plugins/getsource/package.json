@@ -1,5 +1,5 @@
 {
-  "name": "koishi-plugin-annan-getsource",
+  "name": "koishi-plugin-getsource",
   "description": "获取桉南机器人源码",
   "private": true,
   "version": "1.0.0",

@@ -1,14 +1,14 @@
 {
-  "name": "koishi-plugin-annan-ping",
-  "description": "测试机器人是否成功反应",
-  "version": "1.0.0",
+  "name": "@myrtus/koishi-plugin-getselfid",
+  "description": "获取机器人自身编号",
+  "version": "1.0.4",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "idanran <idanran@outlook.com>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idanran/AnNanBot.git",
-    "directory": "plugins/annan-ping"
+    "url": "git+https://github.com/idanran/myrtus.git",
+    "directory": "plugins/getselfid"
   },
   "files": [
     "lib",
