@@ -1,0 +1,27 @@
+port: 5140
+maxPort: 5149
+minSimilarity: 1
+help: false
+prefix:
+  - /
+plugins:
+  annan-forward:
+    groups: []
+  annan-getselfid: null
+  annan-getgroupid: null
+  annan-getsource: null
+  console:
+    open: true
+  logger: null
+  manager: null
+  status: null
+  sandbox: null
+  adapter-onebot:
+    bots: []
+  adapter-discord:
+    bots: []
+  adapter-telegram:
+    bots: []
+  dataview: null
+  database-mongo:
+    host: 127.0.0.1

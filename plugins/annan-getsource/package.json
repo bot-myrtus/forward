@@ -1,0 +1,21 @@
+{
+  "name": "koishi-plugin-annan-getsource",
+  "description": "获取桉南机器人源码",
+  "private": true,
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.7.1"
+  }
+}
