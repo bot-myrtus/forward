@@ -1,0 +1,21 @@
+{
+  "name": "koishi-plugin-tool",
+  "description": "小工具",
+  "private": true,
+  "version": "0.0.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "AGPL-3.0",
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.8.5"
+  }
+}
