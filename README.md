@@ -9,30 +9,31 @@
 
 ### 必需步骤
 * 根据实际需要准备机器人账号 (具体方法见后面)
-* 安装 Node.js, 版本要求: >=16.10
+* 安装 Node.js, 版本要求: >=16.17.0
 * 下载机器人本体
-* 在本体目录下执行 (可能需要管理员权限):
+* 初始化 (在当前目录下执行)
 ```
-corepack enable
-yarn set version berry
 yarn
+```
+* 运行
+```
 yarn dev
 ```
 
 #### 配置机器人
-* 执行 `yarn dev` 后访问: http://localhost:5140
-* 点击左侧的 "机器人"
-* 点击 "添加机器人"
+* 执行 `yarn dev` 后访问: http://localhost:5141/plugins/
+* 点击右上角的 "添加插件"
+* 点击左上角的 "插件选择"
 * 选择指定平台的 adapter (QQ 群和 QQ 频道均为 "OneBot")
 * 按照提示进行配置
 
 #### 配置群组互联
-* 执行 `yarn dev` 后访问: http://localhost:5140
-* 点击 "annan-forward"
+* 执行 `yarn dev` 后访问: http://localhost:5141/plugins/
+* 点击左侧的 "forward"
 * 按照提示进行配置
 
 ### 设定 QQ 机器人
-1. 在正式启用互联之前，建议提前注册一个 QQ 小号，挂机挂到一定等级，并往钱包里塞一点钱，以减小被腾讯封杀的可能性。不过从实践情况来看，只有一颗星或不塞钱也无妨。
+1. 在正式启用互联之前，建议提前注册一个 QQ 小号，挂机挂到一定等级，以减小被腾讯封杀的可能性。不过从实践情况来看，低等级也无妨。
 2. **下载[ go-cqhttp ](https://github.com/Mrs4s/go-cqhttp/releases)**，启动一下安装提示进行配置。
 
 ### 设定 Telegram 机器人
