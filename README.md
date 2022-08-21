@@ -1,56 +1,48 @@
-# Koishi 模板仓库
+# Myrtus
 
-- [安装方法](#安装方法)
-  - [从当前仓库创建](#从当前仓库创建)
-  - [使用包管理器创建](#使用包管理器创建)
-- [基本功能](#基本功能)
-  - [启动机器人](#启动机器人)
-  - [设置环境变量](#设置环境变量)
-  - [工作区开发](#工作区开发)
+[![Version](https://img.shields.io/github/v/tag/idanran/myrtus.svg)](https://github.com/idanran/myrtus/releases)
+[![License](https://img.shields.io/github/license/idanran/myrtus)](https://github.com/idanran/myrtus/blob/main/LICENSE)
 
-## 安装方法
+在多个群组间传话的机器人。目前支持 QQ 群、Telegram、QQ 频道、Discord 四种群组互联。
 
-我们提供了两种安装方法。你可以使用其中的任意一种。
+## 第一次使用
 
-### 从当前仓库创建
-
-1. 点击 [**这里**](https://github.com/koishijs/boilerplate/generate) 以创建此仓库的副本。<br>注意：这是一个模板仓库，创建副本不同于 fork，它生成的新仓库不会包含当前仓库的提交历史。
-2. 将你创建的项目 clone 到本地，并在本地目录启动命令行。
-3. 输入 `npm install` / `yarn` 安装依赖。
-4. 输入 `npm start` / `yarn start` 开始运行。
-
-### 使用包管理器创建
-
-在任意目录启动命令行，输入下面的指令：
-
-```sh
-npm init koishi         # yarn create koishi
+### 必需步骤
+* 根据实际需要准备机器人账号 (具体方法见后面)
+* 安装 Node.js, 版本要求: >=16.10
+* 下载机器人本体
+* 在本体目录下执行 (可能需要管理员权限):
+```
+corepack enable
+yarn set version berry
+yarn
+yarn dev
 ```
 
-跟随提示即可完成全套初始化流程。
+#### 配置机器人
+* 执行 `yarn dev` 后访问: http://localhost:5140
+* 点击左侧的 "机器人"
+* 点击 "添加机器人"
+* 选择指定平台的 adapter (QQ 群和 QQ 频道均为 "OneBot")
+* 按照提示进行配置
 
-> 由于国内可能无法访问 GitHub，你可能需要科学上网或使用镜像。例如你可以使用 [FastGit](http://fastgit.org/) 作为镜像源，只需在上面的脚本后添加 `-m https://download.fastgit.org` 即可。
+#### 配置群组互联
+* 执行 `yarn dev` 后访问: http://localhost:5140
+* 点击 "annan-forward"
+* 按照提示进行配置
 
-## 基本功能
+### 设定 QQ 机器人
+1. 在正式启用互联之前，建议提前注册一个 QQ 小号，挂机挂到一定等级，并往钱包里塞一点钱，以减小被腾讯封杀的可能性。不过从实践情况来看，只有一颗星或不塞钱也无妨。
+2. **下载[ go-cqhttp ](https://github.com/Mrs4s/go-cqhttp/releases)**，启动一下安装提示进行配置。
 
-### 启动机器人
+### 设定 Telegram 机器人
+@BotFather，与其交互，按照屏幕提示进行操作，建立一个机器人账号。设定完成后，BotFather 会给一个 Token。
 
-如果你顺利完成了上一步操作，你的应用此时应该已经是启动状态，你无需进行额外的操作。但当应用处于关闭状态时，你可以在运行下面的指令以启动：
+之后请记得执行 `/setprivacy` 命令，将机器人的 Privacy 设为 DISABLED，以便于让它看到群组内的讯息。
 
-```sh
-npm start               # yarn start
-```
+邀请机器人进群组，在群组中输入 `/groupid`，这样机器人会自动给出群组 ID 以便设定互联。
 
-关于控制台的使用方法，请参考官方文档 [**使用控制台**](https://koishi.js.org/manual/starter/installation.html#使用控制台) 章节。
+### 设定 Discord 机器人
+进入 [Discord Developer Portal](https://discordapp.com/developers/applications/)，创建 Application。在 Bot 页面中 Add Bot。将 Token 填到 koishi.config.yml 中。
 
-### 工作区开发
-
-除了上面介绍的用法以外，我们还提供了更多功能：
-
-- build：构建源代码
-- bump：更新版本号
-- dep：更新依赖
-- pub：发布插件
-- setup：创建新插件
-
-关于每个指令的具体用法，请参考官方文档 [**工作区开发**](https://koishi.js.org/manual/development.html) 章节。
+邀请机器人进群组，在群组中输入 `/groupid`，这样机器人会自动给出群组 ID 以便设定互联。
