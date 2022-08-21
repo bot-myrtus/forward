@@ -15,7 +15,7 @@ export interface Config {
 export const Config: Schema<Config> = Schema.object({
   rules: Schema.array(Schema.object({
     channelId: Schema.string().required().description('群组编号'),
-    platform: Schema.union(['onebot', 'telegram', 'discord']).required().description('群组平台 (QQ 群和 QQ 频道则为 "onebot")'),
+    platform: Schema.union(['onebot', 'telegram', 'discord', 'qqguild']).required().description('群组平台 (QQ 群为 "onebot")'),
     link: Schema.string().default('https://zh.wikipedia.org/wiki/{replace}').description('链接模板'),
     api: Schema.string().default('https://zh.wikipedia.org/w/api.php').description('API 地址'),
   })).default([]).description('想要支援 MediaWiki 特性的群组规则'),
