@@ -1,30 +1,27 @@
 port: 5140
 maxPort: 5149
-minSimilarity: 1
-help: false
+plugins:
+  group:basic:
+    ~help: null
+    ~rate-limit: null
+    suggest:
+      minSimilarity: 1
+  group:console:
+    console:
+      open: true
+    ~dataview: null
+    logger: null
+    insight: null
+    market:
+      registry:
+        endpoint: https://registry.npmmirror.com
+      search:
+        endpoint: ${{ env.GITHUB_CONTENT_MIRROR }}/koishijs/registry/dist/index.json
+    sandbox: null
+    status: null
+  group:myrtus:
+    forward: {}
+    tool: {}
+    mediawiki: {}
 prefix:
   - /
-plugins:
-  '@myrtus/forward':
-    rules: []
-  '@myrtus/getselfid': null
-  '@myrtus/getgroupid': null
-  '@myrtus/getsource': null
-  '@myrtus/mediawiki':
-    rules: []
-  '@myrtus/ping': null
-  console:
-    open: true
-  logger: null
-  manager: null
-  status: null
-  sandbox: null
-  adapter-onebot:
-    bots: []
-  adapter-discord:
-    bots: []
-  adapter-telegram:
-    bots: []
-  ~database-mongo:
-    host: 127.0.0.1
-  ~dataview: null

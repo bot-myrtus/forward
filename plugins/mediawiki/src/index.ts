@@ -12,7 +12,7 @@ export interface Config {
   }[]
 }
 
-export const schema: Schema<Config> = Schema.object({
+export const Config: Schema<Config> = Schema.object({
   rules: Schema.array(Schema.object({
     channelId: Schema.string().required().description('群组编号'),
     platform: Schema.union(['onebot', 'telegram', 'discord']).required().description('群组平台 (QQ 群和 QQ 频道则为 "onebot")'),
@@ -52,6 +52,7 @@ export function apply(ctx: Context, config: Config) {
     }
   })
 }
+
 
 const linky = (string: string, prefix: string): string[] => {
   let text = {}

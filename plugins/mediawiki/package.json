@@ -1,15 +1,10 @@
 {
-  "name": "@myrtus/koishi-plugin-mediawiki",
-  "description": "让群组支援 mediawiki 特性",
-  "version": "1.0.4",
+  "name": "koishi-plugin-mediawiki",
+  "description": "让群组支援 MediaWiki 特性",
+  "private": true,
+  "version": "0.0.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "author": "idanran <idanran@outlook.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/idanran/myrtus.git",
-    "directory": "plugins/mediawiki"
-  },
   "files": [
     "lib",
     "dist"
@@ -21,6 +16,6 @@
     "plugin"
   ],
   "peerDependencies": {
-    "koishi": "^4.7.1"
+    "koishi": "^4.8.5"
   }
 }

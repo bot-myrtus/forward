@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./plugins/tool"
+    },
+    {
+      "path": "./plugins/mediawiki"
+    },
+    {
+      "path": "./plugins/forward"
+    }
+  ]
+}

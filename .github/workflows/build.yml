@@ -1,0 +1,87 @@
+name: Build
+
+on:
+  release:
+    types:
+      - created
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - runs-on: windows-latest
+            platform: windows
+          - runs-on: windows-latest
+            platform: windows
+            node: 12
+          - runs-on: ubuntu-latest
+            platform: linux
+          - runs-on: ubuntu-latest
+            platform: linux
+            emulate: arm64
+          - runs-on: macos-latest
+            platform: darwin
+
+    runs-on: ${{ matrix.target.runs-on }}
+
+    steps:
+      - name: Set up variables
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=NODE_VERSION::${{ matrix.target.node || '16' }}"
+          echo "::set-output name=ARCH::${{ matrix.target.emulate || 'amd64' }}"
+
+      - name: Install nix (for arm64)
+        if: ${{ matrix.target.emulate }}
+        uses: cachix/install-nix-action@v15
+
+      - name: Set up qemu and binfmt (for arm64)
+        if: ${{ matrix.target.emulate }}
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: ${{ matrix.target.emulate }}
+
+      - name: Check out
+        uses: actions/checkout@v3
+        with:
+          ref: develop
+
+      - name: Set up Node
+        if: ${{ !matrix.target.emulate }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.vars.outputs.NODE_VERSION }}
+
+      - name: Set up Node (for arm64)
+        if: ${{ matrix.target.emulate == 'arm64' }}
+        run: |
+          nix profile install nixpkgs#nodejs-${{ steps.vars.outputs.NODE_VERSION }}_x --option system aarch64-linux
+
+      - name: Install zip (for windows)
+        if: ${{ matrix.target.platform == 'windows' }}
+        run: choco install zip
+
+      - name: Prepare
+        run: bash .github/workflows/prepare.sh
+
+      - name: Install dependencies
+        run: |
+          curl -o $RUNNER_TEMP/yarn.cjs https://repo.yarnpkg.com/3.2.0/packages/yarnpkg-cli/bin/yarn.js
+          node $RUNNER_TEMP/yarn.cjs install --no-immutable
+
+      - name: Pack file
+        run: bash .github/workflows/pack.sh
+
+      - name: Upload asset
+        shell: bash
+        run: >
+          bash .github/workflows/upload.sh
+          '${{ github.repository }}'
+          '${{ matrix.target.platform }}-${{ steps.vars.outputs.ARCH }}-node${{ steps.vars.outputs.NODE_VERSION }}'
+          '${{ toJSON(github.event.release) }}'
+        env:
+          TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
