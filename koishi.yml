@@ -19,9 +19,8 @@ plugins:
         endpoint: ${{ env.GITHUB_CONTENT_MIRROR }}/koishijs/registry/dist/index.json
     sandbox: null
     status: null
-  group:myrtus:
-    forward: {}
-    tool: {}
-    mediawiki: {}
+  '@myrtus/forward': {}
+  '@myrtus/mediawiki': {}
+  '@myrtus/tool': {}
 prefix:
   - /

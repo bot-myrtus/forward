@@ -1,5 +1,5 @@
-import { Context, Schema } from 'koishi'
-import { parseMessageFace } from './parse'
+import { Context, Schema, segment } from 'koishi'
+import { MessageParse } from './parse'
 
 export const name = 'forward'
 
@@ -41,7 +41,7 @@ export const Config: Schema<Config> = Schema.object({
 
 export function apply(ctx: Context, config: Config) {
   ctx.middleware(async (session, next) => {
-    if (!!session.content) {
+    if (session.type === 'message') {
       const index = config.rules.findIndex((element) => (element.source.channelId === session.channelId) && (element.source.platform === session.platform))
       if (index > -1) {
         const { source, targets } = config.rules[index]
@@ -49,19 +49,19 @@ export function apply(ctx: Context, config: Config) {
         for (const target of targets) {
           if (target.disabled) continue
           const botId = `${target.platform}:${target.selfId}`
-          if (typeof same[botId] === 'undefined') {
-            same[botId] = []
-          }
+          typeof same[botId] === 'undefined' && (same[botId] = [])
           same[botId].push([target.channelId, target.guildId])
         }
-        const message = `[${source.name} - ${(typeof session.author.nickname !== "undefined" && session.author.nickname) || session.author.username}] ${session.content}`
+        const prefix = `[${source.name} - ${(typeof session.author.nickname !== "undefined" && session.author.nickname) || session.author.username}] `
+        let message = session.elements
+        message.unshift(segment('text', { content: prefix }))
         for (const botId of Object.keys(same)) {
           const bot = ctx.bots[botId]
           if (botId.includes('telegram') || botId.includes('discord')) {
-            bot.broadcast(same[botId], parseMessageFace(message))
+            bot.broadcast(same[botId], new MessageParse(message).face().record().output().toString())
             continue
           }
-          bot.broadcast(same[botId], message)
+          bot.broadcast(same[botId], new MessageParse(message).record().output().toString())
         }
       }
     }
