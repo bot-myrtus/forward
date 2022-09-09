@@ -25,21 +25,21 @@ import {
   uncapitalize,
   union,
   valueMap
-} from "./chunk-XAQPHSB2.js";
+} from "./chunk-AIBGTUV2.js";
 import {
   ElLoading,
   ElMessage,
   ElMessageBox,
   installer
-} from "./chunk-JHHAUK2F.js";
+} from "./chunk-Z2H67J6D.js";
 import {
   useLocalStorage
-} from "./chunk-NIGR53XG.js";
+} from "./chunk-VYKO7HUI.js";
 import {
   START_LOCATION_NORMALIZED,
   createRouter,
   createWebHistory
-} from "./chunk-EKSRAS6R.js";
+} from "./chunk-3YPBZQR5.js";
 import {
   Comment,
   Fragment,
@@ -52,7 +52,7 @@ import {
   resolveComponent,
   watch,
   withDirectives
-} from "./chunk-2RG3FVYL.js";
+} from "./chunk-ZODGDGOD.js";
 import {
   __export,
   __publicField
@@ -111,8 +111,8 @@ receive("response", ({ id, value, error }) => {
     resolve(value);
   }
 });
-async function connect(endpoint) {
-  socket.value = new WebSocket(endpoint);
+function connect(value) {
+  socket.value = markRaw(value);
   socket.value.onmessage = (ev) => {
     const data = JSON.parse(ev.data);
     console.debug("%c", "color:purple", data.type, data.body);
@@ -126,7 +126,7 @@ async function connect(endpoint) {
       store[key] = void 0;
     }
     console.log("[koishi] websocket disconnected, will retry in 1s...");
-    setTimeout(() => connect(endpoint), 1e3);
+    setTimeout(() => connect(value), 1e3);
   };
   return new Promise((resolve) => {
     socket.value.onopen = resolve;
@@ -1105,7 +1105,7 @@ async function loadExtension(path) {
   }
 }
 var initTask = new Promise((resolve) => {
-  watch(() => store.http, async (newValue, oldValue) => {
+  watch(() => store.entry, async (newValue, oldValue) => {
     newValue || (newValue = []);
     for (const path in extensions) {
       if (newValue.includes(path))
@@ -1210,6 +1210,7 @@ export {
   getChoices,
   getFallback,
   getValue,
+  config as global,
   hasTitle,
   hyphenate,
   icons_exports as icons,

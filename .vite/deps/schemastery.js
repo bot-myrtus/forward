@@ -1,6 +1,6 @@
 import {
   lib_default
-} from "./chunk-XAQPHSB2.js";
+} from "./chunk-AIBGTUV2.js";
 import "./chunk-IN47U6CF.js";
 
 // dep:schemastery
