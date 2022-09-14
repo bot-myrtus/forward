@@ -14,13 +14,14 @@
 - 下载机器人[本体](https://github.com/idanran/myrtus/releases)
 - 初始化 (在当前目录下执行)
 
-```
+```ps
+corepack enable yarn
 yarn
 ```
 
 - 运行
 
-```
+```ps
 yarn dev
 ```
 

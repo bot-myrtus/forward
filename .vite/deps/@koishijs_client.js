@@ -513,6 +513,7 @@ import Overlay from "C:/Users/28648/OneDrive/U/node/myrtus/node_modules/@koishij
 // node_modules/cordis/lib/index.mjs
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 var __publicField2 = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
@@ -520,6 +521,7 @@ var __publicField2 = (obj, key, value) => {
 function isBailed(value) {
   return value !== null && value !== false && value !== void 0;
 }
+__name(isBailed, "isBailed");
 var Lifecycle = class {
   constructor(root2, config2) {
     __publicField(this, "isActive", false);
@@ -643,6 +645,7 @@ var Lifecycle = class {
     this.root.state.clear(true);
   }
 };
+__name(Lifecycle, "Lifecycle");
 __publicField2(Lifecycle, "methods", ["on", "once", "off", "before", "after", "parallel", "emit", "serial", "bail", "start", "stop"]);
 function isConstructor(func) {
   if (!func.prototype)
@@ -651,6 +654,7 @@ function isConstructor(func) {
     return false;
   return true;
 }
+__name(isConstructor, "isConstructor");
 function resolveConfig(plugin, config2) {
   if (config2 === false)
     return;
@@ -662,6 +666,7 @@ function resolveConfig(plugin, config2) {
     config2 = schema(config2);
   return config2;
 }
+__name(resolveConfig, "resolveConfig");
 var State = class {
   constructor(parent, config2) {
     __publicField(this, "uid");
@@ -675,10 +680,10 @@ var State = class {
     this.ctx = this.context = parent.extend({ state: this });
   }
   collect(label, callback) {
-    const dispose = () => {
+    const dispose = __name(() => {
       remove(this.disposables, dispose);
       return callback();
-    };
+    }, "dispose");
     this.disposables.push(dispose);
     defineProperty(dispose, "name", label);
     return dispose;
@@ -704,6 +709,7 @@ var State = class {
     });
   }
 };
+__name(State, "State");
 var Fork = class extends State {
   constructor(parent, config2, runtime) {
     super(parent, config2);
@@ -748,6 +754,7 @@ var Fork = class extends State {
     }
   }
 };
+__name(Fork, "Fork");
 var Runtime = class extends State {
   constructor(registry2, plugin, config2) {
     super(registry2[Context.current], config2);
@@ -838,9 +845,11 @@ var Runtime = class extends State {
     this.restart();
   }
 };
+__name(Runtime, "Runtime");
 function isApplicable(object) {
   return object && typeof object === "object" && typeof object.apply === "function";
 }
+__name(isApplicable, "isApplicable");
 var Registry = class extends Map {
   constructor(root2, config2) {
     super();
@@ -898,18 +907,19 @@ var Registry = class extends Map {
     return this.delete(plugin);
   }
 };
+__name(Registry, "Registry");
 __publicField2(Registry, "methods", ["using", "plugin", "dispose"]);
 var _Context = class {
   constructor(config2) {
     __publicField(this, "options");
-    const attach = (internal) => {
+    const attach = __name((internal) => {
       if (!internal)
         return;
       attach(Object.getPrototypeOf(internal));
       for (const key of Object.getOwnPropertySymbols(internal)) {
         this[key] = new internal[key](this, this.options);
       }
-    };
+    }, "attach");
     this.root = this;
     this.mapping = /* @__PURE__ */ Object.create(null);
     this.options = resolveConfig(Object.getPrototypeOf(this).constructor, config2);
@@ -930,6 +940,7 @@ var _Context = class {
   }
 };
 var Context = _Context;
+__name(Context, "Context");
 __publicField2(Context, "events", Symbol("events"));
 __publicField2(Context, "static", Symbol("static"));
 __publicField2(Context, "filter", Symbol("filter"));
@@ -946,6 +957,7 @@ __publicField2(Context, "immediate", Symbol("immediate"));
     }
     for (const key of options.properties || []) {
       Object.defineProperty(Context22.prototype, key, {
+        configurable: true,
         get() {
           return this[name][key];
         },
@@ -956,11 +968,11 @@ __publicField2(Context, "immediate", Symbol("immediate"));
     }
   }
   Context22.mixin = mixin;
+  __name(mixin, "mixin");
   function service(name, options = {}) {
-    if (Object.prototype.hasOwnProperty.call(this.prototype, name))
-      return;
     const privateKey = typeof name === "symbol" ? name : Symbol(name);
     Object.defineProperty(this.prototype, name, {
+      configurable: true,
       get() {
         const key = this.mapping[name] || privateKey;
         const value = this.root[key];
@@ -994,6 +1006,7 @@ __publicField2(Context, "immediate", Symbol("immediate"));
     mixin(name, options);
   }
   Context22.service = service;
+  __name(service, "service");
   function ensureInternal(prototype) {
     if (Object.prototype.hasOwnProperty.call(prototype, Context22.internal)) {
       return prototype[Context22.internal];
@@ -1001,6 +1014,7 @@ __publicField2(Context, "immediate", Symbol("immediate"));
     const parent = ensureInternal(Object.getPrototypeOf(prototype));
     return prototype[Context22.internal] = Object.create(parent);
   }
+  __name(ensureInternal, "ensureInternal");
 })(Context || (Context = {}));
 Context.prototype[Context.internal] = /* @__PURE__ */ Object.create(null);
 Context.service("registry", Registry);
@@ -1008,6 +1022,33 @@ Context.service("lifecycle", Lifecycle);
 Context.mixin("state", {
   properties: ["runtime", "collect"]
 });
+var Service = class {
+  constructor(ctx, name, immediate) {
+    this.ctx = ctx;
+    Object.getPrototypeOf(ctx.root).constructor.service(name);
+    defineProperty(this, Context.current, ctx);
+    if (immediate) {
+      this[Context.immediate] = name;
+    }
+    ctx.on("ready", async () => {
+      await Promise.resolve();
+      await this.start();
+      ctx[name] = this;
+    });
+    ctx.on("dispose", async () => {
+      ctx[name] = null;
+      await this.stop();
+    });
+  }
+  start() {
+  }
+  stop() {
+  }
+  get caller() {
+    return this[Context.current];
+  }
+};
+__name(Service, "Service");
 
 // node_modules/@koishijs/client/client/index.ts
 var client_default = components_default;
