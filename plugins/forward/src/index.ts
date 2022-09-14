@@ -58,10 +58,10 @@ export function apply(ctx: Context, config: Config) {
         for (const botId of Object.keys(same)) {
           const bot = ctx.bots[botId]
           if (botId.includes('telegram') || botId.includes('discord')) {
-            bot.broadcast(same[botId], new MessageParse(message).face().record().output().toString())
+            bot.broadcast(same[botId], new MessageParse(message).face().record().output())
             continue
           }
-          bot.broadcast(same[botId], new MessageParse(message).record().output().toString())
+          bot.broadcast(same[botId], new MessageParse(message).record().output())
         }
       }
     }

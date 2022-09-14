@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-tool",
   "description": "小工具",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
