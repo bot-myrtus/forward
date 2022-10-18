@@ -1,62 +1,68 @@
 {
-  "hash": "1b63adb0",
-  "browserHash": "7ab01ae0",
+  "hash": "1cc01170",
+  "browserHash": "b401e16b",
   "optimized": {
-    "schemastery": {
-      "src": "../../node_modules/schemastery/lib/index.mjs",
-      "file": "schemastery.js",
-      "fileHash": "6202a0f3",
-      "needsInterop": false
-    },
-    "element-plus": {
-      "src": "../../node_modules/element-plus/es/index.mjs",
-      "file": "element-plus.js",
-      "fileHash": "273278c3",
-      "needsInterop": false
-    },
-    "@koishijs/client": {
-      "src": "../../node_modules/@koishijs/client/client/index.ts",
-      "file": "@koishijs_client.js",
-      "fileHash": "ac0ce5ea",
-      "needsInterop": false
-    },
-    "@vueuse/core": {
-      "src": "../../node_modules/@vueuse/core/index.mjs",
-      "file": "@vueuse_core.js",
-      "fileHash": "b1f74503",
-      "needsInterop": false
-    },
     "vue": {
       "src": "../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "c5479f29",
+      "fileHash": "9e214288",
       "needsInterop": false
     },
     "vue-router": {
       "src": "../../node_modules/vue-router/dist/vue-router.mjs",
       "file": "vue-router.js",
-      "fileHash": "9093b6ec",
+      "fileHash": "2df16eef",
       "needsInterop": false
+    },
+    "element-plus": {
+      "src": "../../node_modules/element-plus/es/index.mjs",
+      "file": "element-plus.js",
+      "fileHash": "94bdc647",
+      "needsInterop": false
+    },
+    "@vueuse/core": {
+      "src": "../../node_modules/@vueuse/core/index.mjs",
+      "file": "@vueuse_core.js",
+      "fileHash": "f3e5c47c",
+      "needsInterop": false
+    },
+    "@popperjs/core": {
+      "src": "../../node_modules/@popperjs/core/dist/index.mjs",
+      "file": "@popperjs_core.js",
+      "fileHash": "9d4b5f75",
+      "needsInterop": false
+    },
+    "d3-force": {
+      "src": "../../node_modules/d3-force/src/index.js",
+      "file": "d3-force.js",
+      "fileHash": "0d4be2d7",
+      "needsInterop": false
+    },
+    "semver": {
+      "src": "../../node_modules/semver/index.js",
+      "file": "semver.js",
+      "fileHash": "8395ad0d",
+      "needsInterop": true
+    },
+    "spark-md5": {
+      "src": "../../node_modules/spark-md5/spark-md5.js",
+      "file": "spark-md5.js",
+      "fileHash": "59c961ca",
+      "needsInterop": true
     }
   },
   "chunks": {
-    "chunk-AIBGTUV2": {
-      "file": "chunk-AIBGTUV2.js"
+    "chunk-WW3H7SQG": {
+      "file": "chunk-WW3H7SQG.js"
     },
-    "chunk-Z2H67J6D": {
-      "file": "chunk-Z2H67J6D.js"
+    "chunk-TUTPZM3B": {
+      "file": "chunk-TUTPZM3B.js"
     },
-    "chunk-VYKO7HUI": {
-      "file": "chunk-VYKO7HUI.js"
+    "chunk-2QGY6IU7": {
+      "file": "chunk-2QGY6IU7.js"
     },
-    "chunk-3YPBZQR5": {
-      "file": "chunk-3YPBZQR5.js"
-    },
-    "chunk-ZODGDGOD": {
-      "file": "chunk-ZODGDGOD.js"
-    },
-    "chunk-IN47U6CF": {
-      "file": "chunk-IN47U6CF.js"
+    "chunk-TWLJ45QX": {
+      "file": "chunk-TWLJ45QX.js"
     }
   }
 }
