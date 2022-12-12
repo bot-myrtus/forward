@@ -52,11 +52,11 @@ export function apply(ctx: Context, config: Config) {
           same[botId] ?? (same[botId] = [])
           same[botId].push([target.channelId, target.guildId])
         }
-        const prefix = `[${source.name} - ${session.author.nickname ?? session.author.username}] `
+        const prefix = `[${source.name} - ${session.author.nickname || session.author.username}] `
         let message = session.elements
         message.unshift(segment('text', { content: prefix }))
         if (session.quote) {
-          const re = `Re ${session.quote.author.nickname ?? session.quote.author.username} ⌈${session.quote.content}⌋: `
+          const re = `Re ${session.quote.author.nickname || session.quote.author.username} ⌈${session.quote.content}⌋: `
           message.splice(1, 0, segment(null, {}, segment.parse(re)))
         }
         for (const botId of Object.keys(same)) {
