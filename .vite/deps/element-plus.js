@@ -16,7 +16,7 @@ import {
   useVModel,
   useWindowFocus,
   useWindowSize
-} from "./chunk-WW3H7SQG.js";
+} from "./chunk-2H4U4UX2.js";
 import {
   Comment,
   Fragment,
@@ -104,11 +104,11 @@ import {
   withDirectives,
   withKeys,
   withModifiers
-} from "./chunk-TUTPZM3B.js";
+} from "./chunk-BE2XRKD6.js";
 import {
   Ee,
   yn
-} from "./chunk-2QGY6IU7.js";
+} from "./chunk-NBS5D3UL.js";
 import {
   __commonJS,
   __toESM
@@ -121,10 +121,13 @@ var require_dayjs_min = __commonJS({
       "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = e() : "function" == typeof define && define.amd ? define(e) : (t = "undefined" != typeof globalThis ? globalThis : t || self).dayjs = e();
     }(exports2, function() {
       "use strict";
-      var t = 1e3, e = 6e4, n = 36e5, r = "millisecond", i = "second", s2 = "minute", u2 = "hour", a2 = "day", o2 = "week", f2 = "month", h3 = "quarter", c2 = "year", d2 = "date", $ = "Invalid Date", l2 = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_") }, m2 = function(t2, e2, n2) {
+      var t = 1e3, e = 6e4, n = 36e5, r = "millisecond", i = "second", s2 = "minute", u2 = "hour", a2 = "day", o2 = "week", f2 = "month", h3 = "quarter", c2 = "year", d2 = "date", l2 = "Invalid Date", $ = /^(\d{4})[-/]?(\d{1,2})?[-/]?(\d{0,2})[Tt\s]*(\d{1,2})?:?(\d{1,2})?:?(\d{1,2})?[.:]?(\d+)?$/, y = /\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g, M2 = { name: "en", weekdays: "Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday".split("_"), months: "January_February_March_April_May_June_July_August_September_October_November_December".split("_"), ordinal: function(t2) {
+        var e2 = ["th", "st", "nd", "rd"], n2 = t2 % 100;
+        return "[" + t2 + (e2[(n2 - 20) % 10] || e2[n2] || e2[0]) + "]";
+      } }, m2 = function(t2, e2, n2) {
         var r2 = String(t2);
         return !r2 || r2.length >= e2 ? t2 : "" + Array(e2 + 1 - r2.length).join(n2) + t2;
-      }, g = { s: m2, z: function(t2) {
+      }, v2 = { s: m2, z: function(t2) {
         var e2 = -t2.utcOffset(), n2 = Math.abs(e2), r2 = Math.floor(n2 / 60), i2 = n2 % 60;
         return (e2 <= 0 ? "+" : "-") + m2(r2, 2, "0") + ":" + m2(i2, 2, "0");
       }, m: function t2(e2, n2) {
@@ -138,14 +141,14 @@ var require_dayjs_min = __commonJS({
         return { M: f2, y: c2, w: o2, d: a2, D: d2, h: u2, m: s2, s: i, ms: r, Q: h3 }[t2] || String(t2 || "").toLowerCase().replace(/s$/, "");
       }, u: function(t2) {
         return void 0 === t2;
-      } }, v2 = "en", D2 = {};
-      D2[v2] = M2;
+      } }, g = "en", D2 = {};
+      D2[g] = M2;
       var p2 = function(t2) {
         return t2 instanceof _2;
       }, S2 = function t2(e2, n2, r2) {
         var i2;
         if (!e2)
-          return v2;
+          return g;
         if ("string" == typeof e2) {
           var s3 = e2.toLowerCase();
           D2[s3] && (i2 = s3), n2 && (D2[s3] = n2, i2 = s3);
@@ -156,13 +159,13 @@ var require_dayjs_min = __commonJS({
           var a3 = e2.name;
           D2[a3] = e2, i2 = a3;
         }
-        return !r2 && i2 && (v2 = i2), i2 || !r2 && v2;
+        return !r2 && i2 && (g = i2), i2 || !r2 && g;
       }, w2 = function(t2, e2) {
         if (p2(t2))
           return t2.clone();
         var n2 = "object" == typeof e2 ? e2 : {};
         return n2.date = t2, n2.args = arguments, new _2(n2);
-      }, O2 = g;
+      }, O2 = v2;
       O2.l = S2, O2.i = p2, O2.w = function(t2, e2) {
         return w2(t2, { locale: e2.$L, utc: e2.$u, x: e2.$x, $offset: e2.$offset });
       };
@@ -181,7 +184,7 @@ var require_dayjs_min = __commonJS({
             if (e2 instanceof Date)
               return new Date(e2);
             if ("string" == typeof e2 && !/Z$/i.test(e2)) {
-              var r2 = e2.match(l2);
+              var r2 = e2.match($);
               if (r2) {
                 var i2 = r2[2] - 1 || 0, s3 = (r2[7] || "0").substring(0, 3);
                 return n2 ? new Date(Date.UTC(r2[1], i2, r2[3] || 1, r2[4] || 0, r2[5] || 0, r2[6] || 0, s3)) : new Date(r2[1], i2, r2[3] || 1, r2[4] || 0, r2[5] || 0, r2[6] || 0, s3);
@@ -195,7 +198,7 @@ var require_dayjs_min = __commonJS({
         }, m3.$utils = function() {
           return O2;
         }, m3.isValid = function() {
-          return !(this.$d.toString() === $);
+          return !(this.$d.toString() === l2);
         }, m3.isSame = function(t2, e2) {
           var n2 = w2(t2);
           return this.startOf(e2) <= n2 && n2 <= this.endOf(e2);
@@ -210,69 +213,69 @@ var require_dayjs_min = __commonJS({
         }, m3.valueOf = function() {
           return this.$d.getTime();
         }, m3.startOf = function(t2, e2) {
-          var n2 = this, r2 = !!O2.u(e2) || e2, h4 = O2.p(t2), $2 = function(t3, e3) {
+          var n2 = this, r2 = !!O2.u(e2) || e2, h4 = O2.p(t2), l3 = function(t3, e3) {
             var i2 = O2.w(n2.$u ? Date.UTC(n2.$y, e3, t3) : new Date(n2.$y, e3, t3), n2);
             return r2 ? i2 : i2.endOf(a2);
-          }, l3 = function(t3, e3) {
+          }, $2 = function(t3, e3) {
             return O2.w(n2.toDate()[t3].apply(n2.toDate("s"), (r2 ? [0, 0, 0, 0] : [23, 59, 59, 999]).slice(e3)), n2);
-          }, y2 = this.$W, M4 = this.$M, m4 = this.$D, g2 = "set" + (this.$u ? "UTC" : "");
+          }, y2 = this.$W, M4 = this.$M, m4 = this.$D, v3 = "set" + (this.$u ? "UTC" : "");
           switch (h4) {
             case c2:
-              return r2 ? $2(1, 0) : $2(31, 11);
+              return r2 ? l3(1, 0) : l3(31, 11);
             case f2:
-              return r2 ? $2(1, M4) : $2(0, M4 + 1);
+              return r2 ? l3(1, M4) : l3(0, M4 + 1);
             case o2:
-              var v3 = this.$locale().weekStart || 0, D3 = (y2 < v3 ? y2 + 7 : y2) - v3;
-              return $2(r2 ? m4 - D3 : m4 + (6 - D3), M4);
+              var g2 = this.$locale().weekStart || 0, D3 = (y2 < g2 ? y2 + 7 : y2) - g2;
+              return l3(r2 ? m4 - D3 : m4 + (6 - D3), M4);
             case a2:
             case d2:
-              return l3(g2 + "Hours", 0);
+              return $2(v3 + "Hours", 0);
             case u2:
-              return l3(g2 + "Minutes", 1);
+              return $2(v3 + "Minutes", 1);
             case s2:
-              return l3(g2 + "Seconds", 2);
+              return $2(v3 + "Seconds", 2);
             case i:
-              return l3(g2 + "Milliseconds", 3);
+              return $2(v3 + "Milliseconds", 3);
             default:
               return this.clone();
           }
         }, m3.endOf = function(t2) {
           return this.startOf(t2, false);
         }, m3.$set = function(t2, e2) {
-          var n2, o3 = O2.p(t2), h4 = "set" + (this.$u ? "UTC" : ""), $2 = (n2 = {}, n2[a2] = h4 + "Date", n2[d2] = h4 + "Date", n2[f2] = h4 + "Month", n2[c2] = h4 + "FullYear", n2[u2] = h4 + "Hours", n2[s2] = h4 + "Minutes", n2[i] = h4 + "Seconds", n2[r] = h4 + "Milliseconds", n2)[o3], l3 = o3 === a2 ? this.$D + (e2 - this.$W) : e2;
+          var n2, o3 = O2.p(t2), h4 = "set" + (this.$u ? "UTC" : ""), l3 = (n2 = {}, n2[a2] = h4 + "Date", n2[d2] = h4 + "Date", n2[f2] = h4 + "Month", n2[c2] = h4 + "FullYear", n2[u2] = h4 + "Hours", n2[s2] = h4 + "Minutes", n2[i] = h4 + "Seconds", n2[r] = h4 + "Milliseconds", n2)[o3], $2 = o3 === a2 ? this.$D + (e2 - this.$W) : e2;
           if (o3 === f2 || o3 === c2) {
             var y2 = this.clone().set(d2, 1);
-            y2.$d[$2](l3), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
+            y2.$d[l3]($2), y2.init(), this.$d = y2.set(d2, Math.min(this.$D, y2.daysInMonth())).$d;
           } else
-            $2 && this.$d[$2](l3);
+            l3 && this.$d[l3]($2);
           return this.init(), this;
         }, m3.set = function(t2, e2) {
           return this.clone().$set(t2, e2);
         }, m3.get = function(t2) {
           return this[O2.p(t2)]();
         }, m3.add = function(r2, h4) {
-          var d3, $2 = this;
+          var d3, l3 = this;
           r2 = Number(r2);
-          var l3 = O2.p(h4), y2 = function(t2) {
-            var e2 = w2($2);
-            return O2.w(e2.date(e2.date() + Math.round(t2 * r2)), $2);
+          var $2 = O2.p(h4), y2 = function(t2) {
+            var e2 = w2(l3);
+            return O2.w(e2.date(e2.date() + Math.round(t2 * r2)), l3);
           };
-          if (l3 === f2)
+          if ($2 === f2)
             return this.set(f2, this.$M + r2);
-          if (l3 === c2)
+          if ($2 === c2)
             return this.set(c2, this.$y + r2);
-          if (l3 === a2)
+          if ($2 === a2)
             return y2(1);
-          if (l3 === o2)
+          if ($2 === o2)
             return y2(7);
-          var M4 = (d3 = {}, d3[s2] = e, d3[u2] = n, d3[i] = t, d3)[l3] || 1, m4 = this.$d.getTime() + r2 * M4;
+          var M4 = (d3 = {}, d3[s2] = e, d3[u2] = n, d3[i] = t, d3)[$2] || 1, m4 = this.$d.getTime() + r2 * M4;
           return O2.w(m4, this);
         }, m3.subtract = function(t2, e2) {
           return this.add(-1 * t2, e2);
         }, m3.format = function(t2) {
           var e2 = this, n2 = this.$locale();
           if (!this.isValid())
-            return n2.invalidDate || $;
+            return n2.invalidDate || l2;
           var r2 = t2 || "YYYY-MM-DDTHH:mm:ssZ", i2 = O2.z(this), s3 = this.$H, u3 = this.$m, a3 = this.$M, o3 = n2.weekdays, f3 = n2.months, h4 = function(t3, n3, i3, s4) {
             return t3 && (t3[n3] || t3(e2, r2)) || i3[n3].slice(0, s4);
           }, c3 = function(t3) {
@@ -280,15 +283,15 @@ var require_dayjs_min = __commonJS({
           }, d3 = n2.meridiem || function(t3, e3, n3) {
             var r3 = t3 < 12 ? "AM" : "PM";
             return n3 ? r3.toLowerCase() : r3;
-          }, l3 = { YY: String(this.$y).slice(-2), YYYY: this.$y, M: a3 + 1, MM: O2.s(a3 + 1, 2, "0"), MMM: h4(n2.monthsShort, a3, f3, 3), MMMM: h4(f3, a3), D: this.$D, DD: O2.s(this.$D, 2, "0"), d: String(this.$W), dd: h4(n2.weekdaysMin, this.$W, o3, 2), ddd: h4(n2.weekdaysShort, this.$W, o3, 3), dddd: o3[this.$W], H: String(s3), HH: O2.s(s3, 2, "0"), h: c3(1), hh: c3(2), a: d3(s3, u3, true), A: d3(s3, u3, false), m: String(u3), mm: O2.s(u3, 2, "0"), s: String(this.$s), ss: O2.s(this.$s, 2, "0"), SSS: O2.s(this.$ms, 3, "0"), Z: i2 };
+          }, $2 = { YY: String(this.$y).slice(-2), YYYY: this.$y, M: a3 + 1, MM: O2.s(a3 + 1, 2, "0"), MMM: h4(n2.monthsShort, a3, f3, 3), MMMM: h4(f3, a3), D: this.$D, DD: O2.s(this.$D, 2, "0"), d: String(this.$W), dd: h4(n2.weekdaysMin, this.$W, o3, 2), ddd: h4(n2.weekdaysShort, this.$W, o3, 3), dddd: o3[this.$W], H: String(s3), HH: O2.s(s3, 2, "0"), h: c3(1), hh: c3(2), a: d3(s3, u3, true), A: d3(s3, u3, false), m: String(u3), mm: O2.s(u3, 2, "0"), s: String(this.$s), ss: O2.s(this.$s, 2, "0"), SSS: O2.s(this.$ms, 3, "0"), Z: i2 };
           return r2.replace(y, function(t3, e3) {
-            return e3 || l3[t3] || i2.replace(":", "");
+            return e3 || $2[t3] || i2.replace(":", "");
           });
         }, m3.utcOffset = function() {
           return 15 * -Math.round(this.$d.getTimezoneOffset() / 15);
-        }, m3.diff = function(r2, d3, $2) {
-          var l3, y2 = O2.p(d3), M4 = w2(r2), m4 = (M4.utcOffset() - this.utcOffset()) * e, g2 = this - M4, v3 = O2.m(this, M4);
-          return v3 = (l3 = {}, l3[c2] = v3 / 12, l3[f2] = v3, l3[h3] = v3 / 3, l3[o2] = (g2 - m4) / 6048e5, l3[a2] = (g2 - m4) / 864e5, l3[u2] = g2 / n, l3[s2] = g2 / e, l3[i] = g2 / t, l3)[y2] || g2, $2 ? v3 : O2.a(v3);
+        }, m3.diff = function(r2, d3, l3) {
+          var $2, y2 = O2.p(d3), M4 = w2(r2), m4 = (M4.utcOffset() - this.utcOffset()) * e, v3 = this - M4, g2 = O2.m(this, M4);
+          return g2 = ($2 = {}, $2[c2] = g2 / 12, $2[f2] = g2, $2[h3] = g2 / 3, $2[o2] = (v3 - m4) / 6048e5, $2[a2] = (v3 - m4) / 864e5, $2[u2] = v3 / n, $2[s2] = v3 / e, $2[i] = v3 / t, $2)[y2] || v3, l3 ? g2 : O2.a(g2);
         }, m3.daysInMonth = function() {
           return this.endOf(f2).$D;
         }, m3.$locale = function() {
@@ -318,7 +321,7 @@ var require_dayjs_min = __commonJS({
         return t2.$i || (t2(e2, _2, w2), t2.$i = true), w2;
       }, w2.locale = S2, w2.isDayjs = p2, w2.unix = function(t2) {
         return w2(1e3 * t2);
-      }, w2.en = D2[v2], w2.Ls = D2, w2.p = {}, w2;
+      }, w2.en = D2[g], w2.Ls = D2, w2.p = {}, w2;
     });
   }
 });
@@ -548,16 +551,13 @@ var require_advancedFormat = __commonJS({
       "object" == typeof exports2 && "undefined" != typeof module2 ? module2.exports = t() : "function" == typeof define && define.amd ? define(t) : (e = "undefined" != typeof globalThis ? globalThis : e || self).dayjs_plugin_advancedFormat = t();
     }(exports2, function() {
       "use strict";
-      return function(e, t, r) {
-        var n = t.prototype, s2 = n.format;
-        r.en.ordinal = function(e2) {
-          var t2 = ["th", "st", "nd", "rd"], r2 = e2 % 100;
-          return "[" + e2 + (t2[(r2 - 20) % 10] || t2[r2] || t2[0]) + "]";
-        }, n.format = function(e2) {
+      return function(e, t) {
+        var r = t.prototype, n = r.format;
+        r.format = function(e2) {
           var t2 = this, r2 = this.$locale();
           if (!this.isValid())
-            return s2.bind(this)(e2);
-          var n2 = this.$utils(), a2 = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
+            return n.bind(this)(e2);
+          var s2 = this.$utils(), a2 = (e2 || "YYYY-MM-DDTHH:mm:ssZ").replace(/\[([^\]]+)]|Q|wo|ww|w|WW|W|zzz|z|gggg|GGGG|Do|X|x|k{1,2}|S/g, function(e3) {
             switch (e3) {
               case "Q":
                 return Math.ceil((t2.$M + 1) / 3);
@@ -571,13 +571,13 @@ var require_advancedFormat = __commonJS({
                 return r2.ordinal(t2.week(), "W");
               case "w":
               case "ww":
-                return n2.s(t2.week(), "w" === e3 ? 1 : 2, "0");
+                return s2.s(t2.week(), "w" === e3 ? 1 : 2, "0");
               case "W":
               case "WW":
-                return n2.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
+                return s2.s(t2.isoWeek(), "W" === e3 ? 1 : 2, "0");
               case "k":
               case "kk":
-                return n2.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
+                return s2.s(String(0 === t2.$H ? 24 : t2.$H), "k" === e3 ? 1 : 2, "0");
               case "X":
                 return Math.floor(t2.$d.getTime() / 1e3);
               case "x":
@@ -590,7 +590,7 @@ var require_advancedFormat = __commonJS({
                 return e3;
             }
           });
-          return s2.bind(this)(a2);
+          return n.bind(this)(a2);
         };
       };
     });
@@ -16407,18 +16407,22 @@ var computePosition = async (reference, floating, config) => {
     middleware = [],
     platform: platform2
   } = config;
+  const validMiddleware = middleware.filter(Boolean);
   const rtl = await (platform2.isRTL == null ? void 0 : platform2.isRTL(floating));
   if (true) {
     if (platform2 == null) {
       console.error(["Floating UI: `platform` property was not passed to config. If you", "want to use Floating UI on the web, install @floating-ui/dom", "instead of the /core package. Otherwise, you can create your own", "`platform`: https://floating-ui.com/docs/platform"].join(" "));
     }
-    if (middleware.filter((_ref) => {
+    if (validMiddleware.filter((_ref) => {
       let {
         name
       } = _ref;
       return name === "autoPlacement" || name === "flip";
     }).length > 1) {
-      throw new Error(["Floating UI: duplicate `flip` and/or `autoPlacement`", "middleware detected. This will lead to an infinite loop. Ensure only", "one of either has been passed to the `middleware` array."].join(" "));
+      throw new Error(["Floating UI: duplicate `flip` and/or `autoPlacement` middleware", "detected. This will lead to an infinite loop. Ensure only one of", "either has been passed to the `middleware` array."].join(" "));
+    }
+    if (!reference || !floating) {
+      console.error(["Floating UI: The reference and/or floating element was not defined", "when `computePosition()` was called. Ensure that both elements have", "been created and can be measured."].join(" "));
     }
   }
   let rects = await platform2.getElementRects({
@@ -16433,11 +16437,11 @@ var computePosition = async (reference, floating, config) => {
   let statefulPlacement = placement;
   let middlewareData = {};
   let resetCount = 0;
-  for (let i = 0; i < middleware.length; i++) {
+  for (let i = 0; i < validMiddleware.length; i++) {
     const {
       name,
       fn
-    } = middleware[i];
+    } = validMiddleware[i];
     const {
       x: nextX,
       y: nextY,
@@ -16651,29 +16655,25 @@ var offset = function(value) {
 };
 
 // node_modules/@floating-ui/dom/dist/floating-ui.dom.esm.js
-function isWindow(value) {
-  return value && value.document && value.location && value.alert && value.setInterval;
-}
 function getWindow(node) {
-  if (node == null) {
-    return window;
-  }
-  if (!isWindow(node)) {
-    const ownerDocument = node.ownerDocument;
-    return ownerDocument ? ownerDocument.defaultView || window : window;
-  }
-  return node;
+  var _node$ownerDocument;
+  return ((_node$ownerDocument = node.ownerDocument) == null ? void 0 : _node$ownerDocument.defaultView) || window;
 }
 function getComputedStyle2(element) {
   return getWindow(element).getComputedStyle(element);
 }
 function getNodeName(node) {
-  return isWindow(node) ? "" : node ? (node.nodeName || "").toLowerCase() : "";
+  return isNode(node) ? (node.nodeName || "").toLowerCase() : "";
 }
+var uaString;
 function getUAString() {
+  if (uaString) {
+    return uaString;
+  }
   const uaData = navigator.userAgentData;
-  if (uaData != null && uaData.brands) {
-    return uaData.brands.map((item) => item.brand + "/" + item.version).join(" ");
+  if (uaData && Array.isArray(uaData.brands)) {
+    uaString = uaData.brands.map((item) => item.brand + "/" + item.version).join(" ");
+    return uaString;
   }
   return navigator.userAgent;
 }
@@ -16697,9 +16697,10 @@ function isOverflowElement(element) {
   const {
     overflow,
     overflowX,
-    overflowY
+    overflowY,
+    display
   } = getComputedStyle2(element);
-  return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX);
+  return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX) && !["inline", "contents"].includes(display);
 }
 function isTableElement(element) {
   return ["table", "td", "th"].includes(getNodeName(element));
@@ -16707,15 +16708,45 @@ function isTableElement(element) {
 function isContainingBlock(element) {
   const isFirefox2 = /firefox/i.test(getUAString());
   const css = getComputedStyle2(element);
-  return css.transform !== "none" || css.perspective !== "none" || css.contain === "paint" || ["transform", "perspective"].includes(css.willChange) || isFirefox2 && css.willChange === "filter" || isFirefox2 && (css.filter ? css.filter !== "none" : false);
+  const backdropFilter = css.backdropFilter || css.WebkitBackdropFilter;
+  return css.transform !== "none" || css.perspective !== "none" || (backdropFilter ? backdropFilter !== "none" : false) || isFirefox2 && css.willChange === "filter" || isFirefox2 && (css.filter ? css.filter !== "none" : false) || ["transform", "perspective"].some((value) => css.willChange.includes(value)) || ["paint", "layout", "strict", "content"].some(
+    (value) => {
+      const contain = css.contain;
+      return contain != null ? contain.includes(value) : false;
+    }
+  );
 }
 function isLayoutViewport() {
   return !/^((?!chrome|android).)*safari/i.test(getUAString());
 }
-var min3 = Math.min;
-var max3 = Math.max;
-var round2 = Math.round;
-function getBoundingClientRect(element, includeScale, isFixedStrategy) {
+function isLastTraversableNode(node) {
+  return ["html", "body", "#document"].includes(getNodeName(node));
+}
+var FALLBACK_SCALE = {
+  x: 1,
+  y: 1
+};
+function getScale(element) {
+  const domElement = !isElement3(element) && element.contextElement ? element.contextElement : isElement3(element) ? element : null;
+  if (!domElement) {
+    return FALLBACK_SCALE;
+  }
+  const rect = domElement.getBoundingClientRect();
+  const css = getComputedStyle2(domElement);
+  let x2 = rect.width / parseFloat(css.width);
+  let y = rect.height / parseFloat(css.height);
+  if (!x2 || !Number.isFinite(x2)) {
+    x2 = 1;
+  }
+  if (!y || !Number.isFinite(y)) {
+    y = 1;
+  }
+  return {
+    x: x2,
+    y
+  };
+}
+function getBoundingClientRect(element, includeScale, isFixedStrategy, offsetParent) {
   var _win$visualViewport$o, _win$visualViewport, _win$visualViewport$o2, _win$visualViewport2;
   if (includeScale === void 0) {
     includeScale = false;
@@ -16724,18 +16755,22 @@ function getBoundingClientRect(element, includeScale, isFixedStrategy) {
     isFixedStrategy = false;
   }
   const clientRect = element.getBoundingClientRect();
-  let scaleX = 1;
-  let scaleY = 1;
-  if (includeScale && isHTMLElement(element)) {
-    scaleX = element.offsetWidth > 0 ? round2(clientRect.width) / element.offsetWidth || 1 : 1;
-    scaleY = element.offsetHeight > 0 ? round2(clientRect.height) / element.offsetHeight || 1 : 1;
+  let scale = FALLBACK_SCALE;
+  if (includeScale) {
+    if (offsetParent) {
+      if (isElement3(offsetParent)) {
+        scale = getScale(offsetParent);
+      }
+    } else {
+      scale = getScale(element);
+    }
   }
   const win = isElement3(element) ? getWindow(element) : window;
   const addVisualOffsets = !isLayoutViewport() && isFixedStrategy;
-  const x2 = (clientRect.left + (addVisualOffsets ? (_win$visualViewport$o = (_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) != null ? _win$visualViewport$o : 0 : 0)) / scaleX;
-  const y = (clientRect.top + (addVisualOffsets ? (_win$visualViewport$o2 = (_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) != null ? _win$visualViewport$o2 : 0 : 0)) / scaleY;
-  const width = clientRect.width / scaleX;
-  const height = clientRect.height / scaleY;
+  const x2 = (clientRect.left + (addVisualOffsets ? (_win$visualViewport$o = (_win$visualViewport = win.visualViewport) == null ? void 0 : _win$visualViewport.offsetLeft) != null ? _win$visualViewport$o : 0 : 0)) / scale.x;
+  const y = (clientRect.top + (addVisualOffsets ? (_win$visualViewport$o2 = (_win$visualViewport2 = win.visualViewport) == null ? void 0 : _win$visualViewport2.offsetTop) != null ? _win$visualViewport$o2 : 0 : 0)) / scale.y;
+  const width = clientRect.width / scale.x;
+  const height = clientRect.height / scale.y;
   return {
     width,
     height,
@@ -16765,18 +16800,10 @@ function getNodeScroll(element) {
 function getWindowScrollBarX(element) {
   return getBoundingClientRect(getDocumentElement(element)).left + getNodeScroll(element).scrollLeft;
 }
-function isScaled(element) {
-  const rect = getBoundingClientRect(element);
-  return round2(rect.width) !== element.offsetWidth || round2(rect.height) !== element.offsetHeight;
-}
 function getRectRelativeToOffsetParent(element, offsetParent, strategy) {
   const isOffsetParentAnElement = isHTMLElement(offsetParent);
   const documentElement = getDocumentElement(offsetParent);
-  const rect = getBoundingClientRect(
-    element,
-    isOffsetParentAnElement && isScaled(offsetParent),
-    strategy === "fixed"
-  );
+  const rect = getBoundingClientRect(element, true, strategy === "fixed", offsetParent);
   let scroll = {
     scrollLeft: 0,
     scrollTop: 0
@@ -16808,7 +16835,8 @@ function getParentNode(node) {
   if (getNodeName(node) === "html") {
     return node;
   }
-  return node.assignedSlot || node.parentNode || (isShadowRoot(node) ? node.host : null) || getDocumentElement(node);
+  const result2 = node.assignedSlot || node.parentNode || (isShadowRoot(node) ? node.host : null) || getDocumentElement(node);
+  return isShadowRoot(result2) ? result2.host : result2;
 }
 function getTrueOffsetParent(element) {
   if (!isHTMLElement(element) || getComputedStyle2(element).position === "fixed") {
@@ -16818,15 +16846,11 @@ function getTrueOffsetParent(element) {
 }
 function getContainingBlock(element) {
   let currentNode = getParentNode(element);
-  if (isShadowRoot(currentNode)) {
-    currentNode = currentNode.host;
-  }
-  while (isHTMLElement(currentNode) && !["html", "body"].includes(getNodeName(currentNode))) {
+  while (isHTMLElement(currentNode) && !isLastTraversableNode(currentNode)) {
     if (isContainingBlock(currentNode)) {
       return currentNode;
     } else {
-      const parent2 = currentNode.parentNode;
-      currentNode = isShadowRoot(parent2) ? parent2.host : parent2;
+      currentNode = getParentNode(currentNode);
     }
   }
   return null;
@@ -16870,6 +16894,10 @@ function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
     scrollLeft: 0,
     scrollTop: 0
   };
+  let scale = {
+    x: 1,
+    y: 1
+  };
   const offsets = {
     x: 0,
     y: 0
@@ -16879,15 +16907,17 @@ function convertOffsetParentRelativeRectToViewportRelativeRect(_ref) {
       scroll = getNodeScroll(offsetParent);
     }
     if (isHTMLElement(offsetParent)) {
-      const offsetRect = getBoundingClientRect(offsetParent, true);
+      const offsetRect = getBoundingClientRect(offsetParent);
+      scale = getScale(offsetParent);
       offsets.x = offsetRect.x + offsetParent.clientLeft;
       offsets.y = offsetRect.y + offsetParent.clientTop;
     }
   }
   return {
-    ...rect,
-    x: rect.x - scroll.scrollLeft + offsets.x,
-    y: rect.y - scroll.scrollTop + offsets.y
+    width: rect.width * scale.x,
+    height: rect.height * scale.y,
+    x: rect.x * scale.x - scroll.scrollLeft * scale.x + offsets.x,
+    y: rect.y * scale.y - scroll.scrollTop * scale.y + offsets.y
   };
 }
 function getViewportRect(element, strategy) {
@@ -16914,6 +16944,8 @@ function getViewportRect(element, strategy) {
     y
   };
 }
+var min3 = Math.min;
+var max3 = Math.max;
 function getDocumentRect(element) {
   var _element$ownerDocumen;
   const html = getDocumentElement(element);
@@ -16935,7 +16967,7 @@ function getDocumentRect(element) {
 }
 function getNearestOverflowAncestor(node) {
   const parentNode = getParentNode(node);
-  if (["html", "body", "#document"].includes(getNodeName(parentNode))) {
+  if (isLastTraversableNode(parentNode)) {
     return node.ownerDocument.body;
   }
   if (isHTMLElement(parentNode) && isOverflowElement(parentNode)) {
@@ -16951,57 +16983,65 @@ function getOverflowAncestors(node, list) {
   const scrollableAncestor = getNearestOverflowAncestor(node);
   const isBody = scrollableAncestor === ((_node$ownerDocument = node.ownerDocument) == null ? void 0 : _node$ownerDocument.body);
   const win = getWindow(scrollableAncestor);
-  const target2 = isBody ? [win].concat(win.visualViewport || [], isOverflowElement(scrollableAncestor) ? scrollableAncestor : []) : scrollableAncestor;
-  const updatedList = list.concat(target2);
-  return isBody ? updatedList : updatedList.concat(getOverflowAncestors(target2));
-}
-function contains(parent2, child) {
-  const rootNode = child.getRootNode == null ? void 0 : child.getRootNode();
-  if (parent2.contains(child)) {
-    return true;
-  } else if (rootNode && isShadowRoot(rootNode)) {
-    let next = child;
-    do {
-      if (next && parent2 === next) {
-        return true;
-      }
-      next = next.parentNode || next.host;
-    } while (next);
+  if (isBody) {
+    return list.concat(win, win.visualViewport || [], isOverflowElement(scrollableAncestor) ? scrollableAncestor : []);
   }
-  return false;
+  return list.concat(scrollableAncestor, getOverflowAncestors(scrollableAncestor));
 }
 function getInnerBoundingClientRect(element, strategy) {
-  const clientRect = getBoundingClientRect(element, false, strategy === "fixed");
+  const clientRect = getBoundingClientRect(element, true, strategy === "fixed");
   const top = clientRect.top + element.clientTop;
   const left2 = clientRect.left + element.clientLeft;
+  const scale = isHTMLElement(element) ? getScale(element) : {
+    x: 1,
+    y: 1
+  };
+  const width = element.clientWidth * scale.x;
+  const height = element.clientHeight * scale.y;
+  const x2 = left2 * scale.x;
+  const y = top * scale.y;
   return {
-    top,
-    left: left2,
-    x: left2,
-    y: top,
-    right: left2 + element.clientWidth,
-    bottom: top + element.clientHeight,
-    width: element.clientWidth,
-    height: element.clientHeight
+    top: y,
+    left: x2,
+    right: x2 + width,
+    bottom: y + height,
+    x: x2,
+    y,
+    width,
+    height
   };
 }
-function getClientRectFromClippingAncestor(element, clippingParent, strategy) {
-  if (clippingParent === "viewport") {
+function getClientRectFromClippingAncestor(element, clippingAncestor, strategy) {
+  if (clippingAncestor === "viewport") {
     return rectToClientRect(getViewportRect(element, strategy));
   }
-  if (isElement3(clippingParent)) {
-    return getInnerBoundingClientRect(clippingParent, strategy);
+  if (isElement3(clippingAncestor)) {
+    return getInnerBoundingClientRect(clippingAncestor, strategy);
   }
   return rectToClientRect(getDocumentRect(getDocumentElement(element)));
 }
-function getClippingAncestors(element) {
-  const clippingAncestors = getOverflowAncestors(element);
-  const canEscapeClipping = ["absolute", "fixed"].includes(getComputedStyle2(element).position);
-  const clipperElement = canEscapeClipping && isHTMLElement(element) ? getOffsetParent(element) : element;
-  if (!isElement3(clipperElement)) {
-    return [];
+function getClippingElementAncestors(element, cache2) {
+  const cachedResult = cache2.get(element);
+  if (cachedResult) {
+    return cachedResult;
   }
-  return clippingAncestors.filter((clippingAncestors2) => isElement3(clippingAncestors2) && contains(clippingAncestors2, clipperElement) && getNodeName(clippingAncestors2) !== "body");
+  let result2 = getOverflowAncestors(element).filter((el) => isElement3(el) && getNodeName(el) !== "body");
+  let currentContainingBlockComputedStyle = null;
+  const elementIsFixed = getComputedStyle2(element).position === "fixed";
+  let currentNode = elementIsFixed ? getParentNode(element) : element;
+  while (isElement3(currentNode) && !isLastTraversableNode(currentNode)) {
+    const computedStyle = getComputedStyle2(currentNode);
+    const containingBlock = isContainingBlock(currentNode);
+    const shouldDropCurrentNode = elementIsFixed ? !containingBlock && !currentContainingBlockComputedStyle : !containingBlock && computedStyle.position === "static" && !!currentContainingBlockComputedStyle && ["absolute", "fixed"].includes(currentContainingBlockComputedStyle.position);
+    if (shouldDropCurrentNode) {
+      result2 = result2.filter((ancestor) => ancestor !== currentNode);
+    } else {
+      currentContainingBlockComputedStyle = computedStyle;
+    }
+    currentNode = getParentNode(currentNode);
+  }
+  cache2.set(element, result2);
+  return result2;
 }
 function getClippingRect(_ref) {
   let {
@@ -17010,8 +17050,8 @@ function getClippingRect(_ref) {
     rootBoundary,
     strategy
   } = _ref;
-  const mainClippingAncestors = boundary === "clippingAncestors" ? getClippingAncestors(element) : [].concat(boundary);
-  const clippingAncestors = [...mainClippingAncestors, rootBoundary];
+  const elementClippingAncestors = boundary === "clippingAncestors" ? getClippingElementAncestors(element, this._c) : [].concat(boundary);
+  const clippingAncestors = [...elementClippingAncestors, rootBoundary];
   const firstClippingAncestor = clippingAncestors[0];
   const clippingRect = clippingAncestors.reduce((accRect, clippingAncestor) => {
     const rect = getClientRectFromClippingAncestor(element, clippingAncestor, strategy);
@@ -17035,28 +17075,42 @@ var platform = {
   getDimensions,
   getOffsetParent,
   getDocumentElement,
-  getElementRects: (_ref) => {
+  getScale,
+  async getElementRects(_ref) {
     let {
       reference,
       floating,
       strategy
     } = _ref;
+    const getOffsetParentFn = this.getOffsetParent || getOffsetParent;
+    const getDimensionsFn = this.getDimensions;
     return {
-      reference: getRectRelativeToOffsetParent(reference, getOffsetParent(floating), strategy),
+      reference: getRectRelativeToOffsetParent(reference, await getOffsetParentFn(floating), strategy),
       floating: {
-        ...getDimensions(floating),
         x: 0,
-        y: 0
+        y: 0,
+        ...await getDimensionsFn(floating)
       }
     };
   },
   getClientRects: (element) => Array.from(element.getClientRects()),
   isRTL: (element) => getComputedStyle2(element).direction === "rtl"
 };
-var computePosition2 = (reference, floating, options) => computePosition(reference, floating, {
-  platform,
-  ...options
-});
+var computePosition2 = (reference, floating, options) => {
+  const cache2 = /* @__PURE__ */ new Map();
+  const mergedOptions = {
+    platform,
+    ...options
+  };
+  const platformWithCache = {
+    ...mergedOptions.platform,
+    _c: cache2
+  };
+  return computePosition(reference, floating, {
+    ...mergedOptions,
+    platform: platformWithCache
+  });
+};
 
 // node_modules/element-plus/es/hooks/use-floating/index.mjs
 var useFloatingProps = buildProps({});
@@ -21497,6 +21551,10 @@ var TinyColor = function() {
     this.a = boundAlpha(alpha);
     this.roundA = Math.round(100 * this.a) / 100;
     return this;
+  };
+  TinyColor2.prototype.isMonochrome = function() {
+    var s2 = this.toHsl().s;
+    return s2 === 0;
   };
   TinyColor2.prototype.toHsv = function() {
     var hsv = rgbToHsv(this.r, this.g, this.b);
@@ -26794,7 +26852,7 @@ var _sfc_main42 = defineComponent({
     const tagSize = useSize();
     const ns2 = useNamespace("tag");
     const classes = computed2(() => {
-      const { type: type4, hit, effect, closable, round: round3 } = props;
+      const { type: type4, hit, effect, closable, round: round2 } = props;
       return [
         ns2.b(),
         ns2.is("closable", closable),
@@ -26802,7 +26860,7 @@ var _sfc_main42 = defineComponent({
         ns2.m(tagSize.value),
         ns2.m(effect),
         ns2.is("hit", hit),
-        ns2.is("round", round3)
+        ns2.is("round", round2)
       ];
     });
     const handleClose = (event) => {
@@ -38339,7 +38397,7 @@ function useOption(props, states) {
     if (!select.props.multiple) {
       return isEqual3(props.value, select.props.modelValue);
     } else {
-      return contains2(select.props.modelValue, props.value);
+      return contains(select.props.modelValue, props.value);
     }
   });
   const limitReached = computed2(() => {
@@ -38360,7 +38418,7 @@ function useOption(props, states) {
     return props.disabled || states.groupDisabled || limitReached.value;
   });
   const instance = getCurrentInstance();
-  const contains2 = (arr = [], target2) => {
+  const contains = (arr = [], target2) => {
     if (!isObject4.value) {
       return arr && arr.includes(target2);
     } else {
@@ -43773,7 +43831,7 @@ var ElSelectMenu2 = defineComponent({
         itemSize: (idx) => cachedHeights.value[idx]
       };
     });
-    const contains2 = (arr = [], target2) => {
+    const contains = (arr = [], target2) => {
       const {
         props: {
           valueKey
@@ -43801,7 +43859,7 @@ var ElSelectMenu2 = defineComponent({
         valueKey
       } = select.props;
       if (select.props.multiple) {
-        return contains2(modelValue, get_default(target2, valueKey));
+        return contains(modelValue, get_default(target2, valueKey));
       }
       return isEqual3(modelValue, get_default(target2, valueKey));
     };
@@ -60952,9 +61010,6 @@ var installer = makeInstaller([...Components, ...Plugins]);
 var import_dayjs17 = __toESM(require_dayjs_min(), 1);
 var install = installer.install;
 var version2 = installer.version;
-
-// dep:element-plus
-var element_plus_default2 = installer;
 var export_dayjs = import_dayjs17.default;
 export {
   BAR_MAP,
@@ -61166,7 +61221,7 @@ export {
   dateEquals,
   datePickTypes,
   export_dayjs as dayjs,
-  element_plus_default2 as default,
+  installer as default,
   defaultNamespace,
   descriptionProps,
   dialogEmits,

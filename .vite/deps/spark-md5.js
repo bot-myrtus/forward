@@ -434,10 +434,5 @@ var require_spark_md5 = __commonJS({
     });
   }
 });
-
-// dep:spark-md5
-var spark_md5_default = require_spark_md5();
-export {
-  spark_md5_default as default
-};
+export default require_spark_md5();
 //# sourceMappingURL=spark-md5.js.map

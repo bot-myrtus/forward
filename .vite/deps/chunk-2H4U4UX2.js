@@ -26,7 +26,7 @@ import {
   unref,
   watch,
   watchEffect
-} from "./chunk-TUTPZM3B.js";
+} from "./chunk-BE2XRKD6.js";
 
 // node_modules/vue-demi/lib/index.mjs
 var isVue2 = false;
@@ -7447,4 +7447,4 @@ export {
   useWindowScroll,
   useWindowSize
 };
-//# sourceMappingURL=chunk-WW3H7SQG.js.map
+//# sourceMappingURL=chunk-2H4U4UX2.js.map

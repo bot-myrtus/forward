@@ -15,7 +15,7 @@ import {
   unref,
   watch,
   watchEffect
-} from "./chunk-TUTPZM3B.js";
+} from "./chunk-BE2XRKD6.js";
 import "./chunk-TWLJ45QX.js";
 
 // node_modules/@vue/devtools-api/lib/esm/env.js
@@ -1064,7 +1064,9 @@ function createRouterMatcher(routes, globalOptions) {
         }
       }
       originalRecord = originalRecord || matcher;
-      insertMatcher(matcher);
+      if (matcher.record.components && Object.keys(matcher.record.components).length || matcher.record.name || matcher.record.redirect) {
+        insertMatcher(matcher);
+      }
     }
     return originalMatcher ? () => {
       removeRoute(originalMatcher);
@@ -2636,7 +2638,7 @@ export {
   viewDepthKey
 };
 /*!
-  * vue-router v4.1.5
+  * vue-router v4.1.6
   * (c) 2022 Eduardo San Martin Morote
   * @license MIT
   */

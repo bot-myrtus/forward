@@ -1,5 +1,5 @@
-import { Context, Schema } from 'koishi'
-import { randArray, genlink, compare } from './utils'
+import { Context, Schema, h } from 'koishi'
+import { randArray } from './utils'
 
 export const name = 'mediawiki'
 
@@ -15,7 +15,7 @@ export interface Config {
 export const Config: Schema<Config> = Schema.object({
   rules: Schema.array(Schema.object({
     channelId: Schema.string().required().description('群组编号'),
-    platform: Schema.union(['onebot', 'telegram', 'discord', 'qqguild']).required().description('群组平台 (QQ 群为 "onebot")'),
+    platform: Schema.union(['onebot', 'telegram', 'discord', 'qqguild', 'kook', 'feishu']).required().description('群组平台 (QQ 群为 "onebot")'),
     link: Schema.string().default('https://zh.wikipedia.org/wiki/{replace}').description('链接模板'),
     api: Schema.string().default('https://zh.wikipedia.org/w/api.php').description('API 地址'),
   })).default([]).description('想要支援 MediaWiki 特性的群组规则'),
@@ -26,13 +26,19 @@ export function apply(ctx: Context, config: Config) {
     if (session.type === 'message') {
       const index = config.rules.findIndex((element) => (element.channelId === session.channelId) && (element.platform === session.platform))
       if (index > -1) {
-        const text = session.content.replace(/&#91;/gu, '[').replace(/&#93;/gu, ']')
-        const keys = text.match(/(?<=\[\[).*?(?=\]\])/g)
-        if (keys.length > 0) {
-          return keys.map((value) => {
-            return config.rules[index].link.replace('{replace}', encodeURI(value))
-          }).join('  ')
-        }
+        return session.elements.map((element) => {
+          if (element.type === 'text') {
+            const keys = element.attrs.content.match(/(?<=\[\[).*?(?=\]\])/g)
+            if (keys.length > 0) {
+              const res = []
+              for (const key of keys) {
+                const url = config.rules[index].link.replace('{replace}', encodeURI(key))
+                res.push(url)
+              }
+              return h('text', { content: res.join('  ') })
+            }
+          }
+        })
       }
     }
     return next()

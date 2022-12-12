@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/idanran/myrtus)](https://github.com/idanran/myrtus/blob/main/LICENSE)
 
-在多个群组间传话的机器人。支持 `QQ 群`、`Telegram`、`QQ 频道`、`Discord`、`KOOK` 互联。
+在多个群组间传话的机器人。支持 `QQ 群`、`Telegram`、`QQ 频道`、`Discord`、`KOOK`、`飞书` 互联。
 
 ## 快速搭建
 

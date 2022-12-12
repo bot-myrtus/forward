@@ -2357,10 +2357,5 @@ var require_semver2 = __commonJS({
     };
   }
 });
-
-// dep:semver
-var semver_default = require_semver2();
-export {
-  semver_default as default
-};
+export default require_semver2();
 //# sourceMappingURL=semver.js.map
