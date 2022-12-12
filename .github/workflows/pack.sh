@@ -13,7 +13,7 @@ for file in $(cat package.json | jq -r '.files' | sed '1d' | sed '$d'); do
   echo $file | cut -d \" -f 2 >> .gitignore
 done
 
-for file in $(find . -type f | git check-ignore --stdin --no-index); do
+for file in $(find . -type f,l | git check-ignore --stdin --no-index); do
   dir=$(dirname $RUNNER_TEMP/bundle/$file)
   mkdir -p $dir
   cp -a $file $dir
