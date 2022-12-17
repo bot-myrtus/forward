@@ -60,12 +60,7 @@ export function apply(ctx: Context, config: Config) {
           message.splice(1, 0, segment(null, {}, segment.parse(re)))
         }
         for (const botId of Object.keys(same)) {
-          const bot = ctx.bots[botId]
-          if (botId.includes('telegram') || botId.includes('discord')) {
-            bot.broadcast(same[botId], new MessageParse(message).face().record().output())
-            continue
-          }
-          bot.broadcast(same[botId], new MessageParse(message).record().output())
+          ctx.bots[botId].broadcast(same[botId], new MessageParse(message).face().record().output())
         }
       }
     }
