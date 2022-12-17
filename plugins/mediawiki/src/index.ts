@@ -26,7 +26,7 @@ export function apply(ctx: Context, config: Config) {
     if (session.type === 'message') {
       const index = config.rules.findIndex((element) => (element.channelId === session.channelId) && (element.platform === session.platform))
       if (index > -1) {
-        return session.elements.map((element) => {
+        session.send(session.elements.map((element) => {
           if (element.type === 'text') {
             const keys = element.attrs.content.match(/(?<=\[\[).*?(?=\]\])/g)
             if (keys?.length > 0) {
@@ -38,7 +38,7 @@ export function apply(ctx: Context, config: Config) {
               return h('text', { content: res.join('  ') })
             }
           }
-        })
+        }))
       }
     }
     return next()

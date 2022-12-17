@@ -65,5 +65,5 @@ export function apply(ctx: Context, config: Config) {
       }
     }
     return next()
-  }, true)
+  })
 }
