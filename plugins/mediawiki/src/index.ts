@@ -29,7 +29,7 @@ export function apply(ctx: Context, config: Config) {
         return session.elements.map((element) => {
           if (element.type === 'text') {
             const keys = element.attrs.content.match(/(?<=\[\[).*?(?=\]\])/g)
-            if (keys.length > 0) {
+            if (keys?.length > 0) {
               const res = []
               for (const key of keys) {
                 const url = config.rules[index].link.replace('{replace}', encodeURI(key))
