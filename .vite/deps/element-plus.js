@@ -16722,6 +16722,9 @@ function isLayoutViewport() {
 function isLastTraversableNode(node) {
   return ["html", "body", "#document"].includes(getNodeName(node));
 }
+var min3 = Math.min;
+var max3 = Math.max;
+var round2 = Math.round;
 var FALLBACK_SCALE = {
   x: 1,
   y: 1
@@ -16733,6 +16736,15 @@ function getScale(element) {
   }
   const rect = domElement.getBoundingClientRect();
   const css = getComputedStyle2(domElement);
+  if (css.boxSizing !== "border-box") {
+    if (!isHTMLElement(domElement)) {
+      return FALLBACK_SCALE;
+    }
+    return {
+      x: domElement.offsetWidth > 0 ? round2(rect.width) / domElement.offsetWidth || 1 : 1,
+      y: domElement.offsetHeight > 0 ? round2(rect.height) / domElement.offsetHeight || 1 : 1
+    };
+  }
   let x2 = rect.width / parseFloat(css.width);
   let y = rect.height / parseFloat(css.height);
   if (!x2 || !Number.isFinite(x2)) {
@@ -16944,8 +16956,6 @@ function getViewportRect(element, strategy) {
     y
   };
 }
-var min3 = Math.min;
-var max3 = Math.max;
 function getDocumentRect(element) {
   var _element$ownerDocumen;
   const html = getDocumentElement(element);
@@ -26852,7 +26862,7 @@ var _sfc_main42 = defineComponent({
     const tagSize = useSize();
     const ns2 = useNamespace("tag");
     const classes = computed2(() => {
-      const { type: type4, hit, effect, closable, round: round2 } = props;
+      const { type: type4, hit, effect, closable, round: round3 } = props;
       return [
         ns2.b(),
         ns2.is("closable", closable),
@@ -26860,7 +26870,7 @@ var _sfc_main42 = defineComponent({
         ns2.m(tagSize.value),
         ns2.m(effect),
         ns2.is("hit", hit),
-        ns2.is("round", round2)
+        ns2.is("round", round3)
       ];
     });
     const handleClose = (event) => {
