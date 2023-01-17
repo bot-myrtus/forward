@@ -42,6 +42,7 @@ export const Config: Schema<Config> = Schema.object({
 export function apply(ctx: Context, config: Config) {
   ctx.middleware(async (session, next) => {
     if (session.type === 'message') {
+      //console.log(session.elements)
       const index = config.rules.findIndex((element) => (element.source.channelId === session.channelId) && (element.source.platform === session.platform))
       if (index > -1) {
         const { source, targets } = config.rules[index]
@@ -52,15 +53,16 @@ export function apply(ctx: Context, config: Config) {
           same[botId] ?? (same[botId] = [])
           same[botId].push([target.channelId, target.guildId])
         }
-        const prefix = `[${source.name} - ${session.author.nickname || session.author.username}] `
+        const prefix = `[${source.name} - ${session.author.nickname || session.author.username}]\n`
         let message = session.elements
         message.unshift(segment('text', { content: prefix }))
         if (session.quote) {
           const re = `Re ${session.quote.author.nickname || session.quote.author.username} ⌈${session.quote.content}⌋: `
           message.splice(1, 0, segment(null, {}, segment.parse(re)))
         }
+        const guildMemberMap = await session.bot.getGuildMemberMap(session.guildId)
         for (const botId of Object.keys(same)) {
-          ctx.bots[botId].broadcast(same[botId], new MessageParse(message).face().record().output())
+          ctx.bots[botId].broadcast(same[botId], new MessageParse(message).face().record().at(guildMemberMap).output())
         }
       }
     }
