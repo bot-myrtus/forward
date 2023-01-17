@@ -1,4 +1,4 @@
-import { segment } from 'koishi'
+import { Dict, segment, Session } from 'koishi'
 
 const faces = {
     0: '惊讶', 1: '撇嘴', 2: '色', 3: '发呆', 4: '得意', 5: '流泪', 6: '害羞', 7: '闭嘴', 8: '睡', 9: '大哭',
@@ -36,9 +36,10 @@ export class MessageParse {
     }
     face() {
         this.message = this.message.map((value) => {
-            if (value.type === 'face') {
+            const { type, attrs } = value
+            if (type === 'face') {
                 let content = '[表情]'
-                faces[value.attrs.id] && (content = `[${faces[value.attrs.id]}]`)
+                faces[attrs.id] && (content = `[${faces[attrs.id]}]`)
                 return segment('text', { content })
             }
             return value
@@ -49,6 +50,18 @@ export class MessageParse {
         this.message = this.message.map((value) => {
             if (value.type === 'record') {
                 return segment('text', { content: '[语音]' })
+            }
+            return value
+        })
+        return this
+    }
+    at(guildMemberMap: Record<string, string>) {
+        this.message = this.message.map((value) => {
+            const { type, attrs } = value
+            if (type === 'at') {
+                if (attrs.id && !attrs.name) {
+                    return segment('text', { content: `@${guildMemberMap[attrs.id]}` })
+                }
             }
             return value
         })
