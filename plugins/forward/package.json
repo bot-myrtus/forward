@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
   "description": "群组互联",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -15,12 +15,20 @@
     "plugin"
   ],
   "peerDependencies": {
-    "koishi": "^4.11.0"
+    "koishi": "^4.11.4"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idanran/myrtus.git",
     "directory": "plugins/forward"
   },
-  "author": "idanran <idanran@outlook.com>"
+  "author": "idanran <idanran@outlook.com>",
+  "koishi": {
+    "category": "tool",
+    "service": {
+      "required": [
+        "database"
+      ]
+    }
+  }
 }
