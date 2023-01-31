@@ -1,4 +1,4 @@
-import { Dict, segment, Session } from 'koishi'
+import { Dict, h } from 'koishi'
 
 const faces = {
     0: '惊讶', 1: '撇嘴', 2: '色', 3: '发呆', 4: '得意', 5: '流泪', 6: '害羞', 7: '闭嘴', 8: '睡', 9: '大哭',
@@ -27,20 +27,25 @@ const faces = {
     230: '嘲讽', 231: '哼', 232: '佛系', 233: '掐一掐', 234: '惊呆', 235: '颤抖', 236: '啃头', 237: '偷看', 238: '扇脸', 239: '原谅',
     240: '喷脸', 241: '生日快乐', 243: '甩头', 244: '扔狗', 245: "加油必胜", 246: "加油抱抱", 247: "口罩护体", 260: "搬砖中", 261: "忙到飞起", 262: "脑阔疼", 263: "沧桑",
     264: "捂脸", 265: "辣眼睛", 266: "哦哟", 267: "头秃", 268: "问号脸", 269: "暗中观察", 270: "emm", 271: "吃瓜", 272: "呵呵哒", 273: "我酸了",
-    274: "太南了", 277: "汪汪", 278: '汗', 281: '无眼笑', 282: '敬礼', 283: '狂笑', 284: '面无表情', 285: '摸鱼', 286: '魔鬼笑', 287: '哦', 288: '请', 289: "睁眼", 290: '敲开心', 292: '让我康康', 293: '摸锦鲤', 295: '拿到红包', 300: "胖三斤", 301: '好闪', 302: '左拜年', 303: '右拜年', 306: "牛气冲天", 307: "喵喵", 311: "打call", 312: "变形", 314: "仔细分析", 317: "菜汪", 318: "崇拜",
-    319: "比心", 320: "庆祝", 322: '拒绝', 323: '嫌弃', 324: "吃糖", 325: "惊吓", 326: "生气", 332: '举牌牌', 333: "烟花", 334: '虎虎生威', 335: '绿马护体', 336: '豹富', 337: '花朵脸', 338: '我想开了', 339: '舔屏', 340: '热化了'
+    274: "太南了", 277: "汪汪", 278: '汗', 281: '无眼笑', 282: '敬礼', 283: '狂笑', 284: '面无表情', 285: '摸鱼', 286: '魔鬼笑', 287: '哦', 288: '请',
+    289: "睁眼", 290: '敲开心', 292: '让我康康', 293: '摸锦鲤', 295: '拿到红包', 300: "胖三斤", 301: '好闪', 302: '左拜年', 303: '右拜年', 306: "牛气冲天",
+    307: "喵喵", 311: "打call", 312: "变形", 314: "仔细分析", 317: "菜汪", 318: "崇拜", 319: "比心", 320: "庆祝", 322: '拒绝', 323: '嫌弃', 324: "吃糖",
+    325: "惊吓", 326: "生气", 332: '举牌牌', 333: "烟花", 334: '虎虎生威', 335: '绿马护体', 336: '豹富', 337: '花朵脸', 338: '我想开了', 339: '舔屏',
+    340: '热化了', 341: '打招呼', 342: '酸Q', 343: '我方了', 344: '大怨种', 345: '红包多多', 346: '你真棒棒', 347: '大展宏兔', 348: '福萝卜'
 }
 
 export class MessageParse {
-    constructor(private message: segment[]) {
+    constructor(private message: h[]) {
     }
     face() {
         this.message = this.message.map((value) => {
             const { type, attrs } = value
             if (type === 'face') {
                 let content = '[表情]'
-                faces[attrs.id] && (content = `[${faces[attrs.id]}]`)
-                return segment('text', { content })
+                if (['onebot', 'qqguild'].includes(attrs.platform) && faces[attrs.id]) {
+                    content = `[${faces[attrs.id]}]`
+                }
+                return h('text', { content })
             }
             return value
         })
@@ -49,18 +54,18 @@ export class MessageParse {
     record() {
         this.message = this.message.map((value) => {
             if (value.type === 'record') {
-                return segment('text', { content: '[语音]' })
+                return h('text', { content: '[语音]' })
             }
             return value
         })
         return this
     }
-    at(guildMemberMap: Record<string, string>) {
+    at(guildMemberMap: Dict<string, string>) {
         this.message = this.message.map((value) => {
             const { type, attrs } = value
             if (type === 'at') {
                 if (attrs.id && !attrs.name) {
-                    return segment('text', { content: `@${guildMemberMap[attrs.id]}` })
+                    return h('text', { content: `@${guildMemberMap[attrs.id]}` })
                 }
             }
             return value
@@ -68,6 +73,9 @@ export class MessageParse {
         return this
     }
     output() {
-        return segment(null, this.message)
+        return h(null, this.message)
+    }
+    outputRaw() {
+        return this.message
     }
 }
