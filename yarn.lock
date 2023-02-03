@@ -109,12 +109,12 @@
     js-yaml "^4.1.0"
     ns-require "^1.1.4"
 
-"@koishijs/plugin-adapter-discord@^3.4.3":
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/@koishijs/plugin-adapter-discord/-/plugin-adapter-discord-3.4.3.tgz#7527bce229e9b6c29b8d4495e0a1f744a477c5bb"
-  integrity sha512-aq/syagEzcJAtttHnP5be/WitC6bF/ACYXaUNr/gTlodXWeWf53rUcS53PXCRuep/UcddXLQsXO3hNdGJFcaoA==
+"@koishijs/plugin-adapter-discord@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@koishijs/plugin-adapter-discord/-/plugin-adapter-discord-3.5.0.tgz#b3b2c31a2dd1e1dd0f0eef43b141178209c160c0"
+  integrity sha512-SWA5umhjRf4vhenn2QvLn0SaY8LSitkD4CZLzUiN7+oYt2ivVcn5m9l8Fy5M2CzOAEIMiGDBikHru+c/O5Jmfg==
   dependencies:
-    "@satorijs/adapter-discord" "^3.4.3"
+    "@satorijs/adapter-discord" "^3.5.0"
 
 "@koishijs/plugin-adapter-feishu@^1.1.3":
   version "1.1.3"
@@ -137,12 +137,12 @@
   dependencies:
     "@satorijs/adapter-onebot" "^5.5.4"
 
-"@koishijs/plugin-adapter-telegram@^3.6.5":
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/@koishijs/plugin-adapter-telegram/-/plugin-adapter-telegram-3.6.5.tgz#9caa1ea0d6457e1b8a2bf91103ebf2ece0b928b2"
-  integrity sha512-Oc5983nv70lJM8eHYVgZbK0Wb2XYFh3hnU2hAernudX9YWTHo9OWD4EHpxSfNl9By0VxvjJqIqXDTetUHArz0A==
+"@koishijs/plugin-adapter-telegram@^3.6.6":
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/@koishijs/plugin-adapter-telegram/-/plugin-adapter-telegram-3.6.6.tgz#77f75574e1b05f4201c47008cbd2d6f4fa5ca68d"
+  integrity sha512-G7kHN+n0imWZ/D/3ABfJMu3Kbli5IiCjhp0nw6L1FSmehEmIKiinwh4JYA4r9zH4G0jI/HYbZ2v8z4tLEQC+lw==
   dependencies:
-    "@satorijs/adapter-telegram" "^3.6.5"
+    "@satorijs/adapter-telegram" "^3.6.6"
 
 "@koishijs/plugin-admin@^1.1.5":
   version "1.1.5"
@@ -177,12 +177,12 @@
     uuid "^8.3.2"
     ws "^8.11.0"
 
-"@koishijs/plugin-database-sqlite@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@koishijs/plugin-database-sqlite/-/plugin-database-sqlite-3.2.3.tgz#105bc1734c9df329ba02f29c7b069d75a3cdb619"
-  integrity sha512-uDwpH7ZhJpoxLRtFQzTjJ9AEY/LCeq9QEHb/EowDCL2MKlZFxCm/MvcYqpLMbEC4gC+nTM5qEyLVlROcEGs4Ow==
+"@koishijs/plugin-database-sqlite@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@koishijs/plugin-database-sqlite/-/plugin-database-sqlite-3.2.4.tgz#142ca6bb7a2458c8a9dd0d02acf80c1b805887e0"
+  integrity sha512-XIj08iTcRUuu79zYkXrNAr4V/p8iV6ekAVAvI+vMOJBxpssr+pnyt+N1G1AUZ0zlvEoKlm4NLHZosSSdYB9w7A==
   dependencies:
-    "@minatojs/driver-sqlite" "^3.2.3"
+    "@minatojs/driver-sqlite" "^3.2.4"
 
 "@koishijs/plugin-dataview@^2.2.0":
   version "2.2.0"
@@ -293,20 +293,20 @@
   dependencies:
     cosmokit "^1.4.0"
 
-"@minatojs/driver-sqlite@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@minatojs/driver-sqlite/-/driver-sqlite-3.2.3.tgz#897ed86a7a939a9c79ec973ef52fb5e030319b75"
-  integrity sha512-C1hKTumu+6hOB4Qay1RMN0wmqoCnEL5uZBfijtrOToRdmaJkpewOzAI82z7h4v3xtSptV/OcjDdpConTWnCGng==
+"@minatojs/driver-sqlite@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@minatojs/driver-sqlite/-/driver-sqlite-3.2.4.tgz#5e15eecb2a848af57efdafcb75d4ded777d88d38"
+  integrity sha512-PgHkhUju4CJgWL+YD+TM3xzojs+RIM7krW/hJkia0rrB1JRgS21K34IPgRTGmtaDZLAijo8vDUGX0rfUNhZSwQ==
   dependencies:
-    "@minatojs/sql-utils" "^3.0.0"
+    "@minatojs/sql-utils" "^3.0.1"
     "@minatojs/sql.js" "^2.0.0"
     cosmokit "^1.4.0"
-    reggol "^1.3.4"
+    reggol "^1.3.5"
 
-"@minatojs/sql-utils@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@minatojs/sql-utils/-/sql-utils-3.0.0.tgz#6d6260cede94031b5ce39879315882eb590f2f74"
-  integrity sha512-vmj5mdXsjofJd/Ul17E9poBtaQoh3Izz24Fk2nNGyVPhfGdLF/AVixugI5AXc9l4lL5s9EgcPyrdZ8GOzXMzFg==
+"@minatojs/sql-utils@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@minatojs/sql-utils/-/sql-utils-3.0.1.tgz#a1280c91702a6c7c5f64896c82c21bef11501ea6"
+  integrity sha512-Oo87k9Por0UQfOUGbYuI8yBoxw/vFFGThvVEYkpv8hfMz+1++Ne77JED2uB26ZhfNbmibhnqc2rYXu+O1aseUA==
   dependencies:
     cosmokit "^1.4.0"
 
@@ -341,10 +341,10 @@
   resolved "https://registry.yarnpkg.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz#a7f69e3665d3da9b115f9e71671dae1b97e13671"
   integrity sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==
 
-"@satorijs/adapter-discord@^3.4.3":
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/@satorijs/adapter-discord/-/adapter-discord-3.4.3.tgz#f23c46e923ae2ab5e6342cea7f9de62cec59ba63"
-  integrity sha512-SGuzvBdmH7dbCLty4XUolwqJh+HZWn6Cq58uOPcHlcEcGW9Ofhh49ILOr9HsbRTvDqhHmA7R1ddGVsJMA1w4tA==
+"@satorijs/adapter-discord@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@satorijs/adapter-discord/-/adapter-discord-3.5.0.tgz#b39d05a20fe77dd80036e76b5dedb5d48d266dbc"
+  integrity sha512-GUIRExbUoYcouFnC0JStlayxQa+EBvW6oI2xOEvI5AcYzAUp+v0gadJqb7SEjku+cBCKdsw6t6zkuR3MszOfrg==
   dependencies:
     file-type "^16.5.4"
     form-data "^4.0.0"
@@ -370,10 +370,10 @@
   dependencies:
     qface "^1.2.0"
 
-"@satorijs/adapter-telegram@^3.6.5":
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/@satorijs/adapter-telegram/-/adapter-telegram-3.6.5.tgz#81ea741edbc92578b3101a9cf25f88aca1ba76e6"
-  integrity sha512-TZdO7vomxWLvMVGkedVMLOMzZd9tMSHNq7TP/5Gs+Nhg/jlxw7dLaerH3rAe818hSdjAWDtMJcvcY7t7SKJw7w==
+"@satorijs/adapter-telegram@^3.6.6":
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/@satorijs/adapter-telegram/-/adapter-telegram-3.6.6.tgz#0fcda0882092faebbe7584205621c05ace8ec719"
+  integrity sha512-+FYy+/YmgWTlzBhLWqZz+V1D6PBko9He26XMfVrGwmDaFcaxJ6X/MLMKGdEDNt8CnrHQhNSfhKquB431AVxgwA==
   dependencies:
     file-type "^16.5.4"
     form-data "^4.0.0"

@@ -40,7 +40,9 @@ export function apply(ctx: Context, config: Config) {
       const targetConfigs: Array<TargetConst | FullConst> = []
       for (const target of rule.targets) {
         const targetConfig = config.constants[target] as TargetConst | FullConst
-        targetConfig && targetConfigs.push(targetConfig)
+        if (targetConfig && !targetConfig.disabled) {
+          targetConfigs.push(targetConfig)
+        }
       }
       if (targetConfigs.length === 0) {
         continue
@@ -77,9 +79,8 @@ export function apply(ctx: Context, config: Config) {
             }
           }
           for (let index = 0; index < targetConfigs.length; index++) {
-            const target = targetConfigs[index]
-            if (target.disabled) continue
             if (index && delay) await sleep(delay)
+            const target = targetConfigs[index]
             if (session.quote) {
               const { quote, selfId } = session
               let added = false
@@ -205,7 +206,7 @@ export const Config: Schema<Config> = Schema.intersect([
           selfId: Schema.string().required().description('「目标」机器人自身编号'),
           channelId: Schema.string().required().description('「来源」/「目标」群组编号'),
           platform: Schema.union(platform).required().description('「来源」/「目标」群组平台'),
-          guildId: Schema.string().required().description('「目标」父级群组编号 (可能与群组编号相同)'),
+          guildId: Schema.string().required().description('「来源」/「目标」父级群组编号 (可能与群组编号相同)'),
           disabled: Schema.boolean().default(false).description('「目标」是否禁用'),
           name: Schema.string().required().description('「来源」群组代称'),
         } as const),
