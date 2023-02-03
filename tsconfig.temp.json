@@ -2,13 +2,16 @@
   "files": [],
   "references": [
     {
-      "path": "./plugins/tool"
+      "path": "./plugins/sundry"
     },
     {
       "path": "./plugins/mediawiki"
     },
     {
       "path": "./plugins/forward"
+    },
+    {
+      "path": "./plugins/config-helper"
     }
   ]
 }
