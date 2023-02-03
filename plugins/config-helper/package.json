@@ -1,7 +1,7 @@
 {
-  "name": "@myrtus/koishi-plugin-tool",
-  "description": "小工具",
-  "version": "2.1.3",
+  "name": "@myrtus/koishi-plugin-config-helper",
+  "description": "协助获取配置插件所需要的信息",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -9,18 +9,19 @@
     "dist"
   ],
   "license": "AGPL-3.0",
+  "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",
     "plugin"
   ],
   "peerDependencies": {
-    "koishi": "^4.9.1"
+    "koishi": "^4.11.4"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idanran/myrtus.git",
-    "directory": "plugins/tool"
+    "directory": "plugins/config-helper"
   },
   "author": "idanran <idanran@outlook.com>"
 }

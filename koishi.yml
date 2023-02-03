@@ -40,6 +40,7 @@ plugins:
   group:myrtus:
     '@myrtus/forward': {}
     '@myrtus/mediawiki': {}
-    '@myrtus/tool': {}
+    '@myrtus/sundry': {}
+    '@myrtus/config-helper': {}
 prefix:
   - /
