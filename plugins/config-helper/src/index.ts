@@ -12,4 +12,9 @@ export function apply(ctx: Context) {
   ctx.command("selfid", '获取机器人自身编号').action(({ session }) => `selfId (自身编号): ${session.selfId}`)
 
   ctx.command("platform", '获取当前平台').action(({ session }) => `platform (平台): ${session.platform}`)
+
+  ctx.middleware((session, next)=>{
+    //console.log(session)
+    return next()
+  })
 }
