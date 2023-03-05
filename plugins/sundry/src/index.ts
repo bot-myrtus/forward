@@ -10,4 +10,9 @@ export function apply(ctx: Context) {
   ctx.command("source").action(() => "https://github.com/idanran/myrtus/")
 
   ctx.command("ping").action(() => `pang`)
+
+  ctx.middleware((session, next) => {
+    //console.log(session)
+    return next()
+  })
 }

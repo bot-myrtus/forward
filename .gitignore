@@ -8,6 +8,7 @@ yarn-debug.log
 yarn-error.log
 tsconfig.tsbuildinfo
 koishi_bak.yml
+koishi0.yml
 
 .eslintcache
 .DS_Store

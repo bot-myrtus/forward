@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
   "description": "消息转发 (群组互联)",
-  "version": "3.0.3",
+  "version": "3.1.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -14,10 +14,12 @@
     "koishi",
     "plugin",
     "relay",
-    "forward"
+    "forward",
+    "bridge",
+    "transfer"
   ],
   "peerDependencies": {
-    "koishi": "^4.11.4"
+    "koishi": "^4.11.8"
   },
   "repository": {
     "type": "git",

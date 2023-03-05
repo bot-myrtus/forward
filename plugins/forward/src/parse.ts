@@ -1,6 +1,6 @@
 import { Dict, h } from 'koishi'
 
-const faces = {
+const qqFaces = {
     0: '惊讶', 1: '撇嘴', 2: '色', 3: '发呆', 4: '得意', 5: '流泪', 6: '害羞', 7: '闭嘴', 8: '睡', 9: '大哭',
     10: '尴尬', 11: '发怒', 12: '调皮', 13: '呲牙', 14: '微笑', 15: '难过', 16: '酷', 17: '非典', 18: '抓狂', 19: '吐',
     20: '偷笑', 21: '可爱', 22: '白眼', 23: '傲慢', 24: '饥饿', 25: '困', 26: '惊恐', 27: '流汗', 28: '憨笑', 29: '悠闲',
@@ -42,8 +42,8 @@ export class MessageParse {
             const { type, attrs } = value
             if (type === 'face') {
                 let content = '[表情]'
-                if (['onebot', 'qqguild'].includes(attrs.platform) && faces[attrs.id]) {
-                    content = `[${faces[attrs.id]}]`
+                if (['onebot', 'qqguild'].includes(attrs.platform) && qqFaces[attrs.id]) {
+                    content = `[${qqFaces[attrs.id]}]`
                 }
                 return h('text', { content })
             }
