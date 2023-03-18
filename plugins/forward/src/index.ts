@@ -95,7 +95,7 @@ export function apply(ctx: Context, config: Config) {
         const bot = ctx.bots[targetSid]
 
         if (!bot) {
-          ctx.logger('forward').warn(`暂时找不到机器人实例 %c, 等待一会儿说不定就有了呢？!`, targetSid)
+          ctx.logger('forward').warn(`暂时找不到机器人实例 %c, 等待一会儿说不定就有了呢!`, targetSid)
           continue
         }
         if (bot.status !== 'online') {
@@ -122,7 +122,8 @@ export function apply(ctx: Context, config: Config) {
           }
           if (!added) {
             const { author, elements } = session.quote
-            const re: h[] = [h.text(`Re ${author.nickname || author.username} ⌈`), ...elements, h.text('⌋\n')]
+            const username = author.nickname || author.username
+            const re: h[] = [h.text(`Re ${username} ⌈`), ...elements, h.text('⌋\n')]
             payload.children.splice(1, 0, ...new MessageParse(re).face().at(guildMemberMap).outputRaw())
           }
         }
@@ -257,12 +258,12 @@ export const Config: Schema<Config> = Schema.intersect([
   }).description('转发规则设置'),
   Schema.object({
     delay: Schema.object({
-      onebot: Schema.natural().role('ms').default(0.5 * Time.second).description('onebot 消息发送的延迟'),
-      telegram: Schema.natural().role('ms').default(0.1 * Time.second).description('telegram 消息发送的延迟'),
-      discord: Schema.natural().role('ms').default(0.1 * Time.second).description('discord 消息发送的延迟'),
-      qqguild: Schema.natural().role('ms').default(0.5 * Time.second).description('qqguild 消息发送的延迟'),
-      kook: Schema.natural().role('ms').default(0.1 * Time.second).description('kook 消息发送的延迟'),
-      feishu: Schema.natural().role('ms').default(0.1 * Time.second).description('feishu 消息发送的延迟'),
+      onebot: Schema.natural().role('ms').default(0.5 * Time.second).description('onebot 消息发送的延迟 (单位为毫秒)'),
+      telegram: Schema.natural().role('ms').default(0.1 * Time.second).description('telegram 消息发送的延迟 (单位为毫秒)'),
+      discord: Schema.natural().role('ms').default(0.1 * Time.second).description('discord 消息发送的延迟 (单位为毫秒)'),
+      qqguild: Schema.natural().role('ms').default(0.5 * Time.second).description('qqguild 消息发送的延迟 (单位为毫秒)'),
+      kook: Schema.natural().role('ms').default(0.1 * Time.second).description('kook 消息发送的延迟 (单位为毫秒)'),
+      feishu: Schema.natural().role('ms').default(0.1 * Time.second).description('feishu 消息发送的延迟 (单位为毫秒)'),
     })
   }).description('发送间隔设置')
 ])
