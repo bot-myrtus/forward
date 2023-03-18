@@ -1,4 +1,5 @@
 require:
+  - esbuild-register
   - yakumo-esbuild
   - yakumo-esbuild-yaml
   - yakumo-publish
@@ -13,3 +14,5 @@ pipeline:
     - tsc
     - esbuild
     - client
+  clean:
+    - tsc --clean

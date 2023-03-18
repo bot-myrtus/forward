@@ -1,9 +1,9 @@
-host: localhost
 port: 5140
 maxPort: 5149
+
 plugins:
   group:basic:
-    ~help: {}
+    help: {}
     rate-limit: {}
     locales: {}
     commands: {}
@@ -11,6 +11,7 @@ plugins:
     ~bind: {}
   group:console:
     analytics: {}
+    ~auth: {}
     console:
       open: true
     dataview: {}
@@ -23,8 +24,8 @@ plugins:
         endpoint: https://registry.npmmirror.com
       search:
         endpoint: https://registry.koishi.chat/index.json
-    status: {}
     sandbox: {}
+    status: {}
   group:database:
     database-sqlite: {}
     ~database-mysql: {}
@@ -37,6 +38,10 @@ plugins:
     ~adapter-kook: {}
     ~adapter-feishu: {}
     gocqhttp: {}
+  group:develop:
+    $if: env.NODE_ENV === 'development'
+    hmr:
+      root: '.'
   group:myrtus:
     '@myrtus/forward': {}
     '@myrtus/mediawiki': {}
