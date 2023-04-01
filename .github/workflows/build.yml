@@ -77,15 +77,12 @@ jobs:
         run: bash .github/workflows/pack.sh
 
       - name: Upload asset
-        id: upload
         shell: bash
         run: >
           bash .github/workflows/upload.sh
-          '${{ github.repository }}'
           '${{ matrix.target.platform }}-${{ steps.vars.outputs.ARCH }}-node${{ steps.vars.outputs.NODE_VERSION }}'
-          '${{ toJSON(github.event.release) }}'
         env:
-          TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
 
   docker:
     runs-on: ubuntu-latest

@@ -22,6 +22,10 @@ export const name = 'forward'
 
 export const using = ['database'] as const
 
+export const usage = `
+使用「inspect」插件可以让配置变得更容易。参见 Koishi 文档中的[「获取会话信息」一章](https://koishi.chat/manual/usage/platform.html#%E8%8E%B7%E5%8F%96%E4%BC%9A%E8%AF%9D%E4%BF%A1%E6%81%AF)。
+`
+
 export function apply(ctx: Context, config: Config) {
   ctx.model.extend('myrtus_forward_sent', {
     id: 'unsigned',
@@ -35,6 +39,8 @@ export function apply(ctx: Context, config: Config) {
   }, {
     autoInc: true
   })
+
+  const logger = ctx.logger('forward')
 
   for (const rule of config.rules) {
     const sConfig = config.constants[rule.source] as SourceConfig
@@ -68,9 +74,9 @@ export function apply(ctx: Context, config: Config) {
       const prefix = `[${sConfig.name} - ${session.author.nickname || session.author.username}]\n`
       const message = [h.text(prefix), ...session.elements]
       const guildMemberMap = await session.bot.getGuildMemberMap(session.guildId)
-      const payload = new MessageParse(message).face().record().at(guildMemberMap).output()
+      const payload: h[] = new MessageParse(message).face().record().at(guildMemberMap).output()
 
-      let rows: Pick<Sent, Keys<Sent, any>>[]
+      let rows: Pick<Sent, Keys<Sent, any>>[] = []
       if (session.quote) {
         const { quote, selfId, sid, channelId } = session
         if (selfId === quote.userId) {
@@ -86,6 +92,9 @@ export function apply(ctx: Context, config: Config) {
             from_channel_id: channelId
           })
         }
+        logger.debug('%C', '=== inspect quote ===')
+        logger.debug(`from sid: ${sid}`)
+        logger.debug(rows)
       }
 
       const sent: Sent[] = []
@@ -95,41 +104,49 @@ export function apply(ctx: Context, config: Config) {
         const bot = ctx.bots[targetSid]
 
         if (!bot) {
-          ctx.logger('forward').warn(`暂时找不到机器人实例 %c, 等待一会儿说不定就有了呢!`, targetSid)
+          logger.warn(`暂时找不到机器人实例 %c, 等待一会儿说不定就有了呢!`, targetSid)
           continue
         }
         if (bot.status !== 'online') {
-          ctx.logger('forward').warn(`机器人实例 %c 处于非在线状态，可能与网络环境有关。`, targetSid)
+          logger.warn(`机器人实例 %c 处于非在线状态，可能与网络环境有关。`, targetSid)
           continue
         }
 
         if (index) await sleep(config.delay[target.platform])
 
         if (session.quote) {
-          let added = false
+          let quoteId: string | undefined
           if (session.selfId === session.quote.userId) {
-            const row = rows.find(v => v.from_sid === targetSid)
+            logger.debug('selfId = quote.userId')
+            const row = rows.find(v => v.from_sid === targetSid && v.from_channel_id === target.channelId)
             if (row) {
-              payload.children.unshift(h.quote(row.from))
-              added = true
+              quoteId = row.from
+              logger.debug(`channelId: ${row.from_channel_id}`)
             }
           } else {
-            const row = rows.find(v => v.to_sid === targetSid)
+            logger.debug('selfId != quote.userId')
+            const row = rows.find(v => v.to_sid === targetSid && v.to_channel_id === target.channelId)
             if (row) {
-              payload.children.unshift(h.quote(row.to))
-              added = true
+              quoteId = row.to
+              logger.debug(`channelId: ${row.to_channel_id}`)
             }
           }
-          if (!added) {
+          if (quoteId) {
+            payload.unshift(h.quote(quoteId))
+            logger.debug(`msgId: ${quoteId}`)
+            logger.debug(`added`)
+          } else {
             const { author, elements } = session.quote
             const username = author.nickname || author.username
             const re: h[] = [h.text(`Re ${username} ⌈`), ...elements, h.text('⌋\n')]
-            payload.children.splice(1, 0, ...new MessageParse(re).face().at(guildMemberMap).outputRaw())
+            payload.unshift(...new MessageParse(re).face().record().at(guildMemberMap).output())
+            logger.debug('not added')
           }
+          logger.debug(`to sid: ${targetSid}`)
         }
 
         try {
-          const messageIds = await bot.sendMessage(target.channelId, payload, target.guildId)
+          const messageIds = await bot.sendMessage(target.channelId, h(null, payload), target.guildId)
           for (const msgId of messageIds) {
             sent.push({
               from: session.messageId,
@@ -142,7 +159,7 @@ export function apply(ctx: Context, config: Config) {
             })
           }
         } catch (error) {
-          ctx.logger('forward').error(error)
+          logger.error(error)
         }
       }
 
@@ -155,7 +172,7 @@ export function apply(ctx: Context, config: Config) {
   }
 }
 
-type Platform = 'onebot' | 'telegram' | 'discord' | 'qqguild' | 'kook' | 'feishu'
+type Platform = 'onebot' | 'telegram' | 'discord' | 'qqguild' | 'kook' | 'feishu' | 'lark'
 
 interface Source {
   channelId: string
@@ -198,6 +215,7 @@ export interface Config {
     qqguild: number
     kook: number
     feishu: number
+    lark: number
   }
 }
 
@@ -208,7 +226,14 @@ const platform = [
   Schema.const('qqguild' as const).description('qqguild (QQ频道)'),
   Schema.const('kook' as const),
   Schema.const('feishu' as const).description('feishu (飞书)'),
+  Schema.const('lark' as const).description('lark'),
 ]
+
+const share = {
+  platform: Schema.union(platform).required().description('平台名'),
+  channelId: Schema.string().required().description('频道 ID (可能与群组 ID 相同)'),
+  guildId: Schema.string().required().description('群组 ID'),
+}
 
 export const Config: Schema<Config> = Schema.intersect([
   Schema.object({
@@ -224,28 +249,22 @@ export const Config: Schema<Config> = Schema.intersect([
         Schema.object({
           type: Schema.const('source' as const).required(),
           name: Schema.string().required().description('群组代称'),
-          channelId: Schema.string().required().description('群组编号'),
-          platform: Schema.union(platform).required().description('群组平台'),
-          guildId: Schema.string().required().description('父级群组编号 (可能与群组编号相同)'),
+          ...share,
           blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发)')
         } as const),
         Schema.object({
           type: Schema.const('target' as const).required(),
-          selfId: Schema.string().required().description('机器人自身编号'),
-          channelId: Schema.string().required().description('群组编号'),
-          platform: Schema.union(platform).required().description('群组平台'),
-          guildId: Schema.string().required().description('父级群组编号 (可能与群组编号相同)'),
+          selfId: Schema.string().required().description('自身 ID'),
+          ...share,
           disabled: Schema.boolean().default(false).description('是否禁用')
         } as const),
         Schema.object({
           type: Schema.const('full' as const).required(),
-          selfId: Schema.string().required().description('「目标」机器人自身编号'),
-          channelId: Schema.string().required().description('「来源」/「目标」群组编号'),
-          platform: Schema.union(platform).required().description('「来源」/「目标」群组平台'),
-          guildId: Schema.string().required().description('「来源」/「目标」父级群组编号 (可能与群组编号相同)'),
-          disabled: Schema.boolean().default(false).description('「目标」是否禁用'),
-          name: Schema.string().required().description('「来源」群组代称'),
-          blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('「来源」屏蔽词 (消息包含屏蔽词时不转发)')
+          name: Schema.string().required().description('群组代称 (仅在常量用于「来源」时生效)'),
+          selfId: Schema.string().required().description('自身 ID (仅在常量用于「目标」时生效)'),
+          ...share,
+          blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('「来源」屏蔽词 (消息包含屏蔽词时不转发, 仅在常量用于「来源」时生效)'),
+          disabled: Schema.boolean().default(false).description('是否禁用 (仅在常量用于「目标」时生效)'),
         } as const),
       ])
     ]).description('常量名称 (可随意填写)')).description('常量列表 (「消息转发规则」中的参数)')
@@ -264,6 +283,7 @@ export const Config: Schema<Config> = Schema.intersect([
       qqguild: Schema.natural().role('ms').default(0.5 * Time.second).description('qqguild 消息发送的延迟 (单位为毫秒)'),
       kook: Schema.natural().role('ms').default(0.1 * Time.second).description('kook 消息发送的延迟 (单位为毫秒)'),
       feishu: Schema.natural().role('ms').default(0.1 * Time.second).description('feishu 消息发送的延迟 (单位为毫秒)'),
+      lark: Schema.natural().role('ms').default(0.1 * Time.second).description('lark 消息发送的延迟 (单位为毫秒)'),
     })
   }).description('发送间隔设置')
 ])
