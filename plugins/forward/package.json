@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
-  "description": "消息转发 (群组互联)",
-  "version": "3.2.3",
+  "description": "Message forwarding",
+  "version": "3.3.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -19,7 +19,7 @@
     "transfer"
   ],
   "peerDependencies": {
-    "koishi": "^4.12.0"
+    "koishi": "^4.12.2"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,10 @@
   },
   "author": "idanran <idanran@outlook.com>",
   "koishi": {
-    "category": "tool",
+    "description": {
+      "zh": "消息转发 (群组互联)",
+      "en": "Message forwarding"
+    },
     "service": {
       "required": [
         "database"

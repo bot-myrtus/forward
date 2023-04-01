@@ -9,7 +9,6 @@
     "dist"
   ],
   "license": "AGPL-3.0",
-  "scripts": {},
   "keywords": [
     "chatbot",
     "koishi",

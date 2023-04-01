@@ -9,9 +9,6 @@
     },
     {
       "path": "./plugins/forward"
-    },
-    {
-      "path": "./plugins/config-helper"
     }
   ]
 }

@@ -8,6 +8,7 @@
       // Below are some examples for common prefixed plugins.
       // See: https://github.com/koishijs/assets
       "koishi-plugin-assets-*": ["external/assets/packages/*/src"],
+      "koishi-plugin-booru-*": ["external/booru/packages/*/src"],
       "koishi-plugin-cache-*": ["external/cache/packages/*/src"],
       "koishi-plugin-dialogue-*": ["external/dialogue/packages/*/src"],
 
@@ -29,18 +30,19 @@
       // Below are links for koishi internal packages.
       // You only need them when you are developing koishi itself.
       // See: https://github.com/koishijs/koishi
+      // See: https://github.com/koishijs/webui
       // See: https://github.com/satorijs/satori
       // See: https://github.com/shigma/minato
       "@koishijs/plugin-adapter-*": ["external/koishi/plugins/adapter/*/src"],
       "@koishijs/plugin-database-*": ["external/koishi/plugins/database/*/src"],
       "@koishijs/plugin-*": [
-        "external/console/packages/*/src",
         "external/koishi/plugins/common/*/src",
         "external/koishi/plugins/*/src",
+        "external/webui/packages/*/src",
       ],
       "@koishijs/*": [
-        "external/console/packages/*/src",
         "external/koishi/packages/*/src",
+        "external/webui/packages/*/src",
         "external/*/packages/core/src",
       ],
       "@minatojs/driver-*": ["external/minato/packages/*/src"],

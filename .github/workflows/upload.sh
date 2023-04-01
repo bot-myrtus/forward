@@ -1,30 +1,13 @@
-repository=$1
-variant=$2
-release=$3
-
-if [ -z "$release" ]; then
-  release=$(curl \
-    -H "Accept: application/vnd.github.v3+json" \
-    -H "Authorization: token $TOKEN" \
-    https://api.github.com/repos/$repository/releases/latest \
-  )
-fi
+variant=$1
 
 name=$(cat package.json | jq -r '.name' | cut -d / -f 2)
-tag_name=$(echo "$release" | jq -r '.tag_name')
-upload_url=$(echo "$release" | jq -r '.upload_url' | cut -d '{' -f 1)
+tag_name=$(gh release view --json name --jq .name)
+upload_file=$RUNNER_TEMP/$name-$tag_name-$variant.zip
 
 echo name: $name
 echo tag_name: $tag_name
-echo upload_url: $upload_url
+echo upload_file: $upload_file
 
-output=$(curl \
-  -X POST \
-  -H "Accept: application/vnd.github.v3+json" \
-  -H "Authorization: token $TOKEN" \
-  -H "Content-Type: application/zip" \
-  "$upload_url?name=$name-$tag_name-$variant.zip" \
-  --data-binary @$RUNNER_TEMP/bundle.zip \
-)
+mv $RUNNER_TEMP/bundle.zip $upload_file
 
-echo "::set-output name=asset::$output"
+gh release upload $tag_name $upload_file
