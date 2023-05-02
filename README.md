@@ -6,23 +6,11 @@
 
 ## 组分
 
-### @myrtus/forward
-
-[![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-forward?style=flat-square)](https://www.npmjs.com/package/@myrtus/koishi-plugin-forward)
-
-消息转发 (群组互联)。
-
-### @myrtus/mediawiki
-
-[![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-mediawiki?style=flat-square)](https://www.npmjs.com/package/@myrtus/koishi-plugin-mediawiki)
-
-让群组支援 MediaWiki 特性，例如用户发送 `[[test]]`，随后用户将会收到该主题的链接。
-
-### @myrtus/sundry
-
-[![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-sundry?style=flat-square)](https://www.npmjs.com/package/@myrtus/koishi-plugin-sundry)
-
-杂项。
+| Component           | Description              | Version                                                                                                                               |
+| ------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| @myrtus/forward     | 消息转发 (群组互联)        | [![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-forward)](https://www.npmjs.com/package/@myrtus/koishi-plugin-forward)     |
+| @myrtus/mediawiki   | 查询 MediaWiki 信息       | [![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-mediawiki)](https://www.npmjs.com/package/@myrtus/koishi-plugin-mediawiki) |
+| @myrtus/sundry      | 杂项                      | [![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-sundry)](https://www.npmjs.com/package/@myrtus/koishi-plugin-sundry)       |
 
 ## 快速搭建
 
