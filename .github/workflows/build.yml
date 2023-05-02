@@ -37,7 +37,7 @@ jobs:
 
       - name: Install nix (for arm64)
         if: ${{ matrix.target.emulate }}
-        uses: cachix/install-nix-action@v15
+        uses: cachix/install-nix-action@v20
 
       - name: Set up qemu and binfmt (for arm64)
         if: ${{ matrix.target.emulate }}

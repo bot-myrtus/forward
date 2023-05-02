@@ -263,7 +263,7 @@ export const Config: Schema<Config> = Schema.intersect([
           name: Schema.string().required().description('群组代称 (仅在常量用于「来源」时生效)'),
           selfId: Schema.string().required().description('自身 ID (仅在常量用于「目标」时生效)'),
           ...share,
-          blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('「来源」屏蔽词 (消息包含屏蔽词时不转发, 仅在常量用于「来源」时生效)'),
+          blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发, 仅在常量用于「来源」时生效)'),
           disabled: Schema.boolean().default(false).description('是否禁用 (仅在常量用于「目标」时生效)'),
         } as const),
       ])

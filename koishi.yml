@@ -17,6 +17,7 @@ plugins:
     dataview: {}
     desktop:
       $if: env.KOISHI_AGENT?.includes('Desktop')
+    explorer: {}
     logger: {}
     ~login: {}
     insight: {}
