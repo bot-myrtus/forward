@@ -6,7 +6,7 @@
 
 ## 组分
 
-| Component           | Description              | Version                                                                                                                               |
+| Plugin              | Description              | Version                                                                                                                               |
 | ------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
 | @myrtus/forward     | 消息转发 (群组互联)        | [![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-forward)](https://www.npmjs.com/package/@myrtus/koishi-plugin-forward)     |
 | @myrtus/mediawiki   | 查询 MediaWiki 信息       | [![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-mediawiki)](https://www.npmjs.com/package/@myrtus/koishi-plugin-mediawiki) |
