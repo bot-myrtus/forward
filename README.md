@@ -8,19 +8,25 @@
 
 ### @myrtus/forward
 
+[![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-forward?style=flat-square)](https://www.npmjs.com/package/@myrtus/koishi-plugin-forward)
+
 消息转发 (群组互联)。
 
 ### @myrtus/mediawiki
+
+[![npm](https://img.shields.io/npm/v/@myrtus/koishi-plugin-mediawiki?style=flat-square)](https://www.npmjs.com/package/@myrtus/koishi-plugin-mediawiki)
 
 让群组支援 MediaWiki 特性，例如用户发送 `[[test]]`，随后用户将会收到该主题的链接。
 
 ### @myrtus/sundry
 
+[![npm](https://img.shields.io/npm/v/koishi-plugin-sundry?style=flat-square)](https://www.npmjs.com/package/koishi-plugin-sundry)
+
 杂项。
 
 ## 快速搭建
 
-1. 前往[这里](https://github.com/koishijs/koishi-desktop/releases)下载 Koishi 桌面版。
+1. 前往[这里](https://github.com/koishijs/koishi-desktop/releases)下载「Koishi 桌面」。
 2. 启动 Koishi，你将会看到一个控制台界面（网页）。
 3. 点击左侧的「插件市场」，搜索「@myrtus」，添加各组分。
 4. 点击左侧的「插件配置」，点击右上角的「添加插件」，选择各组分 (每次只能选择一个)，随后点击右上角的「启用插件」。

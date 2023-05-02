@@ -12,7 +12,6 @@ export function apply(ctx: Context) {
   ctx.command("ping").action(() => `pang`)
 
   ctx.middleware((session, next) => {
-    //console.log(session)
     return next()
   })
 }
