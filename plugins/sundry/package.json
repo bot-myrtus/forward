@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-sundry",
-  "description": "杂项",
-  "version": "1.0.0",
+  "description": "Miscellaneous",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -12,15 +12,26 @@
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "sundry"
   ],
   "peerDependencies": {
     "koishi": "^4.11.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idanran/myrtus.git",
+    "url": "https://github.com/idanran/myrtus.git",
     "directory": "plugins/sundry"
   },
-  "author": "idanran <idanran@outlook.com>"
+  "author": {
+    "email": "idanran@outlook.com",
+    "name": "idanran",
+    "url": "https://github.com/idanran"
+  },
+  "koishi": {
+    "description": {
+      "zh": "杂项",
+      "en": "Miscellaneous"
+    }
+  }
 }

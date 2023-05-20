@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-mediawiki",
-  "description": "让群组支援 MediaWiki 特性",
-  "version": "2.1.5",
+  "description": "Help with information about MediaWiki",
+  "version": "2.1.6",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -12,15 +12,26 @@
   "keywords": [
     "chatbot",
     "koishi",
-    "plugin"
+    "plugin",
+    "mediawiki"
   ],
   "peerDependencies": {
-    "koishi": "^4.9.1"
+    "koishi": "^4.11.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idanran/myrtus.git",
+    "url": "https://github.com/idanran/myrtus.git",
     "directory": "plugins/mediawiki"
   },
-  "author": "idanran <idanran@outlook.com>"
+  "author": {
+    "email": "idanran@outlook.com",
+    "name": "idanran",
+    "url": "https://github.com/idanran"
+  },
+  "koishi": {
+    "description": {
+      "zh": "帮助获取有关MediaWiki的信息",
+      "en": "Help with information about MediaWiki"
+    }
+  }
 }

@@ -76,7 +76,7 @@ export function apply(ctx: Context, config: Config) {
       const guildMemberMap = await session.bot.getGuildMemberMap(session.guildId)
       const payload: h[] = new MessageParse(message).face().record().at(guildMemberMap).output()
 
-      let rows: Pick<Sent, Keys<Sent, any>>[] = []
+      let rows: Pick<Sent, Keys<Sent>>[] = []
       if (session.quote) {
         const { quote, selfId, sid, channelId } = session
         if (selfId === quote.userId) {

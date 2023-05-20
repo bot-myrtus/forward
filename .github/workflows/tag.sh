@@ -8,5 +8,5 @@ REG=^$(echo $TAG | sed 's/\./\\./g')$
 
 if [ -z "$(git tag -l | grep $REG)" ]; then
   echo new version detected: $TAG
-  echo ::set-output name=tag::$TAG
+  echo "tag=$TAG" >> $GITHUB_OUTPUT
 fi
