@@ -24,7 +24,6 @@
       // If you are developing a scoped plugin,
       // just uncomment the next line and change `@scope`
       // to the scope name (i.e. npm account or organization).
-      // "@scope/koishi-plugin-*": ["external/*/src"],
       "@myrtus/koishi-plugin-*": ["plugins/*/src"],
 
       // Below are links for koishi internal packages.
@@ -38,7 +37,7 @@
       "@koishijs/plugin-*": [
         "external/koishi/plugins/common/*/src",
         "external/koishi/plugins/*/src",
-        "external/webui/packages/*/src",
+        "external/webui/plugins/*/src",
       ],
       "@koishijs/*": [
         "external/koishi/packages/*/src",

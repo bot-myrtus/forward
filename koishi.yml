@@ -12,6 +12,8 @@ plugins:
     rate-limit: {}
   group:console:
     analytics: {}
+    ~auth: {}
+    config: {}
     console:
       open: true
     dataview: {}
@@ -19,7 +21,6 @@ plugins:
       $if: env.KOISHI_AGENT?.includes('Desktop')
     explorer: {}
     logger: {}
-    ~login: {}
     insight: {}
     market:
       registry:

@@ -32,8 +32,8 @@ jobs:
         id: vars
         shell: bash
         run: |
-          echo "::set-output name=NODE_VERSION::${{ matrix.target.node || '16' }}"
-          echo "::set-output name=ARCH::${{ matrix.target.emulate || 'amd64' }}"
+          echo "NODE_VERSION=${{ matrix.target.node || '16' }}" >> $GITHUB_OUTPUT
+          echo "ARCH=${{ matrix.target.emulate || 'amd64' }}" >> $GITHUB_OUTPUT
 
       - name: Install nix (for arm64)
         if: ${{ matrix.target.emulate }}

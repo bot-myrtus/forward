@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
-  "description": "Message forwarding",
-  "version": "3.3.1",
+  "description": "Forward messages",
+  "version": "3.3.2",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idanran/myrtus.git",
+    "url": "https://github.com/idanran/myrtus.git",
     "directory": "plugins/forward"
   },
   "author": {

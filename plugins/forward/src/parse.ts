@@ -28,7 +28,7 @@ export class MessageParse {
                     if (this.faceEnable) {
                         let content = '[表情]'
                         const faceName = attrs.name
-                        if (['onebot', 'qqguild'].includes(attrs.platform) && faceName && faceName !== '') {
+                        if (['onebot', 'qqguild'].includes(attrs.platform) && faceName) {
                             content = `[${[faceName]}]`
                         }
                         return h('text', { content })
