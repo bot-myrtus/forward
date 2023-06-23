@@ -55,7 +55,9 @@ export function apply(ctx: Context, config: Config) {
     if (targetConfigs.length === 0) {
       continue
     }
-    ctx.platform(sConfig.platform).guild(sConfig.guildId).channel(sConfig.channelId).middleware(async (session, next) => {
+
+    const listened = ctx.platform(sConfig.platform).guild(sConfig.guildId).channel(sConfig.channelId)
+    listened.middleware(async (session, next) => {
       if (session.type !== 'message' || session.elements.length === 0) {
         return next()
       }
