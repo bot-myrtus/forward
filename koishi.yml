@@ -1,6 +1,5 @@
 port: 5140
 maxPort: 5149
-
 plugins:
   group:basic:
     ~admin: {}
@@ -29,6 +28,7 @@ plugins:
         endpoint: https://registry.koishi.chat/index.json
     sandbox: {}
     status: {}
+    theme-vanilla: {}
   group:storage:
     database-sqlite: {}
     ~database-mysql: {}
@@ -45,12 +45,11 @@ plugins:
   group:develop:
     $if: env.NODE_ENV === 'development'
     hmr:
-      root: '.'
+      root: .
   group:myrtus:
     '@myrtus/forward': {}
     '@myrtus/mediawiki': {}
     '@myrtus/sundry': {}
-
 logger:
   levels:
     forward: 2
