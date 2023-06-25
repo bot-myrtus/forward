@@ -1,7 +1,10 @@
 lib
 dist
-accounts
+data
 external
+.yarn
+cache
+logs
 
 yarn.lock
 package-lock.json
@@ -13,6 +16,7 @@ yarn-error.log
 tsconfig.tsbuildinfo
 koishi_bak.yml
 koishi0.yml
+tsconfig.temp.json
 
 .eslintcache
 .DS_Store

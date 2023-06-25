@@ -222,17 +222,17 @@ export interface Config {
 }
 
 const platform = [
-  Schema.const('onebot' as const).description('onebot (QQ)'),
-  Schema.const('telegram' as const),
-  Schema.const('discord' as const),
-  Schema.const('qqguild' as const).description('qqguild (QQ频道)'),
-  Schema.const('kook' as const),
-  Schema.const('feishu' as const).description('feishu (飞书)'),
-  Schema.const('lark' as const).description('lark'),
+  Schema.const('onebot').description('onebot (QQ)'),
+  Schema.const('telegram'),
+  Schema.const('discord'),
+  Schema.const('qqguild').description('qqguild (QQ频道)'),
+  Schema.const('kook'),
+  Schema.const('feishu').description('feishu (飞书)'),
+  Schema.const('lark').description('lark'),
 ]
 
 const share = {
-  platform: Schema.union(platform).required().description('平台名'),
+  platform: Schema.union(platform).description('平台名'),
   channelId: Schema.string().required().description('频道 ID (可能与群组 ID 相同)'),
   guildId: Schema.string().required().description('群组 ID'),
 }
@@ -249,19 +249,19 @@ export const Config: Schema<Config> = Schema.intersect([
       }),
       Schema.union([
         Schema.object({
-          type: Schema.const('source' as const).required(),
+          type: Schema.const('source').required(),
           name: Schema.string().required().description('群组代称'),
           ...share,
           blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发)')
-        } as const),
+        }),
         Schema.object({
-          type: Schema.const('target' as const).required(),
+          type: Schema.const('target').required(),
           selfId: Schema.string().required().description('自身 ID'),
           ...share,
           disabled: Schema.boolean().default(false).description('是否禁用')
-        } as const),
+        }),
         Schema.object({
-          type: Schema.const('full' as const).required(),
+          type: Schema.const('full').required(),
           name: Schema.string().required().description('群组代称 (仅在常量用于「来源」时生效)'),
           selfId: Schema.string().required().description('自身 ID (仅在常量用于「目标」时生效)'),
           ...share,
