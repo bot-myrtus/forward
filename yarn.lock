@@ -791,7 +791,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@myrtus/koishi-plugin-forward@workspace:plugins/forward"
   peerDependencies:
-    koishi: ^4.12.7
+    koishi: ^4.13.2
   languageName: unknown
   linkType: soft
 
@@ -3321,14 +3321,6 @@ __metadata:
   checksum: a3c16a4d829049894bd152997ab70c53df2e82763b8c79b0fcc7b305ea4dff98ca92ba79c4cf85873b78c38a753ee22674d47d7a1a20d03f1ecc96c0178d0f43
   languageName: node
   linkType: hard
-
-"koishi-plugin-test@workspace:external/test":
-  version: 0.0.0-use.local
-  resolution: "koishi-plugin-test@workspace:external/test"
-  peerDependencies:
-    koishi: ^4.13.4
-  languageName: unknown
-  linkType: soft
 
 "koishi-plugin-theme-vanilla@npm:^1.0.5":
   version: 1.0.5
