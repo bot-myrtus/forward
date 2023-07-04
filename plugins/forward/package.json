@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
   "description": "Forward messages",
-  "version": "3.3.3",
+  "version": "3.3.4",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -19,7 +19,7 @@
     "transfer"
   ],
   "peerDependencies": {
-    "koishi": "^4.13.2"
+    "koishi": "^4.13.5"
   },
   "repository": {
     "type": "git",
@@ -40,6 +40,7 @@
       "required": [
         "database"
       ]
-    }
+    },
+    "browser": true
   }
 }

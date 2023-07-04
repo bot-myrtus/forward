@@ -1,5 +1,8 @@
 import { Context, Schema, h, Dict, sleep, Keys, Time } from 'koishi'
 import { MessageParse } from './parse'
+import { RuleSource, RuleTarget, Config } from './config'
+
+export * from './config'
 
 interface Sent {
   from: string
@@ -23,7 +26,9 @@ export const name = 'forward'
 export const using = ['database'] as const
 
 export const usage = `
-使用「inspect」插件可以让配置变得更容易。参见 Koishi 文档中的[「获取会话信息」一章](https://koishi.chat/manual/usage/platform.html#%E8%8E%B7%E5%8F%96%E4%BC%9A%E8%AF%9D%E4%BF%A1%E6%81%AF)。
+这是用于在不同群组间转发消息的插件。
+
+入门教程[点此查阅](https://github.com/idanran/myrtus#%E8%AE%BE%E5%AE%9A%E6%B6%88%E6%81%AF%E8%BD%AC%E5%8F%91%E8%A7%84%E5%88%99)，如有疑问可[提交 issue](https://github.com/idanran/myrtus/issues/new)。
 `
 
 export function apply(ctx: Context, config: Config) {
@@ -43,11 +48,11 @@ export function apply(ctx: Context, config: Config) {
   const logger = ctx.logger('forward')
 
   for (const rule of config.rules) {
-    const sConfig = config.constants[rule.source] as SourceConfig
+    const sConfig = config.constants[rule.source] as RuleSource
     if (!sConfig) continue
-    const targetConfigs: Array<TargetConfig> = []
+    const targetConfigs: Array<RuleTarget> = []
     for (const target of rule.targets) {
-      const targetConfig = config.constants[target] as TargetConfig
+      const targetConfig = config.constants[target] as RuleTarget
       if (targetConfig && !targetConfig.disabled) {
         targetConfigs.push(targetConfig)
       }
@@ -173,119 +178,3 @@ export function apply(ctx: Context, config: Config) {
     })
   }
 }
-
-type Platform = 'onebot' | 'telegram' | 'discord' | 'qqguild' | 'kook' | 'feishu' | 'lark'
-
-interface Source {
-  channelId: string
-  name: string
-  platform: Platform
-  guildId: string
-  blockingWords: string[]
-}
-interface Target {
-  selfId: string
-  channelId: string
-  platform: Platform
-  guildId: string
-  disabled: boolean
-}
-
-interface SourceConst extends Source {
-  type: 'source'
-}
-interface TargetConst extends Target {
-  type: 'target'
-}
-interface FullConst extends Target, Source {
-  type: 'full'
-}
-
-type TargetConfig = TargetConst | FullConst
-type SourceConfig = SourceConst | FullConst
-
-export interface Config {
-  constants: Dict<SourceConst | TargetConst | FullConst, string>,
-  rules: {
-    source: string
-    targets: string[]
-  }[],
-  delay: {
-    onebot: number
-    telegram: number
-    discord: number
-    qqguild: number
-    kook: number
-    feishu: number
-    lark: number
-  }
-}
-
-const platform = [
-  Schema.const('onebot').description('onebot (QQ)'),
-  Schema.const('telegram'),
-  Schema.const('discord'),
-  Schema.const('qqguild').description('qqguild (QQ频道)'),
-  Schema.const('kook'),
-  Schema.const('feishu').description('feishu (飞书)'),
-  Schema.const('lark').description('lark'),
-]
-
-const share = {
-  platform: Schema.union(platform).description('平台名'),
-  channelId: Schema.string().required().description('频道 ID (可能与群组 ID 相同)'),
-  guildId: Schema.string().required().description('群组 ID'),
-}
-
-export const Config: Schema<Config> = Schema.intersect([
-  Schema.object({
-    constants: Schema.dict(Schema.intersect([
-      Schema.object({
-        type: Schema.union([
-          Schema.const('source').description('仅用于「来源」'),
-          Schema.const('target').description('仅用于「目标」'),
-          Schema.const('full').description('用于「来源」或「目标」(通常用以双向转发)'),
-        ]).role('radio').required().description('常量类型'),
-      }),
-      Schema.union([
-        Schema.object({
-          type: Schema.const('source').required(),
-          name: Schema.string().required().description('群组代称'),
-          ...share,
-          blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发)')
-        }),
-        Schema.object({
-          type: Schema.const('target').required(),
-          selfId: Schema.string().required().description('自身 ID'),
-          ...share,
-          disabled: Schema.boolean().default(false).description('是否禁用')
-        }),
-        Schema.object({
-          type: Schema.const('full').required(),
-          name: Schema.string().required().description('群组代称 (仅在常量用于「来源」时生效)'),
-          selfId: Schema.string().required().description('自身 ID (仅在常量用于「目标」时生效)'),
-          ...share,
-          blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发, 仅在常量用于「来源」时生效)'),
-          disabled: Schema.boolean().default(false).description('是否禁用 (仅在常量用于「目标」时生效)'),
-        } as const),
-      ])
-    ]).description('常量名称 (可随意填写)')).description('常量列表 (「消息转发规则」中的参数)')
-  }).description('常量设置'),
-  Schema.object({
-    rules: Schema.array(Schema.object({
-      source: Schema.string().required().description('来源 (此处填入「常量名称」)'),
-      targets: Schema.array(String).description('目标列表 (此处填入「常量名称」)'),
-    })).description('消息转发规则列表'),
-  }).description('转发规则设置'),
-  Schema.object({
-    delay: Schema.object({
-      onebot: Schema.natural().role('ms').default(0.5 * Time.second).description('onebot 消息发送的延迟 (单位为毫秒)'),
-      telegram: Schema.natural().role('ms').default(0.1 * Time.second).description('telegram 消息发送的延迟 (单位为毫秒)'),
-      discord: Schema.natural().role('ms').default(0.1 * Time.second).description('discord 消息发送的延迟 (单位为毫秒)'),
-      qqguild: Schema.natural().role('ms').default(0.5 * Time.second).description('qqguild 消息发送的延迟 (单位为毫秒)'),
-      kook: Schema.natural().role('ms').default(0.1 * Time.second).description('kook 消息发送的延迟 (单位为毫秒)'),
-      feishu: Schema.natural().role('ms').default(0.1 * Time.second).description('feishu 消息发送的延迟 (单位为毫秒)'),
-      lark: Schema.natural().role('ms').default(0.1 * Time.second).description('lark 消息发送的延迟 (单位为毫秒)'),
-    })
-  }).description('发送间隔设置')
-])
