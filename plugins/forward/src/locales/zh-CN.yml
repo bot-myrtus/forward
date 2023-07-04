@@ -1,0 +1,13 @@
+- $description: 常量设置
+  constants: 常量列表 (「转发规则」中的参数)
+- $description: 转发规则设置
+  rules: 转发规则列表
+- $description: 发送间隔设置
+  delay:
+    onebot: onebot 消息发送的延迟 (单位为毫秒)
+    telegram: telegram 消息发送的延迟 (单位为毫秒)
+    discord: discord 消息发送的延迟 (单位为毫秒)
+    qqguild: qqguild 消息发送的延迟 (单位为毫秒)
+    kook: kook 消息发送的延迟 (单位为毫秒)
+    feishu: feishu 消息发送的延迟 (单位为毫秒)
+    lark: lark 消息发送的延迟 (单位为毫秒)
