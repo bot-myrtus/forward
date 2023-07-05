@@ -57,6 +57,8 @@
     "yml-register": "^1.1.0"
   },
   "dependencies": {
+    "@chronocat/koishi-plugin-adapter": "0.0.5",
+    "@chronocat/koishi-plugin-launcher": "0.0.5",
     "@koishijs/plugin-adapter-discord": "^3.8.0",
     "@koishijs/plugin-adapter-kook": "^3.10.0",
     "@koishijs/plugin-adapter-lark": "^2.1.2",
@@ -71,6 +73,7 @@
     "@koishijs/plugin-console": "^5.11.6",
     "@koishijs/plugin-database-sqlite": "^3.5.6",
     "@koishijs/plugin-dataview": "^2.3.1",
+    "@koishijs/plugin-echo": "2.2.4",
     "@koishijs/plugin-explorer": "^1.4.0",
     "@koishijs/plugin-help": "^2.2.4",
     "@koishijs/plugin-insight": "^3.4.1",
@@ -86,6 +89,6 @@
     "koishi-plugin-desktop": "^0.0.4",
     "koishi-plugin-gocqhttp": "^3.8.0",
     "koishi-plugin-puppeteer": "^3.5.0",
-    "koishi-plugin-theme-vanilla": "^1.0.5"
+    "koishi-plugin-theme-vanilla": "1.0.6"
   }
 }
