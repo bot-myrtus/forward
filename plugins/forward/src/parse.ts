@@ -4,7 +4,6 @@ export class MessageParse {
     private faceEnable = false
     private recordEnable = false
     private atEnable = false
-    private guildMemberMap: Dict<string, string>
     constructor(private message: h[]) {
     }
     face() {
@@ -15,9 +14,8 @@ export class MessageParse {
         this.recordEnable = true
         return this
     }
-    at(guildMemberMap: Dict<string, string>) {
+    at() {
         this.atEnable = true
-        this.guildMemberMap = guildMemberMap
         return this
     }
     output() {
@@ -40,8 +38,9 @@ export class MessageParse {
                     }
                 }
                 case 'at': {
-                    if (this.atEnable && attrs.id && !attrs.name) {
-                        return h('text', { content: `@${this.guildMemberMap[attrs.id]}` })
+                    if (this.atEnable) {
+                        const name = attrs.name ? attrs.name : attrs.id
+                        return h('text', { content: `@${name}` })
                     }
                 }
             }

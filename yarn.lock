@@ -59,6 +59,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chronocat/koishi-plugin-adapter@npm:0.0.5":
+  version: 0.0.5
+  resolution: "@chronocat/koishi-plugin-adapter@npm:0.0.5"
+  dependencies:
+    "@chronocat/koishi-plugin-launcher": "*"
+    "@swc/helpers": ^0.5.1
+  peerDependencies:
+    koishi: ^4.13.5
+  dependenciesMeta:
+    "@chronocat/koishi-plugin-launcher":
+      optional: true
+  checksum: 4cf5264d11e10c09a0b97dfa84a545aed81564981f9a19e7dc5ed42430c198ed01dfd11e0b027137e2561c8b68d246fa1f67a5ff0405562e4525be2ee40f8c58
+  languageName: node
+  linkType: hard
+
+"@chronocat/koishi-plugin-launcher@npm:*, @chronocat/koishi-plugin-launcher@npm:0.0.5":
+  version: 0.0.5
+  resolution: "@chronocat/koishi-plugin-launcher@npm:0.0.5"
+  dependencies:
+    "@swc/helpers": ^0.5.1
+    execa: ^5
+  peerDependencies:
+    koishi: ^4.13.5
+  checksum: 95b78a428f6032e7e67146d355aedb65146aa0f3ae54844ff7cb505975f8910970efe4c676ed609a75f933ed8712fc31affe8829291f3d3d126aecaa6b06b6a7
+  languageName: node
+  linkType: hard
+
 "@ctrl/tinycolor@npm:^3.4.1":
   version: 3.6.0
   resolution: "@ctrl/tinycolor@npm:3.6.0"
@@ -561,6 +588,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@koishijs/plugin-echo@npm:2.2.4":
+  version: 2.2.4
+  resolution: "@koishijs/plugin-echo@npm:2.2.4"
+  peerDependencies:
+    koishi: ^4.13.6
+  checksum: 3de43b3b1815bc28a093006dc908a758f44ddbc5d801e9cc75ef979199856a125225aadb340d5cd1b83e3e8eae24bb36e935af428cfc59d7e2e67b118a112b4d
+  languageName: node
+  linkType: hard
+
 "@koishijs/plugin-explorer@npm:^1.4.0":
   version: 1.4.0
   resolution: "@koishijs/plugin-explorer@npm:1.4.0"
@@ -1010,6 +1046,15 @@ __metadata:
   version: 0.14.0
   resolution: "@sindresorhus/is@npm:0.14.0"
   checksum: 971e0441dd44ba3909b467219a5e242da0fc584048db5324cfb8048148fa8dcc9d44d71e3948972c4f6121d24e5da402ef191420d1266a95f713bb6d6e59c98a
+  languageName: node
+  linkType: hard
+
+"@swc/helpers@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@swc/helpers@npm:0.5.1"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 71e0e27234590435e4c62b97ef5e796f88e786841a38c7116a5e27a3eafa7b9ead7cdec5249b32165902076de78446945311c973e59bddf77c1e24f33a8f272a
   languageName: node
   linkType: hard
 
@@ -2464,7 +2509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^5.1.1":
+"execa@npm:^5, execa@npm:^5.1.1":
   version: 5.1.1
   resolution: "execa@npm:5.1.1"
   dependencies:
@@ -3323,13 +3368,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"koishi-plugin-theme-vanilla@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "koishi-plugin-theme-vanilla@npm:1.0.5"
+"koishi-plugin-theme-vanilla@npm:1.0.6":
+  version: 1.0.6
+  resolution: "koishi-plugin-theme-vanilla@npm:1.0.6"
   peerDependencies:
-    "@koishijs/plugin-console": ^5.11.0
-    koishi: ^4.13.2
-  checksum: 9a8822f058789eed3fd839d920bb17499d18945d6dec04b0b448a63e33400277d9799e956806f131ba61472ed9390b77bce3369195aa7e3ecb37dee574092b94
+    "@koishijs/plugin-console": ^5.11.6
+    koishi: ^4.13.6
+  checksum: 79971187cb4dad247773f19062d8c8b49801d1c9b26c655986c32eec3941bbf29cb24def2b3e92906f5795efac47df02e1f0cacafc49e600a0a1ff7710320b6d
   languageName: node
   linkType: hard
 
@@ -3696,6 +3741,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "myrtus@workspace:."
   dependencies:
+    "@chronocat/koishi-plugin-adapter": 0.0.5
+    "@chronocat/koishi-plugin-launcher": 0.0.5
     "@koishijs/client": ^5.11.6
     "@koishijs/plugin-adapter-discord": ^3.8.0
     "@koishijs/plugin-adapter-kook": ^3.10.0
@@ -3711,6 +3758,7 @@ __metadata:
     "@koishijs/plugin-console": ^5.11.6
     "@koishijs/plugin-database-sqlite": ^3.5.6
     "@koishijs/plugin-dataview": ^2.3.1
+    "@koishijs/plugin-echo": 2.2.4
     "@koishijs/plugin-explorer": ^1.4.0
     "@koishijs/plugin-help": ^2.2.4
     "@koishijs/plugin-hmr": ^1.2.0
@@ -3732,7 +3780,7 @@ __metadata:
     koishi-plugin-desktop: ^0.0.4
     koishi-plugin-gocqhttp: ^3.8.0
     koishi-plugin-puppeteer: ^3.5.0
-    koishi-plugin-theme-vanilla: ^1.0.5
+    koishi-plugin-theme-vanilla: 1.0.6
     typescript: ^5.1.6
     yakumo: ^0.3.13
     yakumo-esbuild: ^0.3.25
@@ -4722,6 +4770,13 @@ __metadata:
   peerDependencies:
     typescript: "*"
   checksum: b9230fd46ecb819bbdd871a82065d73c5204382800c3aa111c65631c2bb6b6c1a17e1ffa326f60e2b69ffc73eadb12269a6e53d2544ab1585c22132477dfa42c
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.4.0":
+  version: 2.6.0
+  resolution: "tslib@npm:2.6.0"
+  checksum: c01066038f950016a18106ddeca4649b4d76caa76ec5a31e2a26e10586a59fceb4ee45e96719bf6c715648e7c14085a81fee5c62f7e9ebee68e77a5396e5538f
   languageName: node
   linkType: hard
 

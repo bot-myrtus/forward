@@ -80,8 +80,7 @@ export function apply(ctx: Context, config: Config) {
 
       const prefix = `[${sConfig.name} - ${session.author.nickname || session.author.username}]\n`
       const message = [h.text(prefix), ...session.elements]
-      const guildMemberMap = await session.bot.getGuildMemberMap(session.guildId)
-      const payload: h[] = new MessageParse(message).face().record().at(guildMemberMap).output()
+      const payload: h[] = new MessageParse(message).face().record().at().output()
 
       let rows: Pick<Sent, Keys<Sent>>[] = []
       if (session.quote) {
@@ -146,7 +145,7 @@ export function apply(ctx: Context, config: Config) {
             const { author, elements } = session.quote
             const username = author.nickname || author.username
             const re: h[] = [h.text(`Re ${username} ⌈`), ...elements, h.text('⌋\n')]
-            payload.unshift(...new MessageParse(re).face().record().at(guildMemberMap).output())
+            payload.unshift(...new MessageParse(re).face().record().at().output())
             logger.debug('not added')
           }
           logger.debug(`to sid: ${targetSid}`)
