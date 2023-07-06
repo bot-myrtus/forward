@@ -38,7 +38,7 @@
     "start": "koishi start"
   },
   "devDependencies": {
-    "@koishijs/client": "^5.11.6",
+    "@koishijs/client": "^5.11.7",
     "@koishijs/plugin-hmr": "^1.2.0",
     "@koishijs/scripts": "^4.1.7",
     "@types/node": "^18.16.19",
@@ -59,7 +59,7 @@
   "dependencies": {
     "@chronocat/koishi-plugin-adapter": "0.0.5",
     "@chronocat/koishi-plugin-launcher": "0.0.5",
-    "@koishijs/plugin-adapter-discord": "^3.8.0",
+    "@koishijs/plugin-adapter-discord": "^3.8.1",
     "@koishijs/plugin-adapter-kook": "^3.10.0",
     "@koishijs/plugin-adapter-lark": "^2.1.2",
     "@koishijs/plugin-adapter-onebot": "^5.7.2",
@@ -70,7 +70,7 @@
     "@koishijs/plugin-bind": "^1.4.2",
     "@koishijs/plugin-commands": "^3.2.2",
     "@koishijs/plugin-config": "^2.2.2",
-    "@koishijs/plugin-console": "^5.11.6",
+    "@koishijs/plugin-console": "^5.11.7",
     "@koishijs/plugin-database-sqlite": "^3.5.6",
     "@koishijs/plugin-dataview": "^2.3.1",
     "@koishijs/plugin-echo": "2.2.4",

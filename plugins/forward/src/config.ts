@@ -62,7 +62,7 @@ const platform = [
 ]
 
 const share = {
-    platform: Schema.union(platform).description('平台名'),
+    platform: Schema.union(platform).description('平台名').default('onebot'),
     channelId: Schema.string().required().description('频道 ID (可能与群组 ID 相同)'),
     guildId: Schema.string().required().description('群组 ID'),
 }
