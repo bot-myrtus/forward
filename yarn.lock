@@ -358,16 +358,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@koishijs/client@npm:^5.11.6":
-  version: 5.11.6
-  resolution: "@koishijs/client@npm:5.11.6"
+"@koishijs/client@npm:^5.11.7":
+  version: 5.11.7
+  resolution: "@koishijs/client@npm:5.11.7"
   dependencies:
-    "@koishijs/components": 1.2.6
+    "@koishijs/components": 1.2.7
     "@maikolib/vite-plugin-yaml": ^1.0.1
     "@vitejs/plugin-vue": ^4.2.3
     "@vueuse/core": ^10.1.2
     cac: ^6.7.14
-    cordis: ^2.8.0
+    cordis: ^2.8.2
     cosmokit: ^1.4.2
     element-plus: 2.3.4
     marked-vue: ^1.2.3
@@ -379,20 +379,20 @@ __metadata:
     vue-router: ^4.2.0
   bin:
     koishi-console: bin.js
-  checksum: 58dce6ddfb74d968ca99968bf718ebfe36d1b098595a1073eb8e7a3de126795ebf5c422043a6e6d4b9d7731aa0eb190f02916c4b2c9d7f85f465f039b983802a
+  checksum: 616c5ff0df8dc6a03b6224751120f811ce705b13163ee2a4b5695716b5e545d896955bceddd9f1db9d351ee60448bf19e15183bea0dff841f589f177f4faa94e
   languageName: node
   linkType: hard
 
-"@koishijs/components@npm:1.2.6":
-  version: 1.2.6
-  resolution: "@koishijs/components@npm:1.2.6"
+"@koishijs/components@npm:1.2.7":
+  version: 1.2.7
+  resolution: "@koishijs/components@npm:1.2.7"
   dependencies:
     "@satorijs/element": ^2.4.2
     cosmokit: ^1.4.2
-    schemastery-vue: 6.1.5
+    schemastery-vue: 6.1.6
   peerDependencies:
     vue: ^3
-  checksum: 2b42c37ccb5e5e185cc53258744f191ee34769c194907af1c3bd88b3b9fb7e1da71ba99feb6224352ce75ca61c104bf3d980649ddff2a7b2666d44bbd8079739
+  checksum: a647fd78e2e8ab3a18869f18e0920ec4ef90d6329f4f17ef62bf4d1cf481344f6150e565fa06d144d84afa1d520c7a94b887dce55cfbcb955f6d0d84cebfc4b9
   languageName: node
   linkType: hard
 
@@ -433,14 +433,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@koishijs/plugin-adapter-discord@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "@koishijs/plugin-adapter-discord@npm:3.8.0"
+"@koishijs/plugin-adapter-discord@npm:^3.8.1":
+  version: 3.8.1
+  resolution: "@koishijs/plugin-adapter-discord@npm:3.8.1"
   dependencies:
-    "@satorijs/adapter-discord": ^3.8.0
+    "@satorijs/adapter-discord": ^3.8.1
   peerDependencies:
-    koishi: ^4.13.5
-  checksum: 6cbd747c7699f8604f330ef5ab77325f7005b15a9bb9869371ff752cb9a1b43257e173140c226506859b829425ede01008617273fc93a6bf795c4021f28da4eb
+    koishi: ^4.13.6
+  checksum: bcf53bcdb1bf507dd849e69e80d73c1c4fed4426f968e173af110da9ce608ce6eab2f42f0fb08234fbcf6c79d1b47122e935d14835e90b7bd01770df2648c303
   languageName: node
   linkType: hard
 
@@ -554,16 +554,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@koishijs/plugin-console@npm:^5.11.6":
-  version: 5.11.6
-  resolution: "@koishijs/plugin-console@npm:5.11.6"
+"@koishijs/plugin-console@npm:^5.11.7":
+  version: 5.11.7
+  resolution: "@koishijs/plugin-console@npm:5.11.7"
   dependencies:
     open: ^8.4.2
     uuid: ^8.3.2
     ws: ^8.13.0
   peerDependencies:
-    koishi: ^4.13.4
-  checksum: 094bf0dfa75aea9250dfecc5382c4576efcc17e0378402364bc9b6a7740d559643bc62c964fafd3e0536546ea88ea85703d09729b97c2fa9249694c64811615d
+    koishi: ^4.13.6
+  checksum: 7ad99dfa63b5b559ee36b8ebd750ae6ebc15e6671079f54c8fe4eed67c1b163b10a410511ee6919a82715e6e6c7dd4433116c93fea3e948a7a4ddb6df45e8524
   languageName: node
   linkType: hard
 
@@ -941,14 +941,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@satorijs/adapter-discord@npm:^3.8.0":
-  version: 3.8.0
-  resolution: "@satorijs/adapter-discord@npm:3.8.0"
+"@satorijs/adapter-discord@npm:^3.8.1":
+  version: 3.8.1
+  resolution: "@satorijs/adapter-discord@npm:3.8.1"
   dependencies:
     form-data: ^4.0.0
   peerDependencies:
     "@satorijs/satori": ^2.5.0
-  checksum: 8fcf83f63f6483aa15d1289d52e4c48cd372a4d97ef77b0d0015ac70c326876330333d0abf6965d920250aed6ea4e4ee3c7220faa4eb7b6d0c6e6acd012adfac
+  checksum: 778b0307f0f544022de976792792f8532b823bc5085610b3b952fc07778d968145a4e5c9b832271c1d7cc16113c884833faabba9fd6377a7f1dd796ff428ac0a
   languageName: node
   linkType: hard
 
@@ -2100,6 +2100,15 @@ __metadata:
   dependencies:
     cosmokit: ^1.4.2
   checksum: c2e0c49aac06865daf6552ad2bef7d419a697a480f3c9a43bf20f44070542b595a5dffaa900975fdd0e96bea8863e5bb2240953b24e9fe3ec79923b96ed5d95a
+  languageName: node
+  linkType: hard
+
+"cordis@npm:^2.8.2":
+  version: 2.8.2
+  resolution: "cordis@npm:2.8.2"
+  dependencies:
+    cosmokit: ^1.4.2
+  checksum: 71a283460ce83c4e7c688f6bd3f5d210f4cef8a9bbf456a01bc828d30514d17150bd9690a00b7c51bf1e1b8c71fa949bec371a637b287902aa9b36e02f0a3a37
   languageName: node
   linkType: hard
 
@@ -3743,8 +3752,8 @@ __metadata:
   dependencies:
     "@chronocat/koishi-plugin-adapter": 0.0.5
     "@chronocat/koishi-plugin-launcher": 0.0.5
-    "@koishijs/client": ^5.11.6
-    "@koishijs/plugin-adapter-discord": ^3.8.0
+    "@koishijs/client": ^5.11.7
+    "@koishijs/plugin-adapter-discord": ^3.8.1
     "@koishijs/plugin-adapter-kook": ^3.10.0
     "@koishijs/plugin-adapter-lark": ^2.1.2
     "@koishijs/plugin-adapter-onebot": ^5.7.2
@@ -3755,7 +3764,7 @@ __metadata:
     "@koishijs/plugin-bind": ^1.4.2
     "@koishijs/plugin-commands": ^3.2.2
     "@koishijs/plugin-config": ^2.2.2
-    "@koishijs/plugin-console": ^5.11.6
+    "@koishijs/plugin-console": ^5.11.7
     "@koishijs/plugin-database-sqlite": ^3.5.6
     "@koishijs/plugin-dataview": ^2.3.1
     "@koishijs/plugin-echo": 2.2.4
@@ -4383,15 +4392,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"schemastery-vue@npm:6.1.5":
-  version: 6.1.5
-  resolution: "schemastery-vue@npm:6.1.5"
+"schemastery-vue@npm:6.1.6":
+  version: 6.1.6
+  resolution: "schemastery-vue@npm:6.1.6"
   dependencies:
     schemastery: ^3.10.1
   peerDependencies:
     element-plus: ^2
     vue: ^3
-  checksum: 77d8e3797060d165e24c07ee23b665ee4b72306e26af96f29bba6e76ea10e08b875d785868ea8b14292b9d7de61bdf1a2f9d8d6c2f34dc21ffb96a3b87b85085
+  checksum: 59e83e850f8679e289f8e5f4316441451220103c7c59aaa45007fe7cf91a6e6f474bb5b5e695182260ab5d0bb5c2e272f9efbd227f50842966e9cb22c409ea47
   languageName: node
   linkType: hard
 
