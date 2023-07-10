@@ -11,3 +11,4 @@
     kook: kook 消息发送的延迟 (单位为毫秒)
     feishu: feishu 消息发送的延迟 (单位为毫秒)
     lark: lark 消息发送的延迟 (单位为毫秒)
+    matrix: matrix 消息发送的延迟 (单位为毫秒)

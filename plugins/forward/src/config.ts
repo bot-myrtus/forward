@@ -1,6 +1,6 @@
 import { Schema, Dict, Time } from 'koishi'
 
-type Platform = 'onebot' | 'telegram' | 'discord' | 'qqguild' | 'kook' | 'feishu' | 'lark'
+type Platform = 'onebot' | 'telegram' | 'discord' | 'qqguild' | 'kook' | 'feishu' | 'lark' | 'matrix'
 
 interface Source {
     channelId: string
@@ -35,6 +35,7 @@ interface Delay {
     kook: number
     feishu: number
     lark: number
+    matrix: number
 }
 
 interface Rule {
@@ -59,6 +60,7 @@ const platform = [
     Schema.const('kook'),
     Schema.const('feishu').description('feishu (飞书)'),
     Schema.const('lark').description('lark'),
+    Schema.const('matrix')
 ]
 
 const share = {
@@ -75,6 +77,7 @@ const delay: Schema<Delay> = Schema.object({
     kook: Schema.natural().role('ms').default(0.1 * Time.second),
     feishu: Schema.natural().role('ms').default(0.1 * Time.second),
     lark: Schema.natural().role('ms').default(0.1 * Time.second),
+    matrix: Schema.natural().role('ms').default(0.1 * Time.second),
 })
 
 const rule: Schema<Rule> = Schema.object({
