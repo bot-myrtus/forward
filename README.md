@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/github/license/idanran/myrtus)](https://github.com/idanran/myrtus/blob/main/LICENSE)
 [![CodeFactor](https://www.codefactor.io/repository/github/idanran/myrtus/badge)](https://www.codefactor.io/repository/github/idanran/myrtus)
 
-在多个群组间传话的机器人。支持 `QQ 群`、`Telegram`、`QQ 频道`、`Discord`、`KOOK`、`飞书`、`Matrix` 互联。
+在多个群组间传话的机器人。支持 `QQ 群`、`Telegram`、`QQ 频道`、`Discord`、`KOOK`、`飞书`、`Matrix` 等平台互联。
 
 ## 组分
 
@@ -26,13 +26,7 @@
 
 #### QQ
 
-1. 准备一个 QQ 号 (等级最好不要过低，否则可能被风控)。
-2. 点击控制台左侧的「插件配置」，选择「adapter-onebot」插件，完成以下配置：
-    - 在「selfId」填写你的 QQ 号。
-    - 在「password」填写你的密码。
-    - 在「protocol」选择 `ws-reverse`。
-    - 开启「gocqhttp.enable」选项。
-3. 点击页面右上角的「启用插件」。
+参见 Koishi 论坛的 [2501](https://forum.koishi.xyz/t/topic/2501) 帖。
 
 #### Telegram
 

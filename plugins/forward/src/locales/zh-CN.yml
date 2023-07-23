@@ -1,7 +1,42 @@
 - $description: 常量设置
-  constants: 常量列表 (「转发规则」中的参数)
+  constants:
+    $description: 常量列表 (「转发规则」中的参数)
+    $value:
+      $description: 常量名称 (可随意填写)
+      $value: 
+        - type:
+            $description: 常量类型
+            $value:
+              - 仅用于「来源」
+              - 仅用于「目标」
+              - 用于「来源」或「目标」(通常用以双向转发)
+        - - name: 群组代称
+            blockingWords:
+              $description: 屏蔽词 (消息包含屏蔽词时不转发)
+              $value: 正则表达式 (无需斜杠包围)
+            platform: 平台名
+            channelId: 频道 ID (可能与群组 ID 相同)
+            guildId: 群组 ID
+          - selfId: 自身 ID
+            disabled: 是否禁用
+            platform: 平台名
+            channelId: 频道 ID (可能与群组 ID 相同)
+            guildId: 群组 ID
+          - name: 群组代称 (仅在「来源」生效)
+            selfId: 自身 ID (仅在「目标」生效)
+            blockingWords:
+              $description: 屏蔽词 (消息包含屏蔽词时不转发, 仅在「来源」生效)
+              $value: 正则表达式 (无需斜杠包围)
+            disabled: 是否禁用 (仅在「目标」生效)
+            platform: 平台名
+            channelId: 频道 ID (可能与群组 ID 相同)
+            guildId: 群组 ID
 - $description: 转发规则设置
-  rules: 转发规则列表
+  rules:
+    $description: 转发规则设置
+    $value:
+      source: 来源 (此处填入「常量名称」)
+      targets: 目标 (此处填入「常量名称」)
 - $description: 发送间隔设置
   delay:
     onebot: onebot 消息发送的延迟 (单位为毫秒)
@@ -12,3 +47,4 @@
     feishu: feishu 消息发送的延迟 (单位为毫秒)
     lark: lark 消息发送的延迟 (单位为毫秒)
     matrix: matrix 消息发送的延迟 (单位为毫秒)
+    line: line 消息发送的延迟 (单位为毫秒)
