@@ -1,4 +1,4 @@
-import { Context, Schema, h, Dict, sleep, Keys, Time } from 'koishi'
+import { Context, h, sleep, Keys } from 'koishi'
 import { MessageParse } from './parse'
 import { RuleSource, RuleTarget, Config } from './config'
 
@@ -118,7 +118,8 @@ export function apply(ctx: Context, config: Config) {
           continue
         }
 
-        if (index) await sleep(config.delay[target.platform])
+        const delay = typeof config.delay[target.platform] !== undefined ? config.delay[target.platform] : 10
+        if (index) await sleep(delay)
 
         if (session.quote) {
           let quoteId: string | undefined
@@ -152,6 +153,7 @@ export function apply(ctx: Context, config: Config) {
         }
 
         try {
+          logger.debug(payload)
           const messageIds = await bot.sendMessage(target.channelId, h(null, payload), target.guildId)
           for (const msgId of messageIds) {
             sent.push({

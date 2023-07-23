@@ -1,18 +1,16 @@
 import { Schema, Dict, Time } from 'koishi'
 
-type Platform = 'onebot' | 'telegram' | 'discord' | 'qqguild' | 'kook' | 'feishu' | 'lark' | 'matrix'
-
 interface Source {
     channelId: string
     name: string
-    platform: Platform
+    platform: string
     guildId: string
     blockingWords: string[]
 }
 interface Target {
     selfId: string
     channelId: string
-    platform: Platform
+    platform: string
     guildId: string
     disabled: boolean
 }
@@ -36,6 +34,7 @@ interface Delay {
     feishu: number
     lark: number
     matrix: number
+    line: number
 }
 
 interface Rule {
@@ -52,21 +51,10 @@ export interface Config {
     delay: Delay
 }
 
-const platform = [
-    Schema.const('onebot').description('onebot (QQ)'),
-    Schema.const('telegram'),
-    Schema.const('discord'),
-    Schema.const('qqguild').description('qqguild (QQ频道)'),
-    Schema.const('kook'),
-    Schema.const('feishu').description('feishu (飞书)'),
-    Schema.const('lark').description('lark'),
-    Schema.const('matrix')
-]
-
 const share = {
-    platform: Schema.union(platform).description('平台名').default('onebot'),
-    channelId: Schema.string().required().description('频道 ID (可能与群组 ID 相同)'),
-    guildId: Schema.string().required().description('群组 ID'),
+    platform: Schema.string().required(),
+    channelId: Schema.string().required(),
+    guildId: Schema.string().required(),
 }
 
 const delay: Schema<Delay> = Schema.object({
@@ -78,34 +66,35 @@ const delay: Schema<Delay> = Schema.object({
     feishu: Schema.natural().role('ms').default(0.1 * Time.second),
     lark: Schema.natural().role('ms').default(0.1 * Time.second),
     matrix: Schema.natural().role('ms').default(0.1 * Time.second),
+    line: Schema.natural().role('ms').default(0.1 * Time.second),
 })
 
 const rule: Schema<Rule> = Schema.object({
-    source: Schema.string().required().description('来源 (此处填入「常量名称」)'),
-    targets: Schema.array(String).description('目标列表 (此处填入「常量名称」)'),
-})
-
-const targetConst: Schema<TargetConst> = Schema.object({
-    type: Schema.const('target').required(),
-    selfId: Schema.string().required().description('自身 ID'),
-    ...share,
-    disabled: Schema.boolean().default(false).description('是否禁用')
+    source: Schema.string().required(),
+    targets: Schema.array(String),
 })
 
 const sourceConst: Schema<SourceConst> = Schema.object({
     type: Schema.const('source').required(),
-    name: Schema.string().required().description('群组代称'),
+    name: Schema.string().required(),
     ...share,
-    blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发)')
+    blockingWords: Schema.array(String)
+})
+
+const targetConst: Schema<TargetConst> = Schema.object({
+    type: Schema.const('target').required(),
+    selfId: Schema.string().required(),
+    ...share,
+    disabled: Schema.boolean().default(false)
 })
 
 const fullConst: Schema<FullConst> = Schema.object({
     type: Schema.const('full').required(),
-    name: Schema.string().required().description('群组代称 (仅在常量用于「来源」时生效)'),
-    selfId: Schema.string().required().description('自身 ID (仅在常量用于「目标」时生效)'),
+    name: Schema.string().required(),
+    selfId: Schema.string().required(),
     ...share,
-    blockingWords: Schema.array(Schema.string().required().description('正则表达式 (无需斜杠包围)')).description('屏蔽词 (消息包含屏蔽词时不转发, 仅在常量用于「来源」时生效)'),
-    disabled: Schema.boolean().default(false).description('是否禁用 (仅在常量用于「目标」时生效)'),
+    blockingWords: Schema.array(String),
+    disabled: Schema.boolean().default(false),
 } as const)
 
 export const Config: Schema<Config> = Schema.intersect([
@@ -113,17 +102,17 @@ export const Config: Schema<Config> = Schema.intersect([
         constants: Schema.dict(Schema.intersect([
             Schema.object({
                 type: Schema.union([
-                    Schema.const('source').description('仅用于「来源」'),
-                    Schema.const('target').description('仅用于「目标」'),
-                    Schema.const('full').description('用于「来源」或「目标」(通常用以双向转发)'),
-                ]).role('radio').required().description('常量类型'),
+                    Schema.const('source'),
+                    Schema.const('target'),
+                    Schema.const('full'),
+                ]).role('radio').required(),
             }),
             Schema.union([
                 sourceConst,
                 targetConst,
                 fullConst,
             ])
-        ]).description('常量名称 (可随意填写)'))
+        ]))
     }),
     Schema.object({
         rules: Schema.array(rule),
