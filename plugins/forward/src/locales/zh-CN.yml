@@ -3,7 +3,7 @@
     $description: 常量列表 (「转发规则」中的参数)
     $value:
       $description: 常量名称 (可随意填写)
-      $value: 
+      $value:
         - type:
             $description: 常量类型
             $value:
