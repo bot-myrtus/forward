@@ -14,9 +14,6 @@ jobs:
         target:
           - runs-on: windows-latest
             platform: windows
-          - runs-on: windows-latest
-            platform: windows
-            node: 14
           - runs-on: ubuntu-latest
             platform: linux
           - runs-on: ubuntu-latest
