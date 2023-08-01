@@ -13,6 +13,7 @@ interface Target {
     platform: string
     guildId: string
     disabled: boolean
+    simulateOriginal: boolean
 }
 
 interface SourceConst extends Source {
@@ -35,6 +36,7 @@ interface Delay {
     lark: number
     matrix: number
     line: number
+    dingtalk: number
 }
 
 interface Rule {
@@ -67,6 +69,7 @@ const delay: Schema<Delay> = Schema.object({
     lark: Schema.natural().role('ms').default(0.1 * Time.second),
     matrix: Schema.natural().role('ms').default(0.1 * Time.second),
     line: Schema.natural().role('ms').default(0.1 * Time.second),
+    dingtalk: Schema.natural().role('ms').default(0.1 * Time.second),
 })
 
 const rule: Schema<Rule> = Schema.object({
@@ -78,14 +81,15 @@ const sourceConst: Schema<SourceConst> = Schema.object({
     type: Schema.const('source').required(),
     name: Schema.string().required(),
     ...share,
-    blockingWords: Schema.array(String)
+    blockingWords: Schema.array(String).role('table')
 })
 
 const targetConst: Schema<TargetConst> = Schema.object({
     type: Schema.const('target').required(),
     selfId: Schema.string().required(),
     ...share,
-    disabled: Schema.boolean().default(false)
+    simulateOriginal: Schema.boolean().default(false),
+    disabled: Schema.boolean().default(false),
 })
 
 const fullConst: Schema<FullConst> = Schema.object({
@@ -93,7 +97,8 @@ const fullConst: Schema<FullConst> = Schema.object({
     name: Schema.string().required(),
     selfId: Schema.string().required(),
     ...share,
-    blockingWords: Schema.array(String),
+    blockingWords: Schema.array(String).role('table'),
+    simulateOriginal: Schema.boolean().default(false),
     disabled: Schema.boolean().default(false),
 } as const)
 

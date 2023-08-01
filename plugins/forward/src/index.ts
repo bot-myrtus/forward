@@ -78,10 +78,6 @@ export function apply(ctx: Context, config: Config) {
         if (includeBlockingWord) return next()
       }
 
-      const prefix = `[${sConfig.name} - ${session.author.nickname || session.author.username}]\n`
-      const message = [h.text(prefix), ...session.elements]
-      const payload: h[] = new MessageParse(message).face().record().at().output()
-
       let rows: Pick<Sent, Keys<Sent>>[] = []
       if (session.quote) {
         const { quote, selfId, sid, channelId } = session
@@ -103,11 +99,25 @@ export function apply(ctx: Context, config: Config) {
         logger.debug(rows)
       }
 
+      const filtered: h[] = new MessageParse(session.elements).face().record().at().output()
+
       const sent: Sent[] = []
       for (let index = 0; index < targetConfigs.length; index++) {
         const target = targetConfigs[index]
         const targetSid = `${target.platform}:${target.selfId}`
         const bot = ctx.bots[targetSid]
+
+        const nickname = session.author.nickname || session.author.username
+        let prefix: h
+        if (target.simulateOriginal && target.platform === 'discord') {
+          prefix = h('author', {
+            nickname: `[${sConfig.name}] ${nickname}`,
+            avatar: session.author.avatar
+          })
+        } else {
+          prefix = h.text(`[${sConfig.name} - ${nickname}]\n`)
+        }
+        const payload: h[] = [prefix, ...filtered]
 
         if (!bot) {
           logger.warn(`暂时找不到机器人实例 %c, 等待一会儿说不定就有了呢!`, targetSid)

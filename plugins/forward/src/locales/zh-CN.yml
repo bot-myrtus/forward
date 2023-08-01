@@ -12,7 +12,7 @@
               - 用于「来源」或「目标」(通常用以双向转发)
         - - name: 群组代称 (可随意填写)
             blockingWords:
-              $description: 屏蔽词 (消息包含屏蔽词时不转发)
+              $description: 屏蔽词 (消息包含屏蔽词时不转发, 支持正则表达式)
               $value: 正则表达式 (无需斜杠包围)
             platform: 平台名
             channelId: 频道 ID (可能与群组 ID 相同)
@@ -22,15 +22,16 @@
             platform: 平台名
             channelId: 频道 ID (可能与群组 ID 相同)
             guildId: 群组 ID
+            simulateOriginal: 模拟原始作者 (仅在 discord 平台生效)
           - name: 群组代称 (可随意填写, 仅在「来源」生效)
             selfId: 自身 ID (仅在「目标」生效)
             blockingWords:
-              $description: 屏蔽词 (消息包含屏蔽词时不转发, 仅在「来源」生效)
-              $value: 正则表达式 (无需斜杠包围)
+              $description: 屏蔽词 (消息包含屏蔽词时不转发, 支持正则表达式, 仅在「来源」生效)
             disabled: 是否禁用 (仅在「目标」生效)
             platform: 平台名
             channelId: 频道 ID (可能与群组 ID 相同)
             guildId: 群组 ID
+            simulateOriginal: 模拟原始作者 (仅在 discord 平台生效, 仅在「目标」生效)
 - $description: 转发规则设置
   rules:
     $description: 转发规则设置
@@ -48,3 +49,4 @@
     lark: lark 消息发送的延迟 (单位为毫秒)
     matrix: matrix 消息发送的延迟 (单位为毫秒)
     line: line 消息发送的延迟 (单位为毫秒)
+    dingtalk: dingtalk 消息发送的延迟 (单位为毫秒)
