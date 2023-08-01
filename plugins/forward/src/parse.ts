@@ -1,4 +1,4 @@
-import { Dict, h } from 'koishi'
+import { h } from 'koishi'
 
 export class MessageParse {
     private faceEnable = false
