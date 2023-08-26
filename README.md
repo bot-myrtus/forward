@@ -26,7 +26,7 @@
 
 #### QQ
 
-参见 Koishi 论坛的 [2501](https://forum.koishi.xyz/t/topic/2501) 帖。
+参见 Koishi 论坛的 [810](https://forum.koishi.xyz/t/topic/810) 帖。
 
 #### Telegram
 
