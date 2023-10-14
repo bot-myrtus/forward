@@ -90,7 +90,6 @@
     "koishi-plugin-adapter-red": "1.7.1",
     "koishi-plugin-assets-local": "^3.1.0",
     "koishi-plugin-desktop": "^0.0.4",
-    "koishi-plugin-gocqhttp": "3.8.1",
     "koishi-plugin-puppeteer": "3.6.3",
     "koishi-plugin-theme-vanilla": "1.0.6"
   }
