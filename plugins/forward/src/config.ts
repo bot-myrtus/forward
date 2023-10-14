@@ -70,6 +70,14 @@ const delay: Schema<Delay> = Schema.object({
     matrix: Schema.natural().role('ms').default(0.1 * Time.second),
     line: Schema.natural().role('ms').default(0.1 * Time.second),
     dingtalk: Schema.natural().role('ms').default(0.1 * Time.second),
+    mail: Schema.natural().role('ms').default(0.1 * Time.second),
+    qq: Schema.natural().role('ms').default(0.1 * Time.second),
+    satori: Schema.natural().role('ms').default(0.1 * Time.second),
+    slack: Schema.natural().role('ms').default(0.1 * Time.second),
+    'wechat-official': Schema.natural().role('ms').default(0.1 * Time.second),
+    wecom: Schema.natural().role('ms').default(0.1 * Time.second),
+    whatsapp: Schema.natural().role('ms').default(0.1 * Time.second),
+    red: Schema.natural().role('ms').default(0.5 * Time.second),
 })
 
 const rule: Schema<Rule> = Schema.object({

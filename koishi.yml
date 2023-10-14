@@ -35,13 +35,15 @@ plugins:
     ~database-mongo: {}
     assets-local: {}
   group:adapter:
-    ~adapter-onebot: {}
     ~adapter-discord: {}
-    ~adapter-telegram: {}
     ~adapter-kook: {}
     ~adapter-lark: {}
-    gocqhttp:
-      signServer: https://captcha.koishi.xyz/sdk/dandelion/energy
+    ~adapter-line: {}
+    ~adapter-matrix: {}
+    ~adapter-qq: {}
+    ~adapter-satori: {}
+    ~adapter-slack: {}
+    ~adapter-telegram: {}
   group:develop:
     $if: env.NODE_ENV === 'development'
     hmr:

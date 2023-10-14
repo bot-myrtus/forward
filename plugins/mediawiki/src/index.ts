@@ -6,7 +6,7 @@ export const name = 'mediawiki'
 export interface Config {
   rules: {
     channelId: string
-    platform: string
+    platform: "onebot" | "telegram" | "discord" | "qqguild" | "kook" | "feishu"
     link: string
     api: string
   }[]
