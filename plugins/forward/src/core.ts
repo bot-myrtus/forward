@@ -95,12 +95,12 @@ export function apply(ctx: Context, config: Config) {
                 const targetSid = `${target.platform}:${target.selfId}`
                 const bot = ctx.bots[targetSid]
 
-                const { name, avatar } = event.user
+                const name = event.member?.name || event.user.name
                 let prefix: h
                 if (target.simulateOriginal && target.platform === 'discord') {
                     prefix = h('author', {
                         nickname: `[${sConfig.name}] ${name}`,
-                        avatar
+                        avatar: event.user.avatar
                     })
                 } else {
                     prefix = h.text(`[${sConfig.name} - ${name}]\n`)
@@ -131,14 +131,17 @@ export function apply(ctx: Context, config: Config) {
                     } else {
                         logger.debug('selfId != quote.userId')
                         const row = rows.find(v => v.to_sid === targetSid && v.to_channel_id === target.channelId)
-                        console.log(row)
                         if (row) {
                             quoteId = row.to
                             logger.debug(`channelId: ${row.to_channel_id}`)
                         }
                     }
                     if (quoteId) {
-                        payload.unshift(h.quote(quoteId))
+                        if(payload[0].type==='author'){
+                            payload.splice(1, 0, h.quote(quoteId))
+                        }else{
+                            payload.unshift(h.quote(quoteId))
+                        }
                         logger.debug(`msgId: ${quoteId}`)
                         logger.debug(`added`)
                     } else {
