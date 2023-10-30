@@ -106,7 +106,8 @@ export function apply(ctx: Context, config: Config) {
                         await bot.deleteMessage(target.channelId, message.id)
                         avatar = message.elements[0].attrs.url*/
                         const data = await session.bot.internal.getChat({ chat_id: event.user.id })
-                        const file = await session.bot.internal.getFile({ file_id: data.photo.small_file_id })
+                        const fileId = data.photo.small_file_id || data.photo.big_file_id
+                        const file = await session.bot.internal.getFile({ file_id: fileId })
                         // @ts-ignore
                         if (session.bot.server) {
                             // @ts-ignore
