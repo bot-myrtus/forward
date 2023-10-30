@@ -95,7 +95,7 @@ export function apply(ctx: Context, config: Config) {
                 const targetSid = `${target.platform}:${target.selfId}`
                 const bot = ctx.bots[targetSid]
 
-                const name = event.member?.name || event.user.name
+                const name = event.member?.name || event.member?.nick || event.user.name
                 let prefix: h
                 if (target.simulateOriginal && target.platform === 'discord') {
                     prefix = h('author', {
@@ -137,9 +137,9 @@ export function apply(ctx: Context, config: Config) {
                         }
                     }
                     if (quoteId) {
-                        if(payload[0].type==='author'){
+                        if (payload[0].type === 'author') {
                             payload.splice(1, 0, h.quote(quoteId))
-                        }else{
+                        } else {
                             payload.unshift(h.quote(quoteId))
                         }
                         logger.debug(`msgId: ${quoteId}`)
