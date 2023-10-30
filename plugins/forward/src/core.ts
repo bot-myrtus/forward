@@ -50,7 +50,8 @@ export function apply(ctx: Context, config: Config) {
         }
 
         const listened = ctx.platform(sConfig.platform).guild(sConfig.guildId).channel(sConfig.channelId)
-        listened.middleware(async ({ event, sid }, next) => {
+        listened.middleware(async (session, next) => {
+            const { event, sid } = session
             if (event.type !== 'message-created' || event.message.elements.length === 0) {
                 return next()
             }
@@ -95,12 +96,30 @@ export function apply(ctx: Context, config: Config) {
                 const targetSid = `${target.platform}:${target.selfId}`
                 const bot = ctx.bots[targetSid]
 
-                const name = event.member?.name || event.member?.nick || event.user.name
+                const name = event.member?.name || event.member?.nick || event.user.nick || event.user.name
                 let prefix: h
                 if (target.simulateOriginal && target.platform === 'discord') {
+                    let avatar = event.user.avatar
+                    if (event.platform === 'telegram') {
+                        /*const user = await session.bot.getUser(event.user.id)
+                        const [message] = await bot.createMessage(target.channelId, h.image(user.avatar))
+                        await bot.deleteMessage(target.channelId, message.id)
+                        avatar = message.elements[0].attrs.url*/
+                        const data = await session.bot.internal.getChat({ chat_id: event.user.id })
+                        const file = await session.bot.internal.getFile({ file_id: data.photo.small_file_id })
+                        // @ts-ignore
+                        if (session.bot.server) {
+                            // @ts-ignore
+                            avatar = `${session.bot.server}/${file.file_path}`
+                        } else {
+                            // @ts-ignore
+                            const { endpoint } = session.bot.file.config
+                            avatar = `${endpoint}/${file.file_path}`
+                        }
+                    }
                     prefix = h('author', {
                         nickname: `[${sConfig.name}] ${name}`,
-                        avatar: event.user.avatar
+                        avatar
                     })
                 } else {
                     prefix = h.text(`[${sConfig.name} - ${name}]\n`)
