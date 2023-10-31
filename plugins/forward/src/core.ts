@@ -105,18 +105,23 @@ export function apply(ctx: Context, config: Config) {
                         const [message] = await bot.createMessage(target.channelId, h.image(user.avatar))
                         await bot.deleteMessage(target.channelId, message.id)
                         avatar = message.elements[0].attrs.url*/
-                        const data = await session.bot.internal.getChat({ chat_id: event.user.id })
-                        const fileId = data.photo.small_file_id || data.photo.big_file_id
-                        const file = await session.bot.internal.getFile({ file_id: fileId })
-                        // @ts-ignore
-                        if (session.bot.server) {
+                        /*const data = await session.bot.internal.getChat({ chat_id: event.user.id })
+                        if (data.photo) {
+                            const fileId = data.photo.small_file_id || data.photo.big_file_id
+                            const file = await session.bot.internal.getFile({ file_id: fileId })
                             // @ts-ignore
-                            avatar = `${session.bot.server}/${file.file_path}`
+                            if (session.bot.server) {
+                                // @ts-ignore
+                                avatar = `${session.bot.server}/${file.file_path}`
+                            } else {
+                                // @ts-ignore
+                                const { endpoint } = session.bot.file.config
+                                avatar = `${endpoint}/${file.file_path}`
+                            }
                         } else {
-                            // @ts-ignore
-                            const { endpoint } = session.bot.file.config
-                            avatar = `${endpoint}/${file.file_path}`
-                        }
+                            avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
+                        }*/
+                        avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
                     }
                     prefix = h('author', {
                         nickname: `[${sConfig.name}] ${name}`,
