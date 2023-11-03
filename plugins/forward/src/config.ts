@@ -6,6 +6,7 @@ interface Source {
     platform: string
     guildId: string
     blockingWords: string[]
+    selfId: string
 }
 interface Target {
     selfId: string
@@ -53,12 +54,6 @@ export interface Config {
     delay: Delay
 }
 
-const share = {
-    platform: Schema.string().required(),
-    channelId: Schema.string().required(),
-    guildId: Schema.string().required(),
-}
-
 const delay: Schema<Delay> = Schema.object({
     onebot: Schema.natural().role('ms').default(0.5 * Time.second),
     telegram: Schema.natural().role('ms').default(0.1 * Time.second),
@@ -85,11 +80,18 @@ const rule: Schema<Rule> = Schema.object({
     targets: Schema.array(String),
 })
 
+const share = {
+    platform: Schema.string().required(),
+    channelId: Schema.string().required(),
+    guildId: Schema.string().required(),
+}
+
 const sourceConst: Schema<SourceConst> = Schema.object({
     type: Schema.const('source').required(),
     name: Schema.string().required(),
     ...share,
-    blockingWords: Schema.array(String).role('table')
+    blockingWords: Schema.array(String).role('table'),
+    selfId: Schema.string().default('*')
 })
 
 const targetConst: Schema<TargetConst> = Schema.object({
