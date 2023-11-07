@@ -54,11 +54,8 @@ export function apply(ctx: Context, config: Config) {
         if (sConfig.guildId !== '*') listened = listened.guild(sConfig.guildId)
         if (sConfig.channelId !== '*') listened = listened.channel(sConfig.channelId)
 
-        listened.middleware(async (session, next) => {
+        listened.on('message-created', async (session) => {
             const { event, sid } = session
-            if (event.type !== 'message-created' || event.message.elements.length === 0) {
-                return next()
-            }
 
             for (const regexpStr of sConfig.blockingWords) {
                 const includeBlockingWord = event.message.elements.some(value => {
@@ -68,7 +65,7 @@ export function apply(ctx: Context, config: Config) {
                     return false
                 })
 
-                if (includeBlockingWord) return next()
+                if (includeBlockingWord) return
             }
 
             let rows: Pick<Sent, Keys<Sent>>[] = []
@@ -100,7 +97,7 @@ export function apply(ctx: Context, config: Config) {
                 const targetSid = `${target.platform}:${target.selfId}`
                 const bot = ctx.bots[targetSid]
 
-                const name = event.member?.name || event.member?.nick || event.user.nick || event.user.name
+                const name = event.member?.nick || event.user.nick || event.user.name
                 let prefix: h
                 if (target.simulateOriginal && target.platform === 'discord') {
                     let avatar = event.user.avatar
@@ -175,7 +172,7 @@ export function apply(ctx: Context, config: Config) {
                         logger.debug(`added`)
                     } else {
                         const { user, elements } = event.message.quote
-                        const re: h[] = [h.text(`Re ${user.name} ⌈`), ...(elements || []), h.text('⌋\n')]
+                        const re: h[] = [h.text(`Re ${user.nick || user.name} ⌈`), ...(elements || []), h.text('⌋\n')]
                         payload.unshift(...new MessageParse(re).face().record().at().output())
                         logger.debug('not added')
                     }
@@ -204,8 +201,6 @@ export function apply(ctx: Context, config: Config) {
             if (sent.length !== 0) {
                 ctx.database.upsert('myrtus_forward_sent', sent)
             }
-
-            return next()
         })
     }
 }

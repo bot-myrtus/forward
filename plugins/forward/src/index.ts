@@ -2,7 +2,7 @@ export * from './config'
 
 export const name = 'forward'
 
-export const using = ['database'] as const
+export const inject = ['database']
 
 export const usage = `
 这是用于在不同群组间转发消息的插件。
