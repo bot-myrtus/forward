@@ -1,97 +1,40 @@
 {
-  "name": "myrtus",
-  "version": "0.0.0",
-  "private": true,
+  "name": "@myrtus/koishi-plugin-forward",
+  "description": "Forward messages",
+  "version": "3.8.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
-    ".env",
-    "koishi.yml"
+    "lib",
+    "dist"
   ],
   "license": "AGPL-3.0",
-  "workspaces": [
-    "external/*",
-    "external/*/external/*",
-    "external/*/external/*/packages/*",
-    "external/*/external/*/packages/@*/*",
-    "external/*/external/*/plugins/*",
-    "external/*/packages/*",
-    "external/*/packages/@*/*",
-    "external/*/plugins/*",
-    "external/satori/adapters/*",
-    "external/koishi/plugins/*",
-    "external/koishi/plugins/adapter/*",
-    "external/koishi/plugins/common/*",
-    "external/koishi/plugins/database/*",
-    "packages/*",
-    "packages/@*/*",
-    "plugins/*",
-    "plugins/@*/*"
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin",
+    "relay",
+    "forward",
+    "bridge",
+    "transfer"
   ],
-  "scripts": {
-    "new": "koishi-scripts new",
-    "setup": "koishi-scripts setup",
-    "clone": "koishi-scripts clone",
-    "build": "yakumo build",
-    "bump": "yakumo version",
-    "dep": "yakumo upgrade",
-    "pub": "yakumo publish",
-    "dev": "cross-env NODE_ENV=development koishi start -r esbuild-register -r yml-register",
-    "start": "koishi start"
+  "peerDependencies": {
+    "koishi": "^4.15.5"
   },
-  "devDependencies": {
-    "@koishijs/client": "^5.16.1",
-    "@koishijs/plugin-hmr": "^1.2.2",
-    "@koishijs/scripts": "^4.4.0",
-    "@types/node": "^18.18.5",
-    "cross-env": "^7.0.3",
-    "esbuild": "^0.17.19",
-    "esbuild-register": "npm:@shigma/esbuild-register@^1.1.1",
-    "typescript": "^5.2.2",
-    "yakumo": "^0.3.13",
-    "yakumo-esbuild": "^0.3.25",
-    "yakumo-esbuild-yaml": "^0.3.1",
-    "yakumo-publish": "^0.3.4",
-    "yakumo-publish-sync": "^0.3.3",
-    "yakumo-tsc": "^0.3.12",
-    "yakumo-upgrade": "^0.3.4",
-    "yakumo-version": "^0.3.4",
-    "yml-register": "^1.1.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bot-myrtus/forward.git"
   },
-  "dependencies": {
-    "@koishijs/plugin-adapter-discord": "4.1.3",
-    "@koishijs/plugin-adapter-kook": "4.0.7",
-    "@koishijs/plugin-adapter-lark": "3.1.5",
-    "@koishijs/plugin-adapter-line": "2.1.3",
-    "@koishijs/plugin-adapter-matrix": "4.0.4",
-    "@koishijs/plugin-adapter-qq": "4.1.3",
-    "@koishijs/plugin-adapter-satori": "^1.0.0",
-    "@koishijs/plugin-adapter-slack": "2.0.4",
-    "@koishijs/plugin-adapter-telegram": "4.1.6",
-    "@koishijs/plugin-admin": "2.0.0-alpha.4",
-    "@koishijs/plugin-analytics": "1.0.7",
-    "@koishijs/plugin-auth": "4.1.5",
-    "@koishijs/plugin-bind": "1.4.4",
-    "@koishijs/plugin-commands": "3.4.3",
-    "@koishijs/plugin-config": "2.4.3",
-    "@koishijs/plugin-console": "5.17.1",
-    "@koishijs/plugin-database-sqlite": "3.6.3",
-    "@koishijs/plugin-dataview": "^2.3.1",
-    "@koishijs/plugin-echo": "2.2.5",
-    "@koishijs/plugin-explorer": "1.5.0",
-    "@koishijs/plugin-help": "2.3.3",
-    "@koishijs/plugin-insight": "3.4.2",
-    "@koishijs/plugin-inspect": "1.1.3",
-    "@koishijs/plugin-locales": "2.5.1",
-    "@koishijs/plugin-logger": "2.5.0",
-    "@koishijs/plugin-market": "2.3.3",
-    "@koishijs/plugin-rate-limit": "^1.3.3",
-    "@koishijs/plugin-sandbox": "3.2.2",
-    "@koishijs/plugin-status": "7.2.2",
-    "koishi": "4.15.3",
-    "koishi-plugin-adapter-red": "2.2.1",
-    "koishi-plugin-assets-local": "3.1.2",
-    "koishi-plugin-desktop": "^0.0.4",
-    "koishi-plugin-puppeteer": "3.7.0",
-    "koishi-plugin-theme-vanilla": "1.0.6",
-    "koishi-plugin-wordle": "0.0.1-alpha.13"
+  "author": {
+    "email": "idanran@outlook.com",
+    "name": "idanran",
+    "url": "https://github.com/idanran"
+  },
+  "koishi": {
+    "description": {
+      "zh": "消息转发 (群组互联)",
+      "en": "Forward messages"
+    },
+    "browser": true
   }
 }
