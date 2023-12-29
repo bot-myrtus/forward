@@ -28,16 +28,7 @@ interface FullConst extends Target, Source {
 }
 
 interface Delay {
-    onebot: number
-    telegram: number
-    discord: number
-    qqguild: number
-    kook: number
-    feishu: number
-    lark: number
-    matrix: number
-    line: number
-    dingtalk: number
+    [key: string]: number
 }
 
 interface Rule {
@@ -54,26 +45,7 @@ export interface Config {
     delay: Delay
 }
 
-const delay: Schema<Delay> = Schema.object({
-    onebot: Schema.natural().role('ms').default(0.5 * Time.second),
-    telegram: Schema.natural().role('ms').default(0.1 * Time.second),
-    discord: Schema.natural().role('ms').default(0.1 * Time.second),
-    qqguild: Schema.natural().role('ms').default(0.5 * Time.second),
-    kook: Schema.natural().role('ms').default(0.1 * Time.second),
-    feishu: Schema.natural().role('ms').default(0.1 * Time.second),
-    lark: Schema.natural().role('ms').default(0.1 * Time.second),
-    matrix: Schema.natural().role('ms').default(0.1 * Time.second),
-    line: Schema.natural().role('ms').default(0.1 * Time.second),
-    dingtalk: Schema.natural().role('ms').default(0.1 * Time.second),
-    mail: Schema.natural().role('ms').default(0.1 * Time.second),
-    qq: Schema.natural().role('ms').default(0.1 * Time.second),
-    satori: Schema.natural().role('ms').default(0.1 * Time.second),
-    slack: Schema.natural().role('ms').default(0.1 * Time.second),
-    'wechat-official': Schema.natural().role('ms').default(0.1 * Time.second),
-    wecom: Schema.natural().role('ms').default(0.1 * Time.second),
-    whatsapp: Schema.natural().role('ms').default(0.1 * Time.second),
-    red: Schema.natural().role('ms').default(0.5 * Time.second),
-})
+const delay: Schema<Delay> = Schema.dict(Schema.natural().role('ms').default(0.1 * Time.second))
 
 const rule: Schema<Rule> = Schema.object({
     source: Schema.string().required(),
@@ -131,8 +103,6 @@ export const Config: Schema<Config> = Schema.intersect([
     }),
     Schema.object({
         rules: Schema.array(rule),
-    }),
-    Schema.object({
         delay: delay
     })
 ]).i18n({
