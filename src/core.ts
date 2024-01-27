@@ -119,8 +119,6 @@ export function apply(ctx: Context, config: Config) {
                                 const { endpoint } = session.bot.file.config
                                 avatar = `${endpoint}/${file.file_path}`
                             }
-                        } else {
-                            avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
                         }*/
                         avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
                     }
