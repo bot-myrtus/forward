@@ -58,14 +58,14 @@ export function apply(ctx: Context, config: Config) {
             const { event, sid } = session
 
             for (const regexpStr of sConfig.blockingWords) {
-                const includeBlockingWord = event.message.elements.some(value => {
+                const hit = event.message.elements.some(value => {
                     if (value.type === 'text') {
                         return new RegExp(regexpStr).test(value.attrs.content)
                     }
                     return false
                 })
 
-                if (includeBlockingWord) return
+                if (hit) return
             }
 
             let rows: Pick<Sent, Keys<Sent>>[] = []
@@ -127,7 +127,8 @@ export function apply(ctx: Context, config: Config) {
                         avatar
                     })
                 } else {
-                    prefix = h.text(`[${sConfig.name} - ${name}]\n`)
+                    const altName = isNullable(sConfig.name) ? '' : `${sConfig.name} - `
+                    prefix = h.text(`[${altName}${name}]\n`)
                 }
                 const payload: h[] = [prefix, ...filtered]
 

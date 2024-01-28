@@ -10,7 +10,7 @@
               - 仅用于「来源」
               - 仅用于「目标」
               - 用于「来源」或「目标」(通常用以双向转发)
-        - - name: 群组代称 (可随意填写)
+        - - name: 来源代称 (可随意填写)
             blockingWords:
               $description: 屏蔽词 (消息包含屏蔽词时不转发, 支持正则表达式)
               $value: 正则表达式 (无需斜杠包围)
@@ -24,10 +24,10 @@
             channelId: 频道 ID (可能与群组 ID 相同)
             guildId: 群组 ID
             simulateOriginal: 模拟原始作者 (仅在 discord 平台生效)
-          - name: 群组代称 (可随意填写, 仅在「来源」生效)
+          - name: 来源代称 (可随意填写)
             selfId: 自身 ID
             blockingWords:
-              $description: 屏蔽词 (消息包含屏蔽词时不转发, 支持正则表达式, 仅在「来源」生效)
+              $description: 屏蔽词 (消息包含屏蔽词时不转发, 支持正则表达式)
             disabled: 是否禁用 (仅在「目标」生效)
             platform: 平台名
             channelId: 频道 ID (可能与群组 ID 相同)

@@ -31,17 +31,20 @@ export class MessageParse {
                         }
                         return h('text', { content })
                     }
+                    break
                 }
                 case 'record': {
                     if (this.recordEnable) {
                         return h('text', { content: '[语音]' })
                     }
+                    break
                 }
                 case 'at': {
                     if (this.atEnable) {
-                        const name = attrs.name ? attrs.name : attrs.id
+                        const name = attrs.name || attrs.id
                         return h('text', { content: `@${name}` })
                     }
+                    break
                 }
             }
             return value

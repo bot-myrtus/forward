@@ -60,9 +60,9 @@ const share = {
 
 const sourceConst: Schema<SourceConst> = Schema.object({
     type: Schema.const('source').required(),
-    name: Schema.string().required(),
+    name: Schema.string(),
     ...share,
-    blockingWords: Schema.array(String).role('table'),
+    blockingWords: Schema.array(String).role('table').default([]),
     selfId: Schema.string().default('*')
 })
 
@@ -76,10 +76,10 @@ const targetConst: Schema<TargetConst> = Schema.object({
 
 const fullConst: Schema<FullConst> = Schema.object({
     type: Schema.const('full').required(),
-    name: Schema.string().required(),
+    name: Schema.string(),
     selfId: Schema.string().required(),
     ...share,
-    blockingWords: Schema.array(String).role('table'),
+    blockingWords: Schema.array(String).role('table').default([]),
     simulateOriginal: Schema.boolean().default(false),
     disabled: Schema.boolean().default(false),
 } as const)
