@@ -51,7 +51,6 @@ export function apply(ctx: Context, config: Config) {
 
         let listened = ctx.platform(sConfig.platform)
         if (sConfig.selfId !== '*') listened = listened.self(sConfig.selfId)
-        if (sConfig.guildId !== '*') listened = listened.guild(sConfig.guildId)
         if (sConfig.channelId !== '*') listened = listened.channel(sConfig.channelId)
 
         listened.on('message-created', async (session) => {
@@ -102,24 +101,6 @@ export function apply(ctx: Context, config: Config) {
                 if (target.simulateOriginal && target.platform === 'discord') {
                     let avatar = event.user.avatar
                     if (event.platform === 'telegram') {
-                        /*const user = await session.bot.getUser(event.user.id)
-                        const [message] = await bot.createMessage(target.channelId, h.image(user.avatar))
-                        await bot.deleteMessage(target.channelId, message.id)
-                        avatar = message.elements[0].attrs.url*/
-                        /*const data = await session.bot.internal.getChat({ chat_id: event.user.id })
-                        if (data.photo) {
-                            const fileId = data.photo.small_file_id || data.photo.big_file_id
-                            const file = await session.bot.internal.getFile({ file_id: fileId })
-                            // @ts-ignore
-                            if (session.bot.server) {
-                                // @ts-ignore
-                                avatar = `${session.bot.server}/${file.file_path}`
-                            } else {
-                                // @ts-ignore
-                                const { endpoint } = session.bot.file.config
-                                avatar = `${endpoint}/${file.file_path}`
-                            }
-                        }*/
                         avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
                     }
                     prefix = h('author', {
@@ -180,7 +161,7 @@ export function apply(ctx: Context, config: Config) {
 
                 try {
                     logger.debug(payload)
-                    const messageIds = await bot.sendMessage(target.channelId, payload, target.guildId)
+                    const messageIds = await bot.sendMessage(target.channelId, payload)
                     for (const msgId of messageIds) {
                         sent.push({
                             from: event.message.id,
