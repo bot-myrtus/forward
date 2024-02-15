@@ -122,7 +122,7 @@ export function apply(ctx: Context, config: Config) {
                     continue
                 }
 
-                const delay = isNullable(config.delay[target.platform]) ? 100 : config.delay[target.platform]
+                const delay = config.delay[target.platform] ?? 200
                 if (index) await sleep(delay)
 
                 if (event.message.quote) {
