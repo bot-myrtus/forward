@@ -15,10 +15,6 @@
 
 ### 设定适配器
 
-#### QQ
-
-参见 Koishi 论坛的 [810](https://forum.koishi.xyz/t/topic/810) 帖。
-
 #### Telegram
 
 1. 添加好友 @BotFather，与其交互，按照屏幕提示进行操作，建立一个机器人账号。设定完成后，BotFather 会给一个 Token。

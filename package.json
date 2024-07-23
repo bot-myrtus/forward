@@ -1,7 +1,7 @@
 {
   "name": "@myrtus/koishi-plugin-forward",
   "description": "Forward messages",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -19,16 +19,11 @@
     "transfer"
   ],
   "peerDependencies": {
-    "koishi": "^4.16.4"
+    "koishi": "^4.17.7"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bot-myrtus/forward.git"
-  },
-  "author": {
-    "email": "idanran@outlook.com",
-    "name": "idanran",
-    "url": "https://github.com/idanran"
+    "url": "git+https://github.com/bot-myrtus/forward.git"
   },
   "koishi": {
     "description": {
