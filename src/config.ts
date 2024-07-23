@@ -2,7 +2,7 @@ import { Schema, Dict, Time } from 'koishi'
 
 interface Source {
     channelId: string
-    name: string
+    name?: string
     platform: string
     blockingWords: string[]
     selfId: string
@@ -83,7 +83,7 @@ export const Config: Schema<Config> = Schema.intersect([
                 targetConst,
                 fullConst
             ])
-        ]))
+        ])).collapse(true)
     }),
     Schema.object({
         rules: Schema.array(Schema.object({

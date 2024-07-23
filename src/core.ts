@@ -1,5 +1,4 @@
-import { Context, h, sleep, Keys, Universal, isNullable } from 'koishi'
-import { MessageParse } from './parse'
+import { Context, h, Universal } from 'koishi'
 import { RuleSource, RuleTarget, Config } from './config'
 
 declare module 'koishi' {
@@ -19,6 +18,22 @@ interface Sent {
     id?: number
 }
 
+function transform(source: h[]): h[] {
+    return h.transform(source, {
+        at(attrs) {
+            const name = attrs.name || attrs.id
+            return h.text(`@${name}`)
+        },
+        face(attrs) {
+            const name = attrs.name || '表情'
+            return h.text(`[${name}]`)
+        },
+        audio(attrs) {
+            return h.text('[语音]')
+        }
+    })
+}
+
 export function apply(ctx: Context, config: Config) {
     ctx.model.extend('myrtus_forward_sent', {
         id: 'unsigned',
@@ -33,12 +48,12 @@ export function apply(ctx: Context, config: Config) {
         autoInc: true
     })
 
-    const logger = ctx.logger('forward')
+    const { logger } = ctx
 
     for (const rule of config.rules) {
         const sConfig = config.constants[rule.source] as RuleSource
         if (!sConfig) continue
-        const targetConfigs: Array<RuleTarget> = []
+        const targetConfigs: RuleTarget[] = []
         for (const target of rule.targets) {
             const targetConfig = config.constants[target] as RuleTarget
             if (targetConfig && !targetConfig.disabled) {
@@ -57,17 +72,17 @@ export function apply(ctx: Context, config: Config) {
             const { event, sid } = session
 
             for (const regexpStr of sConfig.blockingWords) {
-                const hit = event.message.elements.some(value => {
-                    if (value.type === 'text') {
-                        return new RegExp(regexpStr).test(value.attrs.content)
+                const reg = new RegExp(regexpStr)
+                const hit = session.elements.some(v => {
+                    if (v.type === 'text') {
+                        return reg.test(v.attrs.content)
                     }
                     return false
                 })
-
                 if (hit) return
             }
 
-            let rows: Pick<Sent, Keys<Sent>>[] = []
+            let rows: Sent[] = []
             const { quote } = event.message
             if (quote) {
                 if (event.selfId === quote.user.id) {
@@ -85,33 +100,15 @@ export function apply(ctx: Context, config: Config) {
                 }
                 logger.debug('%C', '=== inspect quote ===')
                 logger.debug(`from sid: ${sid}`)
-                logger.debug(rows)
             }
 
-            const filtered: h[] = new MessageParse(event.message.elements).face().record().at().output()
-
+            const filtered = transform(event.message.elements)
             const sent: Sent[] = []
+
             for (let index = 0; index < targetConfigs.length; index++) {
                 const target = targetConfigs[index]
                 const targetSid = `${target.platform}:${target.selfId}`
                 const bot = ctx.bots[targetSid]
-
-                const name = event.member?.nick || event.user.nick || event.user.name
-                let prefix: h
-                if (target.simulateOriginal && target.platform === 'discord') {
-                    let avatar = event.user.avatar
-                    if (event.platform === 'telegram') {
-                        avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
-                    }
-                    prefix = h('author', {
-                        name: `[${sConfig.name}] ${name}`,
-                        avatar
-                    })
-                } else {
-                    const altName = isNullable(sConfig.name) ? '' : `${sConfig.name} - `
-                    prefix = h.text(`[${altName}${name}]\n`)
-                }
-                const payload: h[] = [prefix, ...filtered]
 
                 if (!bot) {
                     logger.warn(`暂时找不到机器人实例 %c, 等待一会儿说不定就有了呢!`, targetSid)
@@ -122,9 +119,25 @@ export function apply(ctx: Context, config: Config) {
                     continue
                 }
 
-                const delay = config.delay[target.platform] ?? 200
-                if (index) await sleep(delay)
+                let prefix: h
+                if (target.simulateOriginal && target.platform === 'discord') {
+                    let avatar = event.user.avatar
+                    if (event.platform === 'telegram') {
+                        avatar = 'https://discord.com/assets/5d6a5e9d7d77ac29116e.png'
+                    }
+                    prefix = h('author', {
+                        name: `[${sConfig.name ?? ''}] ${session.username}`,
+                        avatar
+                    })
+                } else {
+                    const altName = sConfig.name ? `${sConfig.name} - ` : ''
+                    prefix = h.text(`[${altName}${session.username}]\n`)
+                }
 
+                const delay = config.delay[target.platform] ?? 200
+                if (index) await ctx.sleep(delay)
+
+                const payload: h[] = [prefix, ...filtered]
                 if (event.message.quote) {
                     let quoteId: string | undefined
                     if (event.selfId === event.message.quote.user.id) {
@@ -149,18 +162,17 @@ export function apply(ctx: Context, config: Config) {
                             payload.unshift(h.quote(quoteId))
                         }
                         logger.debug(`msgId: ${quoteId}`)
-                        logger.debug(`added`)
+                        logger.debug(`quote added`)
                     } else {
-                        const { user, elements } = event.message.quote
-                        const re: h[] = [h.text(`Re ${user.nick || user.name} ⌈`), ...(elements || []), h.text('⌋\n')]
-                        payload.unshift(...new MessageParse(re).face().record().at().output())
-                        logger.debug('not added')
+                        const { user, elements = [], member } = event.message.quote
+                        const name = member?.nick || user.nick || user.name
+                        payload.unshift(h.text(`Re ${name} ⌈`), ...transform(elements), h.text('⌋\n'))
+                        logger.debug('quote not added')
                     }
                     logger.debug(`to sid: ${targetSid}`)
                 }
 
                 try {
-                    logger.debug(payload)
                     const messageIds = await bot.sendMessage(target.channelId, payload)
                     for (const msgId of messageIds) {
                         sent.push({
