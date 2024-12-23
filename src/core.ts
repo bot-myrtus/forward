@@ -18,7 +18,7 @@ interface Sent {
   id?: number
 }
 
-function transform(source: h[]): h[] {
+function transform(source: h[], rules?: h.SyncVisitor<never>): h[] {
   return h.transform(source, {
     at(attrs) {
       const name = attrs.name || attrs.id
@@ -30,7 +30,8 @@ function transform(source: h[]): h[] {
     },
     audio(attrs) {
       return h.text('[语音]')
-    }
+    },
+    ...rules
   })
 }
 
@@ -93,6 +94,9 @@ export function apply(ctx: Context, config: Config) {
             to_sid: sid,
             to_channel_id: event.channel.id
           })
+          if (sConfig.onlyQuote && rows.length === 0) {
+            return
+          }
         } else if (sConfig.onlyQuote) {
           return
         } else {
@@ -108,7 +112,15 @@ export function apply(ctx: Context, config: Config) {
         return
       }
 
-      const filtered = transform(event.message.elements)
+      const filtered = transform(event.message.elements, {
+        at(attrs) {
+          if (sConfig.onlyQuote && attrs.id === event.selfId) {
+            return h.text('')
+          }
+          const name = attrs.name || attrs.id
+          return h.text(`@${name}`)
+        }
+      })
       const sent: Sent[] = []
 
       for (let index = 0; index < targetConfigs.length; index++) {
