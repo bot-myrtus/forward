@@ -121,6 +121,18 @@ export function apply(ctx: Context, config: Config) {
           return h.text(`@${name}`)
         }
       })
+      if (session.platform === 'discord') {
+        for (const embed of session.event._data.d.embeds) {
+          const buffer = []
+          if (embed.title) {
+            buffer.push(embed.title)
+          }
+          if (embed.description) {
+            buffer.push(embed.description)
+          }
+          filtered.push(h.text(buffer.join('\n')))
+        }
+      }
       const sent: Sent[] = []
 
       for (let index = 0; index < targetConfigs.length; index++) {
