@@ -1,4 +1,4 @@
-import { Context, h, Universal } from 'koishi'
+import { Awaitable, Context, Dict, h, Universal } from 'koishi'
 import { RuleSource, RuleTarget, Config } from './config'
 
 declare module 'koishi' {
@@ -18,8 +18,10 @@ interface Sent {
   id?: number
 }
 
-function transform(source: h[], rules?: h.SyncVisitor<never>): h[] {
-  return h.transform(source, {
+type Visitor<S> = Dict<h.Transformer<S>> | h.Visit<Awaitable<boolean | h.Fragment>, S>
+
+function transform<S = never>(source: h[], rules?: Visitor<S>): Promise<h[]> {
+  return h.transformAsync(source, {
     at(attrs) {
       const name = attrs.name || attrs.id
       return h.text(`@${name}`)
@@ -112,13 +114,20 @@ export function apply(ctx: Context, config: Config) {
         return
       }
 
-      const filtered = transform(event.message.elements, {
+      const filtered = await transform(event.message.elements, {
         at(attrs) {
           if (sConfig.onlyQuote && attrs.id === event.selfId) {
             return h.text('')
           }
           const name = attrs.name || attrs.id
           return h.text(`@${name}`)
+        },
+        async img(attrs) {
+          if (session.platform === 'discord') {
+            const req = await ctx.http(attrs.src, { responseType: 'arraybuffer' })
+            return h.img(req.data, req.headers.get('Content-Type'))
+          }
+          return h('img', attrs)
         }
       })
       if (session.platform === 'discord') {
@@ -196,7 +205,7 @@ export function apply(ctx: Context, config: Config) {
           } else {
             const { user, elements = [], member } = event.message.quote
             const name = member?.nick || user.nick || user.name
-            payload.unshift(h.text(`Re ${name} ⌈`), ...transform(elements), h.text('⌋\n'))
+            payload.unshift(h.text(`Re ${name} ⌈`), ...(await transform(elements)), h.text('⌋\n'))
             logger.debug('quote not added')
           }
           logger.debug(`to sid: ${targetSid}`)
