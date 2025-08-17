@@ -124,8 +124,8 @@ export function apply(ctx: Context, config: Config) {
         },
         async img(attrs) {
           if (session.platform === 'discord') {
-            const req = await ctx.http(attrs.src, { responseType: 'arraybuffer' })
-            return h.img(req.data, req.headers.get('Content-Type'))
+            const res = await ctx.http(attrs.src, { responseType: 'arraybuffer' })
+            return h.img(res.data, res.headers.get('Content-Type'))
           }
           return h('img', attrs)
         }
