@@ -74,6 +74,10 @@ export function apply(ctx: Context, config: Config) {
     listened.on('message-created', async (session) => {
       const { event, sid } = session
 
+      if (session.platform === 'discord' && session.userId === session.selfId) {
+        return
+      }
+
       for (const regexpStr of sConfig.blockingWords) {
         const reg = new RegExp(regexpStr)
         const hit = session.elements.some(v => {
