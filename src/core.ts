@@ -20,10 +20,13 @@ interface Sent {
 
 type Visitor<S> = Dict<h.Transformer<S>> | h.Visit<Awaitable<boolean | h.Fragment>, S>
 
-function transform<S = never>(source: h[], rules?: Visitor<S>): Promise<h[]> {
+function transform<S = never>(platform: string, source: h[], rules?: Visitor<S>): Promise<h[]> {
   return h.transformAsync(source, {
     at(attrs) {
-      const name = attrs.name || attrs.id
+      let name = attrs.name || attrs.id
+      if (platform === 'discord' && attrs.type === 'all') {
+        name = 'everyone\n'
+      }
       return h.text(`@${name}`)
     },
     face(attrs) {
@@ -118,12 +121,15 @@ export function apply(ctx: Context, config: Config) {
         return
       }
 
-      const filtered = await transform(event.message.elements, {
+      const filtered = await transform(session.platform, event.message.elements, {
         at(attrs) {
           if (sConfig.onlyQuote && attrs.id === event.selfId) {
             return h.text('')
           }
-          const name = attrs.name || attrs.id
+          let name = attrs.name || attrs.id
+          if (session.platform === 'discord' && attrs.type === 'all') {
+            name = 'everyone\n'
+          }
           return h.text(`@${name}`)
         },
         async img(attrs) {
@@ -144,6 +150,25 @@ export function apply(ctx: Context, config: Config) {
             buffer.push(embed.description)
           }
           filtered.push(h.text(buffer.join('\n')))
+        }
+        for (const element of filtered) {
+          if (element.type === 'text') {
+            element.attrs.content = element.attrs.content.replace(
+              /<t:(\d+):([tTdDfFR])>/g,
+              (_, ts) => {
+                const date = new Date(ts * 1000)
+                const options = {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: 'numeric',
+                  minute: 'numeric'
+                } as const
+                const locale = Object.keys(Object.values(ctx.root.i18n.locales)[0])[0]
+                return date.toLocaleString(locale, options)
+              }
+            )
+          }
         }
       }
       const sent: Sent[] = []
@@ -209,7 +234,7 @@ export function apply(ctx: Context, config: Config) {
           } else {
             const { user, elements = [], member } = event.message.quote
             const name = member?.nick || user.nick || user.name
-            payload.unshift(h.text(`Re ${name} ⌈`), ...(await transform(elements)), h.text('⌋\n'))
+            payload.unshift(h.text(`Re ${name} ⌈`), ...(await transform(session.platform, elements)), h.text('⌋\n'))
             logger.debug('quote not added')
           }
           logger.debug(`to sid: ${targetSid}`)
