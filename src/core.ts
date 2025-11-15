@@ -40,6 +40,27 @@ function transform<S = never>(platform: string, source: h[], rules?: Visitor<S>)
   })
 }
 
+function relativeTime(date: number) {
+  const now = Date.now()
+  const diff = date - now
+  const seconds = Math.floor(diff / 1000)
+  const minutes = Math.floor(seconds / 60)
+  const hours = Math.floor(minutes / 60)
+  const days = Math.floor(hours / 24)
+
+  if (diff > 0) {
+    if (days > 0) return `${days}天内`
+    if (hours > 0) return `${hours}小时内`
+    if (minutes > 0) return `${minutes}分钟内`
+    return `${seconds}秒内`
+  } else {
+    if (days < 0) return `${Math.abs(days)}天前`
+    if (hours < 0) return `${Math.abs(hours)}小时前`
+    if (minutes < 0) return `${Math.abs(minutes)}分钟前`
+    return `${Math.abs(seconds)}秒前`
+  }
+}
+
 export function apply(ctx: Context, config: Config) {
   ctx.model.extend('myrtus_forward_sent', {
     id: 'unsigned',
@@ -154,18 +175,24 @@ export function apply(ctx: Context, config: Config) {
         for (const element of filtered) {
           if (element.type === 'text') {
             element.attrs.content = element.attrs.content.replace(
-              /<t:(\d+):([tTdDfFR])>/g,
-              (_, ts) => {
-                const date = new Date(ts * 1000)
-                const options = {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: 'numeric',
-                  minute: 'numeric'
-                } as const
-                const locale = Object.keys(Object.values(ctx.root.i18n.locales)[0])[0]
-                return date.toLocaleString(locale, options)
+              /<t:(\d+):([a-zA-Z])>/g,
+              (match: string, timestamp: string, format: string) => {
+                if (format === 'F') {
+                  const date = new Date(+timestamp * 1000)
+                  const options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric'
+                  } as const
+                  const locale = Object.keys(Object.values(ctx.root.i18n.locales)[0])[0]
+                  return date.toLocaleString(locale, options)
+                } else if (format === 'R') {
+                  return relativeTime(+timestamp * 1000)
+                } else {
+                  return match
+                }
               }
             )
           }
