@@ -120,21 +120,31 @@ export function apply(ctx: Context, config: Config) {
 
       let rows: Sent[] = []
       const { quote } = event.message
-      let quoteUser: Universal.User
+      let quoteUser = quote?.user ?? quote?.member?.user
+      let quoteIsSelf = false
       if (quote) {
-        quoteUser = quote.user ?? (await session.bot.getMessage(session.channelId, quote.id)).user
-        if (event.selfId === quoteUser.id) {
+        // QQ group replies can include only a nickname and quoted content, and
+        // the adapter does not support fetching the original message.
+        if (!quoteUser && quote.id && typeof session.bot.getMessage === 'function') {
+          try {
+            quoteUser = (await session.bot.getMessage(session.channelId, quote.id))?.user
+          } catch (error) {
+            logger.debug('cannot fetch quoted message: %s', error)
+          }
+        }
+        quoteIsSelf = event.selfId === quoteUser?.id
+        if (quote.id && (quoteIsSelf || !quoteUser?.id)) {
           rows = await ctx.database.get('myrtus_forward_sent', {
             to: quote.id,
             to_sid: sid,
             to_channel_id: event.channel.id
           })
-          if (sConfig.onlyQuote && rows.length === 0) {
-            return
-          }
-        } else if (sConfig.onlyQuote) {
-          return
-        } else {
+          // A stored forwarding record can identify our own message even when
+          // the platform omits the author of the quoted message.
+          if (rows.length) quoteIsSelf = true
+        }
+        if (sConfig.onlyQuote && (!quoteIsSelf || !rows.length)) return
+        if (quote.id && !quoteIsSelf) {
           rows = await ctx.database.get('myrtus_forward_sent', {
             from: quote.id,
             from_sid: sid,
@@ -245,10 +255,10 @@ export function apply(ctx: Context, config: Config) {
         const delay = config.delay[target.platform] ?? 200
         if (index) await ctx.sleep(delay)
 
-        const payload: h[] = prefix ? [prefix, ...filtered] : filtered
+        const payload: h[] = prefix ? [prefix, ...filtered] : [...filtered]
         if (event.message.quote) {
           let quoteId: string | undefined
-          if (event.selfId === quoteUser.id) {
+          if (quoteIsSelf) {
             logger.debug('selfId = quote.userId')
             const row = rows.find(v => v.from_sid === targetSid && v.from_channel_id === target.channelId)
             if (row) {
@@ -264,7 +274,7 @@ export function apply(ctx: Context, config: Config) {
             }
           }
           if (quoteId) {
-            if (payload[0].type === 'author') {
+            if (payload[0]?.type === 'author') {
               payload.splice(1, 0, h.quote(quoteId))
             } else {
               payload.unshift(h.quote(quoteId))
@@ -273,7 +283,7 @@ export function apply(ctx: Context, config: Config) {
             logger.debug(`quote added`)
           } else {
             const { user, elements = [], member } = event.message.quote
-            const name = member?.nick || user.nick || user.name
+            const name = member?.nick || user?.nick || user?.name || quoteUser?.nick || quoteUser?.name || quoteUser?.id || '未知用户'
             payload.unshift(h.text(`Re ${name} ⌈`), ...(await transform(session.platform, elements)), h.text('⌋\n'))
             logger.debug('quote not added')
           }
